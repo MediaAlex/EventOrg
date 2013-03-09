@@ -1,0 +1,52 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="EventOrg.EventGuide"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot enthält das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
+    <Grid x:Name="LayoutRoot">
+        <controls:Panorama Title="Event Guide">
+        	<controls:Panorama.Background>
+        		<ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg"/>
+        	</controls:Panorama.Background>
+
+            <!--Panoramaelement eins-->
+            <controls:PanoramaItem Header="Gäste">
+                <Grid>
+                	<ListBox x:Name="listBox" Margin="10,10,0,0" Height="478" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding label}" Margin="0,0,10,0" Height="25"/>
+                                    <TextBox Text="{Binding value}" Margin="0,0,10,0" Height="25"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </controls:PanoramaItem>
+
+            <!--Panoramaelement zwei-->
+            <controls:PanoramaItem Header="Location">
+                <Grid/>
+            </controls:PanoramaItem>
+            <controls:PanoramaItem Header="Catering">
+            	<Grid/>
+            </controls:PanoramaItem>
+        </controls:Panorama>
+    </Grid>
+
+    <!--Panoramaanwendungen sollten keine ApplicationBar anzeigen.-->
+
+</phone:PhoneApplicationPage>

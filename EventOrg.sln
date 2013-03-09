@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventOrg", "EventOrg\EventOrg.csproj", "{9cd5f73d-9bf7-4f16-bd55-b2fb646f980f}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9CD5F73D-9BF7-4F16-BD55-B2FB646F980F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CD5F73D-9BF7-4F16-BD55-B2FB646F980F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CD5F73D-9BF7-4F16-BD55-B2FB646F980F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9CD5F73D-9BF7-4F16-BD55-B2FB646F980F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CD5F73D-9BF7-4F16-BD55-B2FB646F980F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CD5F73D-9BF7-4F16-BD55-B2FB646F980F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
