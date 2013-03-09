@@ -31,6 +31,7 @@
 
 		<!--ContentPanel-Objekt - Fügen Sie zusätzlichen Inhalt hier ein.-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Image></Image>
             <Rectangle Name="rec_neuProjekt" Fill="#FFF4F4F5" Height="90" Margin="0,96,0,0" Stroke="Black" VerticalAlignment="Top" Opacity="0.395"
                        MouseLeftButtonUp="tBl_neuProjekt_MouseLeftButtonDown"/>
             <Rectangle Name="rec_laufendProjekt" Fill="#FFF4F4F5" Margin="0,213,0,0" Stroke="Black" Opacity="0.395" Height="90" VerticalAlignment="Top"/>
