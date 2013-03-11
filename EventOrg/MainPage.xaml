@@ -31,17 +31,24 @@
 
 		<!--ContentPanel-Objekt - Fügen Sie zusätzlichen Inhalt hier ein.-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Rectangle Name="rec_neuProjekt" Fill="#FFF4F4F5" Height="90" Margin="0,96,0,0" Stroke="Black" VerticalAlignment="Top" Opacity="0.395"
-                       MouseLeftButtonUp="tBl_neuProjekt_MouseLeftButtonDown"/>
-            <Rectangle Name="rec_laufendProjekt" Fill="#FFF4F4F5" Margin="0,213,0,0" Stroke="Black" Opacity="0.395" Height="90" VerticalAlignment="Top"/>
-            <Rectangle Name="rec_einstellung" Fill="#FFF4F4F5" Margin="0,0,0,184" Stroke="Black" Opacity="0.395" Height="90" VerticalAlignment="Bottom" 
-                       d:LayoutOverrides="Height"/>
-			<TextBlock x:Name="tBl_neuProjekt" Height="87" Margin="10,91,10,0" TextWrapping="Wrap" Text="Neues Projekt" VerticalAlignment="Top" 
-                       FontSize="64" TextAlignment="Center" Foreground="#FF040404" MouseLeftButtonUp="tBl_neuProjekt_MouseLeftButtonDown" />
-			<TextBlock x:Name="tBl_laufendProjekt" Margin="10,216,10,0" TextWrapping="Wrap" FontSize="53.333" TextAlignment="Center" 
-                       Text="Laufende Projekte" Height="80" VerticalAlignment="Top" Foreground="#FF040404" />
-			<TextBlock x:Name="tBl_einstellung" Margin="10,0,10,188" TextWrapping="Wrap" Text="Einstellungen" FontSize="64" 
-                       TextAlignment="Center" Height="90" VerticalAlignment="Bottom" Foreground="#FF040404"/>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                    <Rectangle Width="75" Fill="Indigo"/>
+                    <TextBlock x:Name="tBl_neuProjekt" Margin="0,0,0,0" Text="Neues Projekt" FontSize="53.333" 
+                           MouseLeftButtonUp="tBl_neuProjekt_MouseLeftButtonDown" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <Rectangle Width="75" Fill="Green"/>
+                    <TextBlock x:Name="tBl_laufendProjekt" Margin="0,0,0,0" FontSize="53.333" Text="Alle Projekte"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <Rectangle Width="75" Fill="Cyan"/>
+                    <TextBlock x:Name="tBl_einstellung" Margin="0,0,0,0" Text="Einstellungen" FontSize="53.333"/>
+                </StackPanel>
+            </StackPanel>
+			
 		</Grid>
 	</Grid>
 </phone:PhoneApplicationPage>
