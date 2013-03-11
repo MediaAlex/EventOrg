@@ -17,7 +17,7 @@
     <!--LayoutRoot ist das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
     <Grid x:Name="LayoutRoot">
     	<Grid.Background>
-    		<ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg"/>
+    		<ImageBrush ImageSource="/EventBackground06.jpg" Stretch="UniformToFill" Opacity="0.4"/>
     	</Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -32,22 +32,49 @@
 
         <!--ContentPanel - zusätzliche Inhalte hier platzieren-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-        	<Rectangle Fill="#FFF4F4F5" Height="68" Margin="101,183,20,0" Stroke="Black" VerticalAlignment="Top" Opacity="0.495"/>
-            <Rectangle Fill="#FFF4F4F5" Height="68" Margin="22,0,20,223" Stroke="Black" VerticalAlignment="Bottom" Opacity="0.495"/>
-            <Rectangle Fill="#FFF4F4F5" Height="68" Margin="22,183,0,0" Stroke="Black" VerticalAlignment="Top" Opacity="0.495" HorizontalAlignment="Left" Width="74"/>
-        	<TextBlock x:Name="textBlock" Height="44" Margin="22,10,0,0" TextWrapping="Wrap" Text="Projektname" VerticalAlignment="Top" FontSize="32" HorizontalAlignment="Left" Width="424"/>
-        	<TextBlock x:Name="tBl_projektart" Height="45" Margin="101,193,20,0" TextWrapping="Wrap" Text="Projektart" VerticalAlignment="Top" FontSize="32" Foreground="#FF040404"/>
-            <toolkit:DatePicker Name="dP_von" Margin="61,316,0,0" Height="71" VerticalAlignment="Top" HorizontalAlignment="Left" Width="164" 
-                                Foreground="#FF040404" />
-        	<TextBox x:Name="textBox" Height="80" Margin="10,54,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="29.333" Foreground="#FF040404"/>
-            <toolkit:DatePicker Name="dP_bis" Height="71" HorizontalAlignment="Left" Margin="282,316,0,0" VerticalAlignment="Top" Width="164" 
-                                Foreground="#FF040404" />
-            <TextBlock FontSize="24" Height="42" Margin="22,332,0,0" Name="textBlock3" Text="Von" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="51" Foreground="#FF040404" />
-            <TextBlock FontSize="24" Height="42" HorizontalAlignment="Left" Margin="256,334,0,0" Name="textBlock4" Text="Bis" TextWrapping="Wrap" VerticalAlignment="Top" Width="38" Foreground="#FF040404" />
-            <Button x:Name="but_erstellen" Content="Erstellen" Height="84" Margin="0,0,10,90" VerticalAlignment="Bottom" Foreground="#FF040404" 
+            <StackPanel>
+                <TextBlock Text="Klient" FontSize="34"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Vorname" FontSize="24" Height="34" />
+                    <TextBox Name="tB_vorname" Width="313" Margin="40,0,0,0" Foreground="#FF040404"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Nachname" FontSize="24" Height="34" />
+                    <TextBox Name="tB_nachname" Width="313" Margin="20,0,0,0" Foreground="#FF040404"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Telefon Nr." FontSize="24" Height="34" />
+                    <TextBox Name="tB_phone" Width="313" Margin="20,0,0,0" Foreground="#FF040404"/>
+                </StackPanel>
+                
+                <TextBlock Text="Projekt" FontSize="34"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,0,0,0" Text="Projektname" FontSize="24" Height="34" />
+                    <TextBox x:Name="textBox" Width="313" Margin="0,0,0,0" Foreground="#FF040404"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Width="449" Height="58" Margin="0,0,20,0">
+                	<StackPanel.Background>
+                		<SolidColorBrush Color="White" Opacity="0.3"/>
+                	</StackPanel.Background>
+                    <TextBlock Margin="0,0,0,0" Text="Projektart" FontSize="34" Width="433" TextAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="24" Height="33" Margin="0,0,0,0" Text="Von"/>
+                    <toolkit:DatePicker Name="dP_von" Margin="0,0,0,0" Foreground="#FF040404" />
+                    <TextBlock FontSize="24" Margin="70,0,0,0" Text="Bis" Height="34" />
+                    <toolkit:DatePicker Name="dP_bis" Margin="0,0,0,0" Foreground="#FF040404" />
+                </StackPanel>
+                
+                <Button x:Name="but_erstellen" Content="Erstellen" Height="84" Margin="0,0,10,90" VerticalAlignment="Bottom" Foreground="#FF040404" 
                     BorderBrush="Black" Background="White" MouseLeftButtonUp="but_erstellen_MouseLeftButtonDown"></Button>
-            <Rectangle Fill="#FFF4F4F5" Height="61" HorizontalAlignment="Left" Margin="11,444,0,0" Opacity="0.005" Stroke="Black" 
+                <Rectangle Fill="#FFF4F4F5" Height="61" HorizontalAlignment="Left" Margin="11,444,0,0" Opacity="0.005" Stroke="Black" 
                        VerticalAlignment="Top" Width="424" MouseLeftButtonUp="but_erstellen_MouseLeftButtonDown"/>
+            </StackPanel>
+        	
         </Grid>
     </Grid>
  

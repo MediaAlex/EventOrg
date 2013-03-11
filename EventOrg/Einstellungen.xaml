@@ -33,8 +33,12 @@
         <!--ContentPanel - zusätzliche Inhalte hier platzieren-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
         	<StackPanel Margin="10,10,0,10" HorizontalAlignment="Left" Width="436">
-                <StackPanel Height="100" Orientation="Horizontal">
-                    
+        		<StackPanel.Background>
+        			<SolidColorBrush Color="White" Opacity="0.2"/>
+        		</StackPanel.Background>
+                <StackPanel Height="49" Orientation="Horizontal" Margin="10,0">
+                	<TextBlock x:Name="textBlock" Margin="0,9,0,0" TextWrapping="Wrap" Text="Kapazität (max Anzahl Gäste)" Width="260" Height="34" VerticalAlignment="Top"/>
+                	<TextBox x:Name="textBox" TextWrapping="Wrap" Text="v" Width="86"/>
                 </StackPanel>
                 </StackPanel>
         </Grid>
