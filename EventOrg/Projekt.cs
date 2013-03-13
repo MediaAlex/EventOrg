@@ -13,9 +13,9 @@ namespace EventOrg
 {
     public class Projekt
     {
-        string projekt_name { get; set; }
-        string projekt_art { get; set; }
-        DateTime projekt_datumvon { get; set; }
-        DateTime projekt_datumbis { get; set; }
+        public string projekt_name { get; set; }
+        public string projekt_art { get; set; }
+        public DateTime projekt_datumvon { get; set; }
+        public DateTime projekt_datumbis { get; set; }
     }
 }

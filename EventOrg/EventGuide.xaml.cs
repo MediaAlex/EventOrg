@@ -19,5 +19,12 @@ namespace EventOrg
         {
             InitializeComponent();
         }
+
+        List<Gäste> gäste = new List<Gäste>();
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

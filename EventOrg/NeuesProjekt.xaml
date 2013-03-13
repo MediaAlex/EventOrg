@@ -12,11 +12,15 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot ist das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
     <Grid x:Name="LayoutRoot">
-    	<Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="191*" />
+            <ColumnDefinition Width="289*" />
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
     		<ImageBrush ImageSource="/EventBackground06.jpg" Stretch="UniformToFill" Opacity="0.4"/>
     	</Grid.Background>
         <Grid.RowDefinitions>
@@ -25,13 +29,13 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel enthält den Namen der Anwendung und den Seitentitel-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel x:Name="TitlePanel" Margin="12,17,0,28" Grid.ColumnSpan="2">
             <TextBlock x:Name="ApplicationTitle" Text="EventOrg" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Neues Projekt" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - zusätzliche Inhalte hier platzieren-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0" Grid.ColumnSpan="2">
             <StackPanel>
                 <TextBlock Text="Klient" FontSize="34"/>
                 <StackPanel Orientation="Horizontal">
@@ -52,14 +56,14 @@
                 <TextBlock Text="Projekt" FontSize="34"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0,0,0,0" Text="Projektname" FontSize="24" Height="34" />
-                    <TextBox x:Name="textBox" Width="313" Margin="0,0,0,0" Foreground="#FF040404"/>
+                    <TextBox x:Name="tB_projektname" Width="313" Margin="0,0,0,0" Foreground="#FF040404"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Width="449" Height="58" Margin="0,0,20,0">
                 	<StackPanel.Background>
                 		<SolidColorBrush Color="White" Opacity="0.3"/>
                 	</StackPanel.Background>
-                    <TextBlock Margin="0,0,0,0" Text="2Eventart" FontSize="34" Width="433" TextAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock Name="tBl_eventart" Margin="0,0,0,0" Text="Eventart" FontSize="34" Width="433" TextAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal">
@@ -70,7 +74,7 @@
                 </StackPanel>
                 
                 <Button x:Name="but_erstellen" Content="Erstellen" Height="84" Margin="0,0,10,90" VerticalAlignment="Bottom" Foreground="#FF040404" 
-                    BorderBrush="Black" Background="White" MouseLeftButtonUp="but_erstellen_MouseLeftButtonDown"></Button>
+                    BorderBrush="Black" Background="White" MouseLeftButtonUp="but_erstellen_MouseLeftButtonDown" Click="but_erstellen_Click"></Button>
                 <Rectangle Fill="#FFF4F4F5" Height="61" HorizontalAlignment="Left" Margin="11,444,0,0" Opacity="0.005" Stroke="Black" 
                        VerticalAlignment="Top" Width="424" MouseLeftButtonUp="but_erstellen_MouseLeftButtonDown"/>
             </StackPanel>

@@ -13,8 +13,9 @@ namespace EventOrg
 {
     public class Kunde
     {
-        string kunde_name { get; set; }
-        string kunde_adresse { get; set; }
-        string kunde_telefon { get; set; }
+        public string kunde_vorname { get; set; }
+        public string kunde_nachname { get; set; }
+        public string kunde_adresse { get; set; }
+        public int kunde_telefon { get; set; }
     }
 }
