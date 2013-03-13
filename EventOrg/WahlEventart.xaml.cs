@@ -22,7 +22,13 @@ namespace EventOrg
 
         private void but_neuesEvent_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            //App.liste_eventart.Add(tB_neuesEvent.Text);
+        }
 
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            //lB_eventarten.ItemsSource = App.liste_eventart;
         }
     }
 }

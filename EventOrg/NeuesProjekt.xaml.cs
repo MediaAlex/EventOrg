@@ -24,7 +24,12 @@ namespace EventOrg
             InitializeComponent();
         }
 
-        private void but_erstellen_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void tBl_wahlEventart_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/WahlEventart.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void but_erstellen_Click(object sender, RoutedEventArgs e)
         {
             projekt.projekt_name = tB_projektname.Text;
             projekt.projekt_art = tBl_eventart.Text;
@@ -35,11 +40,6 @@ namespace EventOrg
             kunde.kunde_telefon = Int32.Parse((tB_phone as TextBox).Text.ToString());
 
             NavigationService.Navigate(new Uri("/EventGuide.xaml", UriKind.RelativeOrAbsolute));
-        }
-
-        private void tBl_wahlEventart_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/WahlEventart.xaml", UriKind.RelativeOrAbsolute));
         }
 
 

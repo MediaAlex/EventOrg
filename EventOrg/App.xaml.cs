@@ -13,12 +13,14 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.IO.IsolatedStorage;
+using System.Collections.ObjectModel;
 
 namespace EventOrg
 {
     public partial class App : Application
     {
-        List<Eventart> liste_eventart;
+        public List<Eventart> liste_eventart;
+
         /// <summary>
         /// Ermöglicht den einfachen Zugriff auf den Hauptframe der Phone-Anwendung.
         /// </summary>

@@ -24,11 +24,11 @@
             <!--Panoramaelement eins-->
             <controls:PanoramaItem Header="Gäste">
                 <Grid>
-                	<ListBox x:Name="listBox" Margin="10,10,0,0" Height="478" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400">
+                	<ListBox x:Name="lB_gäste" Margin="10,10,0,0" Height="478" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding label}" Margin="0,0,10,0" Height="25"/>
+                                    <TextBlock Text="{Binding label}" Margin="0,0,10,0" Height="25" />
                                     <TextBox Text="{Binding value}" Margin="0,0,10,0" Height="25"/>
                                 </StackPanel>
                             </DataTemplate>

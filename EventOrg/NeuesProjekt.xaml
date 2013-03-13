@@ -12,7 +12,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.IsVisible="True" >
 
     <!--LayoutRoot ist das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
     <Grid x:Name="LayoutRoot">
@@ -74,9 +74,7 @@
                 </StackPanel>
                 
                 <Button x:Name="but_erstellen" Content="Erstellen" Height="84" Margin="0,0,10,90" VerticalAlignment="Bottom" Foreground="#FF040404" 
-                    BorderBrush="Black" Background="White" MouseLeftButtonUp="but_erstellen_MouseLeftButtonDown" Click="but_erstellen_Click"></Button>
-                <Rectangle Fill="#FFF4F4F5" Height="61" HorizontalAlignment="Left" Margin="11,444,0,0" Opacity="0.005" Stroke="Black" 
-                       VerticalAlignment="Top" Width="424" MouseLeftButtonUp="but_erstellen_MouseLeftButtonDown"/>
+                    BorderBrush="Black" Background="White" Click="but_erstellen_Click"></Button>
             </StackPanel>
         	
         </Grid>

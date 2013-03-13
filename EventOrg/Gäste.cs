@@ -14,20 +14,17 @@ namespace EventOrg
 {
     public class Gäste
     {
-        //public int gäste_anzahlgesamt { get; set; }
-        //public int gäste_anzahlkind { get; set; }
-        //public string gäste_notizen { get; set; }
-        //public int gäste_altermin { get; set; }
-        //public int gäste_altermax { get; set; }
+        public int gäste_anzahlgesamt { get; set; }
+        public int gäste_anzahlkind { get; set; }
+        public string gäste_notizen { get; set; }
+        public int gäste_altermin { get; set; }
+        public int gäste_altermax { get; set; }
 
-        //public string gästelabel_notizen = "Notizen";
-        //public string gästelabel_anzahlgesamt = "Anzahl Gäste";
-        //public string gästelabel_anzahlkind = "Kinder";
-        //public string gästelabel_altermin = "Jüngster";
-        //public string gästelabel_altermax = "Ältester";
-
-        public string label { get; set; }
-        public string value { get; set; }
+        public string gästelabel_notizen = "Notizen";
+        public string gästelabel_anzahlgesamt = "Anzahl Gäste";
+        public string gästelabel_anzahlkind = "Kinder";
+        public string gästelabel_altermin = "Jüngster";
+        public string gästelabel_altermax = "Ältester";
 
     }
 }
