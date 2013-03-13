@@ -18,7 +18,7 @@
     <Grid x:Name="LayoutRoot">
         <controls:Panorama Title="Event Guide">
         	<controls:Panorama.Background>
-        		<ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg"/>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg" Opacity="0.4"/>
         	</controls:Panorama.Background>
 
             <!--Panoramaelement eins-->
@@ -28,8 +28,12 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding label}" Margin="0,0,10,0" Height="25" />
-                                    <TextBox Text="{Binding value}" Margin="0,0,10,0" Height="25"/>
+                                    <StackPanel Height="70" Width="250">
+                                        <TextBlock Text="{Binding label}" Margin="0,0,0,0" FontSize="32" />
+                                    </StackPanel>
+                                    <StackPanel Height="70" Width="150">
+                                        <TextBox Text="{Binding value}" Width="150" Height="70" FontSize="32" Margin="0,0,0,0"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

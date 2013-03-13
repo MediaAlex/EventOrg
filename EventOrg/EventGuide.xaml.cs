@@ -41,7 +41,7 @@ namespace EventOrg
                 });
 			}
             
-            gäste[1].label = gästeSachen.gästelabel_anzahlgesamt;
+            gäste[0].label = gästeSachen.gästelabel_anzahlgesamt;
             gäste[1].label = gästeSachen.gästelabel_altermin;
             gäste[2].label = gästeSachen.gästelabel_altermax;
             //if (Int32.Parse(gäste[1].value as string) < 13)
