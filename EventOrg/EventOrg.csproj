@@ -67,15 +67,20 @@
     <Compile Include="Einstellungen.xaml.cs">
       <DependentUpon>Einstellungen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Eventart.cs" />
     <Compile Include="EventGuide.xaml.cs">
       <DependentUpon>EventGuide.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobaleEinstellungen.cs" />
+    <Compile Include="Gäste.cs" />
+    <Compile Include="Kunde.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="NeuesProjekt.xaml.cs">
       <DependentUpon>NeuesProjekt.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Projekt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
