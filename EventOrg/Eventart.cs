@@ -15,6 +15,11 @@ namespace EventOrg
     public class Eventart
     {
         string event_name { get; set; }
+        List<Eventart> einstellung_eventart { get; set; }
         
+        public füllelisteeventart()
+        {
+            einstellung_eventart.Add("Hochzeit");
+        }
     }
 }
