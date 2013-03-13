@@ -24,5 +24,10 @@ namespace EventOrg
         {
             NavigationService.Navigate(new Uri("/EventGuide.xaml", UriKind.RelativeOrAbsolute));
         }
+
+        private void tBl_wahlEventart_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/WahlEventart.xaml", UriKind.RelativeOrAbsolute));
+        }
     }
 }

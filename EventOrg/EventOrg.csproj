@@ -82,6 +82,9 @@
     </Compile>
     <Compile Include="Projekt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WahlEventart.xaml.cs">
+      <DependentUpon>WahlEventart.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -101,6 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NeuesProjekt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WahlEventart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
