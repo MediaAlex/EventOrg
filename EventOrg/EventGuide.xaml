@@ -7,12 +7,12 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False" Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.IsVisible="True" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"  Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot enthält das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
     <Grid x:Name="LayoutRoot">
@@ -24,29 +24,101 @@
             <!--Panoramaelement eins-->
             <controls:PanoramaItem Header="Gäste">
                 <Grid>
-                	<ListBox x:Name="lB_gäste" Margin="10,10,0,0" Height="478" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <StackPanel Height="70" Width="250">
-                                        <TextBlock Text="{Binding label}" Margin="0,0,0,0" FontSize="32" />
-                                    </StackPanel>
-                                    <StackPanel Height="70" Width="150">
-                                        <TextBox Text="{Binding value}" Width="150" Height="70" FontSize="32" Margin="0,0,0,0"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                	<StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_geschlecht" Margin="0,0,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Geschlecht" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Weiblich, männlich oder gemischt" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <toolkit:ListPicker Header="Geschlecht" FullModeHeader="Wähle ein Geschlecht" Name="LP_geschlecht" Width="160"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_anzGU12" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Anzahl U12" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Anzahl der Gäste unter 12 Jahren" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <TextBox Text="{Binding gäste_anzahlU12, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="90,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_anzGÜ12" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Anzahl Ü12" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Anzahl der Gäste über 12 Jahren" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <TextBox Text="{Binding gäste_anzahlÜ12, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="90,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_anzGÜ60" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Anzahl Ü60" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Anzahl der Gäste über 60 Jahren" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <TextBox Text="{Binding gäste_anzahlÜ60, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="90,0,0,0"/>
+                        </StackPanel>
+                        
+                    </StackPanel>
                 </Grid>
             </controls:PanoramaItem>
 
             <!--Panoramaelement zwei-->
             <controls:PanoramaItem Header="Location">
-                <Grid/>
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Name="StPan_locArt" Margin="0,0,0,0">
+                            <TextBlock Text="Art der Location" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Art der Location" Name="LP_loc"
+                                                Width="420" Margin="0,-10,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_locDatumVon" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Datum von" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Das Datum ab wann die Location gebraucht wird (z.B. für Vorbereitungen)" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <toolkit:DatePicker Height="70" FontSize="28" Margin="30,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_locDatumBis" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Datum bis" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Das Datum ab wann die Location gebraucht wird (z.B. für Vorbereitungen)" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <toolkit:DatePicker Height="70" FontSize="28" Margin="30,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_ausstattung" Margin="0,0,0,0">
+                            <TextBlock Text="Ausstattung" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Art der Location" SelectionMode="Multiple" Name="LP_ausstattung"
+                                                Width="420" Margin="0,-10,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_locKosten" Orientation="Horizontal" Margin="0,0,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Kosten" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Max Kosten für Location" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <TextBox Text="{Binding gäste_anzahlÜ60, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="90,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
+            
+            <!--Panoramaelement drei-->
             <controls:PanoramaItem Header="Catering">
             	<Grid/>
+            </controls:PanoramaItem>
+            
+            <!--Panoramaelement vier-->
+            <controls:PanoramaItem Header="Personal">
+                <Grid/>
+            </controls:PanoramaItem>
+            <!--Panoramaelement fünf-->
+            <controls:PanoramaItem Header="Extras/Deko">
+                <Grid/>
+            </controls:PanoramaItem>
+            
+            <!--Panoramaelement sechs-->
+            <controls:PanoramaItem Header="Musik">
+                <Grid/>
+            </controls:PanoramaItem>
+            
+            <!--Panoramaelement sieben-->
+            <controls:PanoramaItem Header="Einladungen">
+                <Grid/>
             </controls:PanoramaItem>
         </controls:Panorama>
     </Grid>

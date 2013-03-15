@@ -37,7 +37,10 @@ namespace EventOrg
             projekt.projekt_datumvon = (DateTime)dP_von.Value;
             kunde.kunde_vorname = tB_vorname.Text;
             kunde.kunde_nachname = tB_nachname.Text;
-            kunde.kunde_telefon = Int32.Parse((tB_phone as TextBox).Text.ToString());
+            if (tB_phone.Text != "")
+            {
+                kunde.kunde_telefon = Int32.Parse((tB_phone as TextBox).Text.ToString());    
+            }
 
             NavigationService.Navigate(new Uri("/EventGuide.xaml", UriKind.RelativeOrAbsolute));
         }

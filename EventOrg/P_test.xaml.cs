@@ -13,18 +13,21 @@ using Microsoft.Phone.Controls;
 
 namespace EventOrg
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class P_test : PhoneApplicationPage
     {
-        public MainPage()
+        List<string> negativ = new List<string> { "SP_anzG" };
+        public P_test()
         {
             InitializeComponent();
         }
 
-        private void tBl_neuProjekt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new Uri("/P_test.xaml", UriKind.RelativeOrAbsolute));
-
-            NavigationService.Navigate(new Uri("/NeuesProjekt.xaml", UriKind.RelativeOrAbsolute));
+            foreach (var n in negativ)
+            {
+                StackPanel del = (StackPanel)SP_maske.FindName(n);
+                del.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

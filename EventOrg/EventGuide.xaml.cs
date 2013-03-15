@@ -19,43 +19,15 @@ namespace EventOrg
         {
             InitializeComponent();
         }
-
-        List<GästeMerge> gäste = new List<GästeMerge>();
-        Gäste gästeSachen = new Gäste();
+        List<string> geschlecht = new List<string> { "männlich", "weiblich", "gemischt" };
+        List<string> ausstattung = new List<string> {"Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
+        List<string> location = new List<string> { "Stadthalle", "Turnhalle", "Restaurant", "Garten", "Strand", "Park", "Gemeindehaus", "Zuhause" };
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-
-            gästeFüllen();
-            lB_gäste.ItemsSource = gäste;
-        }
-
-        private void gästeFüllen()
-        {
-            for (int i = 0; i < 5; i++)
-			{
-			     gäste.Add(new GästeMerge()
-                { 
-                    label = "",
-                    value = ""
-                });
-			}
-            
-            gäste[0].label = gästeSachen.gästelabel_anzahlgesamt;
-            gäste[1].label = gästeSachen.gästelabel_altermin;
-            gäste[2].label = gästeSachen.gästelabel_altermax;
-            //if (Int32.Parse(gäste[1].value as string) < 13)
-            //{
-            //    gäste[3].label = gästeSachen.gästelabel_anzahlkind;
-            //}
-            gäste[3].label = gästeSachen.gästelabel_anzahlkind;
-            gäste[4].label = gästeSachen.gästelabel_notizen;
-
-            gäste[0].value = "";
-            gäste[1].value = "";
-            gäste[2].value = "";
-            gäste[3].value = "";
-            gäste[4].value = "";
+            LP_geschlecht.ItemsSource = geschlecht;
+            LP_ausstattung.ItemsSource = ausstattung;
+            LP_loc.ItemsSource = location;
         }
     }
 }
