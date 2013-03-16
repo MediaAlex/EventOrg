@@ -1,0 +1,143 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="EventOrg.SpeiseWahl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+
+    <!--LayoutRoot enthält das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
+    <Grid x:Name="LayoutRoot">
+        <controls:Panorama Title="Speise Wünsche">
+            <controls:Panorama.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg" Opacity="0.4"/>
+            </controls:Panorama.Background>
+            
+            <!--Panoramaelement eins: Bestimmter Caterer-->
+            <controls:PanoramaItem Header="Caterer">
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Name="StPan_catVorschl" Margin="0,0,0,0">
+                            <TextBlock Text="Catering Vorschläge" Margin="10,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Catering Vorschläge" Name="LP_CatVorschl"
+                                                Width="400" Margin="0,-10,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="stPan_catWünsche">
+                            <TextBlock FontSize="32" Margin="10,10,0,0" Text="Wünsche vom Klienten"/>
+                            <TextBox Margin="0,0,0,0" Height="295" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </controls:PanoramaItem>
+
+            <!--Panoramaelement zwei: Sektempfang-->
+            <controls:PanoramaItem Header="Sektempfang">
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_seFrage" Margin="0,0,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Sektempfang" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Ist 'Sektempfang' gewünscht?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_seGetr" Margin="0,10,0,0">
+                            <TextBlock Text="Getränke" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Getränke" Name="LP_seGetränke"
+                                                Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_seSnacks" Margin="0,10,0,0">
+                            <TextBlock Text="Snacks" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Snacks" Name="LP_seSnacks"
+                                                Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_seKosten" Margin="0,20,0,0">
+                            <Grid Width="400">
+                                <TextBlock Text="Kosten" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left"/>
+                                <TextBlock Text="30" Name="tBl_seKosten" Margin="0,0,30,0" FontSize="32" HorizontalAlignment="Right"/>
+                                <TextBlock Text="€" HorizontalAlignment="Right" Margin="0,0,0,0" FontSize="32"/>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </controls:PanoramaItem>
+
+            <!--Panoramaelement drei: Vorspeisen-->
+            <controls:PanoramaItem Header="Vorspeisen">
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_vsSuppeFrage" Margin="0,0,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Suppe" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Wird eine Suppe als Vorspeise gewünscht?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_vsSuppe" Margin="0,0,0,0" Visibility="Collapsed">
+                            <TextBlock Text="Suppen" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Suppen" Name="LP_seSuppe"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_vsAufstrichFrage" Margin="0,0,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Aufstrich" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Wird ein Aufstrich als Vorspeise gewünscht?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_vsBagAufstrich" Margin="0,10,0,0" Visibility="Collapsed">
+                            <TextBlock Text="Aufstrich" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Aufstrich" Name="LP_vsAufstrich"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_vsKrCocktailFrage" Margin="0,0,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Krabben Cocktail" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Wird ein Krabben Cocktail als Vorspeise gewünscht?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="stPan_vsWünsche">
+                            <TextBlock FontSize="32" Margin="0,10,0,0" Text="Weitere Wünsche"/>
+                            <TextBox Margin="-10,0,0,0" Height="300" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </controls:PanoramaItem>
+
+            <!--Panoramaelement vier: Hauptgericht-->
+            <controls:PanoramaItem Header="Hauptgericht">
+                <Grid>
+                    
+                </Grid>
+            </controls:PanoramaItem>
+
+            <!--Panoramaelement fünf: Dessert-->
+            <controls:PanoramaItem Header="Dessert">
+                <Grid/>
+            </controls:PanoramaItem>
+
+            <!--Panoramaelement sechs: Kalte Platte-->
+            <controls:PanoramaItem Header="Kalte Platte">
+                <Grid/>
+            </controls:PanoramaItem>
+
+            <!--Panoramaelement sieben: Bar-->
+            <controls:PanoramaItem Header="Bar">
+                <Grid/>
+            </controls:PanoramaItem>
+
+        </controls:Panorama>
+    </Grid>
+
+    <!--Panoramaanwendungen sollten keine ApplicationBar anzeigen.-->
+
+</phone:PhoneApplicationPage>
