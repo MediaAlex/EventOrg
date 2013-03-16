@@ -93,6 +93,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="ScreenExtrasDeko\Tische.xaml.cs">
+      <DependentUpon>Tische.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SpeiseWahl.xaml.cs">
       <DependentUpon>SpeiseWahl.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="P_test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenExtrasDeko\Tische.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -83,9 +83,9 @@
                             <toolkit:DatePicker Height="70" FontSize="28" Margin="20,0,0,0"/>
                         </StackPanel>
                         <StackPanel Name="StPan_ausstattung" Margin="0,0,0,0">
-                            <TextBlock Text="Ausstattung" Margin="10,0,0,0" FontSize="32" />
-                            <toolkit:ListPicker FullModeHeader="Art der Location" SelectionMode="Multiple" Name="LP_ausstattung"
-                                                Width="400" Margin="0,-10,0,0"/>
+                            <TextBlock Text="Ausstattung" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Ausstattung" SelectionMode="Multiple" Name="LP_ausstattung"
+                                                Width="400" Margin="-20,-10,0,0"/>
                         </StackPanel>
                         <StackPanel Name="StPan_locKosten" Orientation="Horizontal" Margin="0,0,0,0">
                             <StackPanel Width="250">
@@ -135,21 +135,231 @@
             
             <!--Panoramaelement vier: Personal-->
             <controls:PanoramaItem Header="Personal">
-                <Grid/>
+                <Grid>
+                    <StackPanel>
+                        <Grid Name="grid_persKoch">
+                            <TextBlock Text="Koch" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Name="grid_persKüHilfe">
+                            <TextBlock Text="Küchenhilfe" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Name="grid_persKellner">
+                            <TextBlock Text="Kellener/Servicekraft" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Name="grid_persPutzhilfe">
+                            <TextBlock Text="Koch" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Name="grid_persAushilfe">
+                            <TextBlock Text="Aushilfe/Springer" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Name="grid_persBarkeeper">
+                            <TextBlock Text="Barkeeper" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Name="grid_persTechniker">
+                            <TextBlock Text="Techniker" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Name="grid_persAnimateur">
+                            <TextBlock Text="Animateur" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Name="grid_persSecurity">
+                            <TextBlock Text="Security" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
+                        </Grid>
+                    </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
+            
             <!--Panoramaelement fünf: Extras/Deko-->
             <controls:PanoramaItem Header="Extras/Deko">
-                <Grid/>
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_extraTische" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Tische" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="15, 6 Pers, viereckig, 45,00 €, 25.07.2013" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_extraStühle" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Stühle" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_extraKüchenUt" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Küchenutensilien" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_extraGesch" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Geschirr/Besteck" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_extraKühlwag" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Kühlwagen" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_extraDeko" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Deko" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_extraBühne" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Bühnenelement" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_extraAbsperr" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Absperrung" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
             
             <!--Panoramaelement sechs: Musik-->
             <controls:PanoramaItem Header="Musik">
-                <Grid/>
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Name="StPan_musikWer" Margin="0,0,0,0">
+                            <TextBlock Text="Verantwortlich für Musik" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Art der Location" SelectionMode="Multiple" Name="LP_musikWer"
+                                                    Width="400" Margin="-20,-10,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="stPan_musikBandDJ" Margin="0,10,0,0" Visibility="Collapsed">
+                            <TextBlock Text="Band/DJ" FontSize="40"/>
+                            <TextBlock Text="Musik Stil" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Musik Stil" SelectionMode="Multiple" Name="LP_musikStilDJ"
+                                                    Width="400" Margin="-20,-10,0,0"/>
+                            <Grid>
+                                <TextBlock Text="Kosten" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                <TextBox HorizontalAlignment="Right" MinWidth="70" Margin="0,0,10,0" TextAlignment="Right"/>
+                            </Grid>
+                                <TextBlock Text="Spezielle Wünsche" FontSize="32"/>
+                                <TextBox Margin="-10,-10,10,0" Height="100"/>
+                        </StackPanel>
+                        <StackPanel Name="stPan_musikTechniker" Margin="0,10,0,0" Visibility="Collapsed">
+                            <TextBlock Text="Techniker" FontSize="40"/>
+                            <TextBlock Text="Musik Stil" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Musik Stil" SelectionMode="Multiple" Name="LP_musikStilTec"
+                                                    Width="400" Margin="-20,-10,0,0"/>
+                            <TextBlock Text="Spezielle Wünsche" FontSize="32"/>
+                            <TextBox Margin="-10,-10,10,0" Height="100"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
             
             <!--Panoramaelement sieben: Einladungen-->
             <controls:PanoramaItem Header="Einladungen">
-                <Grid/>
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="StPan_einlKarten" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Einladungskarten" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_einlKartenDetail" Margin="0,10,0,0" Visibility="Collapsed">
+                            <Grid Width="400">
+                                <TextBlock Text="Wie viele?" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                <TextBox HorizontalAlignment="Right" MinWidth="70" Margin="0,0,10,0" TextAlignment="Right"/>
+                            </Grid>
+                            <Grid Width="400">
+                                <TextBlock Text="Wie groß?" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                <TextBox HorizontalAlignment="Right" MinWidth="70" Margin="0,0,10,0" TextAlignment="Right"/>
+                            </Grid>
+                            <TextBlock Text="Stil" FontSize="32" Margin="10,0,0,0"/>
+                            <toolkit:ListPicker FullModeHeader="Musik Stil" SelectionMode="Multiple" Name="LP_einlStil"
+                                                    Width="400" Margin="0,-10,0,0"/>
+                            <TextBlock Text="Spezielle Wünsche" FontSize="32"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Name="StPan_einlEmail" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="E-Mail Einladung" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_einlEmailDetail" Margin="0,10,0,0" Visibility="Collapsed">
+                            <Grid Width="400">
+                                <TextBlock Text="Adressen" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                <TextBox HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,10,0" TextAlignment="Right"/>
+                            </Grid>
+                            <Grid Width="400">
+                                <TextBlock Text="Betreff" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                <TextBox HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,10,0" TextAlignment="Right"/>
+                            </Grid>
+                            <Grid Width="400">
+                                <TextBlock Text="Email Text" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                <TextBox HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,10,0" TextAlignment="Right"/>
+                            </Grid>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Name="StPan_einlFB" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Facebook Event" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_einlFBDetail" Margin="0,10,0,0" Visibility="Collapsed">
+                            <Grid Width="400">
+                                <TextBlock Text="Adressaten" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                <TextBox HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,0,0" TextAlignment="Right"/>
+                            </Grid>
+                            <Grid Width="400">
+                                <TextBlock Text="Einl. Text" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                <TextBox HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,0,0" TextAlignment="Right"/>
+                            </Grid>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" Name="StPan_einlGoogle" Margin="0,10,0,0">
+                            <StackPanel Width="250">
+                                <TextBlock Text="Google+" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                            </StackPanel>
+                            <StackPanel Name="StPan_einlGoogleDetail" Margin="0,10,0,0" Visibility="Collapsed">
+                                <Grid Width="400">
+                                    <TextBlock Text="Adressaten" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                    <TextBox HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,0,0" TextAlignment="Right"/>
+                                </Grid>
+                                <Grid Width="400">
+                                    <TextBlock Text="Einl. Text" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                    <TextBox HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,0,0" TextAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
+                            
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
         </controls:Panorama>
     </Grid>

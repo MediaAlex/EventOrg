@@ -116,23 +116,139 @@
             <!--Panoramaelement vier: Hauptgericht-->
             <controls:PanoramaItem Header="Hauptgericht">
                 <Grid>
-                    
+                    <StackPanel>
+                        <StackPanel Name="StPan_hsFleisch" Margin="0,10,0,0">
+                            <TextBlock Text="Fleisch" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Fleisch" Name="LP_hsFleisch"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_hsFisch" Margin="0,10,0,0">
+                            <TextBlock Text="Fisch" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Fisch" Name="LP_hsFisch"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_hsVegitarisch" Margin="0,10,0,0">
+                            <TextBlock Text="Vegitarisch" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Vegitarisch" Name="LP_hsVegitarisch"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_hsVegan" Margin="0,10,0,0">
+                            <TextBlock Text="Vegan" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Vegan" Name="LP_hsVegan"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_hsBeilagen" Margin="0,10,0,0">
+                            <TextBlock Text="Beilagen" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Beilagen" Name="LP_hsBeilagen"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="stPan_hsWünsche">
+                            <TextBlock FontSize="32" Margin="0,10,0,0" Text="Weitere Wünsche"/>
+                            <TextBox Margin="-10,0,0,0" Height="300" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
                 </Grid>
             </controls:PanoramaItem>
 
             <!--Panoramaelement fünf: Dessert-->
             <controls:PanoramaItem Header="Dessert">
-                <Grid/>
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Name="StPan_desKuchen" Margin="0,10,0,0">
+                            <TextBlock Text="Kuchen" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Kuchen" Name="LP_desKuchen"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_desEis" Margin="0,10,0,0">
+                            <TextBlock Text="Eis" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Eis" Name="LP_desEis"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_desFrüchte" Margin="0,10,0,0">
+                            <TextBlock Text="Früchte" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Früchte" Name="LP_desFrüchte"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_desCreme" Margin="0,10,0,0">
+                            <TextBlock Text="Creme und Pudding" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Creme und Pudding" Name="LP_desCreme"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="stPan_desWünsche">
+                            <TextBlock FontSize="32" Margin="0,10,0,0" Text="Weitere Wünsche"/>
+                            <TextBox Margin="-10,0,0,0" Height="300" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
 
             <!--Panoramaelement sechs: Kalte Platte-->
             <controls:PanoramaItem Header="Kalte Platte">
-                <Grid/>
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Name="StPan_kplWurst" Margin="0,10,0,0">
+                            <TextBlock Text="Wurst" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Wurst" Name="LP_kplWurst"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_kplKäse" Margin="0,10,0,0">
+                            <TextBlock Text="Käse" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Käse" Name="LP_kplKäse"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_kplFrüchte" Margin="0,10,0,0">
+                            <TextBlock Text="Früchte" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Früchte" Name="LP_kplFrüchte"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_kplFisch" Margin="0,10,0,0">
+                            <TextBlock Text="Fisch" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Fisch" Name="LP_kplFisch"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_kplBrot" Margin="0,10,0,0">
+                            <TextBlock Text="Brot und Brötchen" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Brot und Brötchen" Name="LP_kplBrot"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="stPan_kplWünsche">
+                            <TextBlock FontSize="32" Margin="0,10,0,0" Text="Weitere Wünsche"/>
+                            <TextBox Margin="-10,0,0,0" Height="300" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
 
             <!--Panoramaelement sieben: Bar-->
             <controls:PanoramaItem Header="Bar">
-                <Grid/>
+                <Grid>
+                    <StackPanel>
+                        <StackPanel Name="StPan_barAlkFrei" Margin="0,10,0,0">
+                            <TextBlock Text="Alkoholfreie Getränke" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Alkoholfreie Getränke" Name="LP_barAlkFrei"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_barAlk" Margin="0,10,0,0">
+                            <TextBlock Text="Alkoholische Getränke" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Alkoholische Getränke" Name="LP_barAlk"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_barCocktAlkFrei" Margin="0,10,0,0">
+                            <TextBlock Text="Alkoholfreie Cocktails" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Alkoholfreie Cocktails" Name="LP_barCocktAlkFrei"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="StPan_barCocktAlk" Margin="0,10,0,0">
+                            <TextBlock Text="Alkoholische Cocktail" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Alkoholische Cocktail" Name="LP_barCocktAlk"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
+                        <StackPanel Name="stPan_barWünsche">
+                            <TextBlock FontSize="32" Margin="0,10,0,0" Text="Weitere Wünsche"/>
+                            <TextBox Margin="-10,0,0,0" Height="300" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
             </controls:PanoramaItem>
 
         </controls:Panorama>
