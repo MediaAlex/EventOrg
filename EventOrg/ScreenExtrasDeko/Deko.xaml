@@ -43,12 +43,12 @@
                     </StackPanel>
                     <CheckBox Width="60" Height="70" FontSize="28" Margin="150,0,0,0"/>
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Right">
+                <StackPanel HorizontalAlignment="Right" Margin="0,10,0,0">
                     <TextBlock Text="Was soll dekoriert werden?" Margin="0,0,0,0" FontSize="32" />
                     <toolkit:ListPicker FullModeHeader="Was soll dekoriert werden?" Name="LP_DekoWas" Width="445" Margin="0,-10,10,0"
                                         SelectionMode="Multiple"/>
                 </StackPanel>
-                <Grid >
+                <Grid Margin="0,10,0,0">
                     <TextBlock Text="Deko Datum" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <toolkit:DatePicker Height="70" FontSize="28" Margin="0,0,0,0" HorizontalAlignment="Right"/>
                 </Grid>

@@ -93,6 +93,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="ScreenExtrasDeko\Absperrung.xaml.cs">
+      <DependentUpon>Absperrung.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenExtrasDeko\Bühne.xaml.cs">
+      <DependentUpon>Bühne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenExtrasDeko\Deko.xaml.cs">
+      <DependentUpon>Deko.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenExtrasDeko\Geschirr.xaml.cs">
+      <DependentUpon>Geschirr.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenExtrasDeko\Küchenutensilien.xaml.cs">
+      <DependentUpon>Küchenutensilien.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenExtrasDeko\Kühlwagen.xaml.cs">
+      <DependentUpon>Kühlwagen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenExtrasDeko\Stühle.xaml.cs">
+      <DependentUpon>Stühle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ScreenExtrasDeko\Tische.xaml.cs">
       <DependentUpon>Tische.xaml</DependentUpon>
     </Compile>
@@ -125,6 +146,34 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="P_test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenExtrasDeko\Absperrung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenExtrasDeko\Bühne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenExtrasDeko\Deko.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenExtrasDeko\Geschirr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenExtrasDeko\Küchenutensilien.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenExtrasDeko\Kühlwagen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenExtrasDeko\Stühle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
