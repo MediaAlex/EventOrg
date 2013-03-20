@@ -19,15 +19,124 @@ namespace EventOrg
         {
             InitializeComponent();
         }
-        List<string> geschlecht = new List<string> { "männlich", "weiblich", "gemischt" };
+        List<string> geschlecht = new List<string> { "gemischt", "männlich", "weiblich" };
         List<string> ausstattung = new List<string> {"Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
         List<string> location = new List<string> { "Stadthalle", "Turnhalle", "Restaurant", "Garten", "Strand", "Park", "Gemeindehaus", "Zuhause" };
+        List<string> musikVerantw = new List<string> { "DJ", "Band", "Techniker", "Selbst"};
+        List<string> musikStil = new List<string> { "Gemischt", "HipHop", "R&B", "House", "Elektro", "Rock", "HardRock", "PunkRock", "Classic Rock", "Indi", "Pop", "Classic" };
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            _listPickerFüllen();    
+        }
+
+        private void _listPickerFüllen()
+        {
             LP_geschlecht.ItemsSource = geschlecht;
+            LP_geschlecht.SelectedIndex = 2;
             LP_ausstattung.ItemsSource = ausstattung;
             LP_loc.ItemsSource = location;
+            LP_musikWer.ItemsSource = musikVerantw;
+            LP_musikWer.SelectedIndex = 3;
+            LP_musikStilDJ.ItemsSource = musikStil;
+            LP_musikStilTec.ItemsSource = musikStil;
+        }
+
+        private void rB_catSVers_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (rB_catSVers.IsChecked == false)
+                but_catSpWahl.IsEnabled = true;
+            else
+                but_catSpWahl.IsEnabled = false;
+        }
+
+        private void but_catSpWahl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SpeiseWahl.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void but_persKoch_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            (sender as Button).Visibility = Visibility.Collapsed;
+            ((sender as Button).Parent as Grid).Children[1].SetValue(TextBox.TextProperty, "1");
+        }
+
+        private void tB_persKoch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (((sender as TextBox).Text.ToString() == "") || (Int32.Parse((sender as TextBox).Text) < 1))
+                ((sender as TextBox).Parent as Grid).Children[2].Visibility = Visibility.Visible;
+        }
+
+        private void cB_tische_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            string name = (sender as CheckBox).Name.ToString();
+            if ((sender as CheckBox).IsChecked == true)
+                NavigationService.Navigate(new Uri("/ScreenExtrasDeko/" + name + ".xaml", UriKind.RelativeOrAbsolute));
+
+            if ((sender as CheckBox).IsChecked == false)
+            {
+                string tBlName = "tBl_" + name;
+                (((sender as CheckBox).Parent as StackPanel).FindName(tBlName) as TextBlock).Text = "";
+            }
+        }
+
+        private void LP_musikWer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((string)LP_musikWer.SelectedItem == "DJ" || (string)LP_musikWer.SelectedItem == "Band")
+            {
+                stPan_musikBandDJ.Visibility = Visibility.Visible;
+                stPan_musikTechniker.Visibility = Visibility.Collapsed;
+            }
+            if ((string)LP_musikWer.SelectedItem == "Techniker")
+            {
+                stPan_musikBandDJ.Visibility = Visibility.Collapsed;
+                stPan_musikTechniker.Visibility = Visibility.Visible;
+            }
+            if ((string)LP_musikWer.SelectedItem == "Selbst")
+            {
+                stPan_musikBandDJ.Visibility = Visibility.Collapsed;
+                stPan_musikTechniker.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void Einladung_Checked(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).Name == "Einladungskarten")
+            {
+                StPan_einlKartenDetail.Visibility = Visibility.Visible;
+            }
+            if ((sender as CheckBox).Name == "Email")
+            {
+                StPan_einlEmailDetail.Visibility = Visibility.Visible;
+            }
+            if ((sender as CheckBox).Name == "Facebook")
+            {
+                StPan_einlFBDetail.Visibility = Visibility.Visible;
+            }
+            if ((sender as CheckBox).Name == "Google")
+            {
+                StPan_einlGoogleDetail.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Einladung_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).Name == "Einladungskarten")
+            {
+                StPan_einlKartenDetail.Visibility = Visibility.Collapsed;
+            }
+            if ((sender as CheckBox).Name == "Email")
+            {
+                StPan_einlEmailDetail.Visibility = Visibility.Collapsed;
+            }
+            if ((sender as CheckBox).Name == "Facebook")
+            {
+                StPan_einlFBDetail.Visibility = Visibility.Collapsed;
+            }
+            if ((sender as CheckBox).Name == "Google")
+            {
+                StPan_einlGoogleDetail.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

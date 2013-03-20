@@ -12,7 +12,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+    shell:SystemTray.IsVisible="True" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot enthält das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
     <Grid x:Name="LayoutRoot">
@@ -47,22 +47,22 @@
                                 <TextBlock Text="Sektempfang" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Ist 'Sektempfang' gewünscht?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Checked="SektEmpf_Checked" Unchecked="SektEmpf_Unchecked" />
                         </StackPanel>
-                        <StackPanel Name="StPan_seGetr" Margin="0,10,0,0">
+                        <StackPanel Name="StPan_seGetr" Margin="0,10,0,0" Visibility="Collapsed">
                             <TextBlock Text="Getränke" Margin="0,0,0,0" FontSize="32" />
                             <toolkit:ListPicker FullModeHeader="Getränke" Name="LP_seGetränke"
                                                 Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
                         </StackPanel>
-                        <StackPanel Name="StPan_seSnacks" Margin="0,10,0,0">
+                        <StackPanel Name="StPan_seSnacks" Margin="0,10,0,0" Visibility="Collapsed">
                             <TextBlock Text="Snacks" Margin="0,0,0,0" FontSize="32" />
                             <toolkit:ListPicker FullModeHeader="Snacks" Name="LP_seSnacks"
                                                 Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Name="StPan_seKosten" Margin="0,20,0,0">
+                        <StackPanel Orientation="Horizontal" Name="StPan_seKosten" Margin="0,20,0,0" Visibility="Collapsed">
                             <Grid Width="400">
                                 <TextBlock Text="Kosten" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left"/>
-                                <TextBlock Text="30" Name="tBl_seKosten" Margin="0,0,30,0" FontSize="32" HorizontalAlignment="Right"/>
+                                <TextBlock Text="" Name="tBl_seKosten" Margin="0,0,30,0" FontSize="32" HorizontalAlignment="Right"/>
                                 <TextBlock Text="€" HorizontalAlignment="Right" Margin="0,0,0,0" FontSize="32"/>
                             </Grid>
                         </StackPanel>
@@ -79,7 +79,8 @@
                                 <TextBlock Text="Suppe" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Wird eine Suppe als Vorspeise gewünscht?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Name="cB_suppe"
+                                      Checked="Vorspeisen_Checked" Unchecked="Vorspeisen_Unchecked" />
                         </StackPanel>
                         <StackPanel Name="StPan_vsSuppe" Margin="0,0,0,0" Visibility="Collapsed">
                             <TextBlock Text="Suppen" Margin="0,0,0,0" FontSize="32" />
@@ -91,7 +92,8 @@
                                 <TextBlock Text="Aufstrich" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Wird ein Aufstrich als Vorspeise gewünscht?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Name="cB_aufstrich"
+                                      Checked="Vorspeisen_Checked" Unchecked="Vorspeisen_Unchecked"/>
                         </StackPanel>
                         <StackPanel Name="StPan_vsBagAufstrich" Margin="0,10,0,0" Visibility="Collapsed">
                             <TextBlock Text="Aufstrich" Margin="0,0,0,0" FontSize="32" />
@@ -103,7 +105,8 @@
                                 <TextBlock Text="Krabben Cocktail" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Wird ein Krabben Cocktail als Vorspeise gewünscht?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0"/>
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Name="cB_krabbCockt"
+                                      Checked="Vorspeisen_Checked" Unchecked="Vorspeisen_Unchecked"/>
                         </StackPanel>
                         <StackPanel Name="stPan_vsWünsche">
                             <TextBlock FontSize="32" Margin="0,10,0,0" Text="Weitere Wünsche"/>
@@ -249,6 +252,10 @@
                         </StackPanel>
                     </StackPanel>
                 </Grid>
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem Header="Abschluss">
+                <Button Name="but_abschluss" Content="Abschluss" Background="White" Foreground="Black" Tap="Abschluss_Tap" />
             </controls:PanoramaItem>
 
         </controls:Panorama>
