@@ -12,7 +12,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" >
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot ist das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
     <Grid x:Name="LayoutRoot">
@@ -50,7 +50,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Telefon Nr." FontSize="24" Height="34" />
-                    <TextBox Name="tB_phone" Width="313" Margin="20,0,0,0" Foreground="#FF040404"/>
+                    <TextBox Name="tB_phone" Width="313" Margin="20,0,0,0" Foreground="#FF040404" InputScope="Number" TextAlignment="Right"/>
                 </StackPanel>
                 
                 <TextBlock Text="Projekt" FontSize="34"/>
@@ -58,15 +58,11 @@
                     <TextBlock Margin="0,0,0,0" Text="Projektname" FontSize="24" Height="34" />
                     <TextBox x:Name="tB_projektname" Width="313" Margin="0,0,0,0" Foreground="#FF040404"/>
                 </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Width="449" Height="58" Margin="0,0,20,0">
-                	<StackPanel.Background>
-                		<SolidColorBrush Color="White" Opacity="0.3"/>
-                	</StackPanel.Background>
-                    <TextBlock Name="tBl_eventart" Margin="0,0,0,0" Text="Eventart" FontSize="34" Width="433" TextAlignment="Center" FontWeight="Bold"/>
-                </StackPanel>
-                
                 <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,0,0,0" Text="Eventart" FontSize="24" Height="34" />
+                    <toolkit:ListPicker FullModeHeader="Eventart" Margin="55,0,0,0" Width="290" Name="LP_eventart"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock FontSize="24" Height="33" Margin="0,0,0,0" Text="Von"/>
                     <toolkit:DatePicker Name="dP_von" Margin="0,0,0,0" Foreground="#FF040404" />
                     <TextBlock FontSize="24" Margin="70,0,0,0" Text="Bis" Height="34" />

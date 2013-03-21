@@ -67,7 +67,7 @@ namespace EventOrg
         {
             if ((sender as CheckBox).Name == "cB_suppe")
             {
-                stPan_vsWünsche.Visibility = Visibility.Collapsed;
+                StPan_vsSuppe.Visibility = Visibility.Collapsed;
             }
             if ((sender as CheckBox).Name == "cB_aufstrich")
             {

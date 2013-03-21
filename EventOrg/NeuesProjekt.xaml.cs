@@ -24,6 +24,13 @@ namespace EventOrg
             InitializeComponent();
         }
 
+        List<string> eventart = new List<string> { "Hochzeit", "Geburtstag" };
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            LP_eventart.ItemsSource = eventart;
+        }
+
         private void tBl_wahlEventart_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new Uri("/WahlEventart.xaml", UriKind.RelativeOrAbsolute));
@@ -32,7 +39,7 @@ namespace EventOrg
         private void but_erstellen_Click(object sender, RoutedEventArgs e)
         {
             projekt.projekt_name = tB_projektname.Text;
-            projekt.projekt_art = tBl_eventart.Text;
+            projekt.projekt_art = LP_eventart.SelectedItem.ToString();
             projekt.projekt_datumbis = (DateTime)dP_bis.Value;
             projekt.projekt_datumvon = (DateTime)dP_von.Value;
             kunde.kunde_vorname = tB_vorname.Text;
@@ -44,7 +51,5 @@ namespace EventOrg
 
             NavigationService.Navigate(new Uri("/EventGuide.xaml", UriKind.RelativeOrAbsolute));
         }
-
-
     }
 }
