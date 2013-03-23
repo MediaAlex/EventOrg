@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,7 +16,11 @@
 
     <!--LayoutRoot enthält das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
     <Grid x:Name="LayoutRoot">
-        <controls:Panorama Title="Speise Wünsche">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="333*" />
+            <RowDefinition Height="363*" />
+        </Grid.RowDefinitions>
+        <controls:Panorama Title="Speise Wünsche" Grid.RowSpan="2">
             <controls:Panorama.Background>
                 <ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg" Opacity="0.4"/>
             </controls:Panorama.Background>
@@ -47,7 +51,7 @@
                                 <TextBlock Text="Sektempfang" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Ist 'Sektempfang' gewünscht?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <CheckBox Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Checked="SektEmpf_Checked" Unchecked="SektEmpf_Unchecked" />
+                            <CheckBox Width="60" Height="70" FontSize="28" Margin="105,0,0,0" Checked="SektEmpf_Checked" Unchecked="SektEmpf_Unchecked" />
                         </StackPanel>
                         <StackPanel Name="StPan_seGetr" Margin="0,10,0,0" Visibility="Collapsed">
                             <TextBlock Text="Getränke" Margin="0,0,0,0" FontSize="32" />
@@ -84,8 +88,8 @@
                         </StackPanel>
                         <StackPanel Name="StPan_vsSuppe" Margin="0,0,0,0" Visibility="Collapsed">
                             <TextBlock Text="Suppen" Margin="0,0,0,0" FontSize="32" />
-                            <toolkit:ListPicker FullModeHeader="Suppen" Name="LP_seSuppe"
-                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                            <toolkit:ListPicker FullModeHeader="Suppen" Name="LP_vsSuppe"
+                                                    Width="400" Margin="-20,-10,0,0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="StPan_vsAufstrichFrage" Margin="0,0,0,0">
                             <StackPanel Width="250">
@@ -162,6 +166,11 @@
                             <toolkit:ListPicker FullModeHeader="Kuchen" Name="LP_desKuchen"
                                                     Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
                         </StackPanel>
+                        <StackPanel Name="StPan_desCreme" Margin="0,10,0,0">
+                            <TextBlock Text="Creme und Pudding" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Creme und Pudding" Name="LP_desCreme"
+                                                    Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
+                        </StackPanel>
                         <StackPanel Name="StPan_desEis" Margin="0,10,0,0">
                             <TextBlock Text="Eis" Margin="0,0,0,0" FontSize="32" />
                             <toolkit:ListPicker FullModeHeader="Eis" Name="LP_desEis"
@@ -172,9 +181,9 @@
                             <toolkit:ListPicker FullModeHeader="Früchte" Name="LP_desFrüchte"
                                                     Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
                         </StackPanel>
-                        <StackPanel Name="StPan_desCreme" Margin="0,10,0,0">
-                            <TextBlock Text="Creme und Pudding" Margin="0,0,0,0" FontSize="32" />
-                            <toolkit:ListPicker FullModeHeader="Creme und Pudding" Name="LP_desCreme"
+                        <StackPanel Name="StPan_desGetränke" Margin="0,10,0,0">
+                            <TextBlock Text="Getränke" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Früchte" Name="LP_desGetränke"
                                                     Width="400" Margin="-20,-10,0,0" SelectionMode="Multiple"/>
                         </StackPanel>
                         <StackPanel Name="stPan_desWünsche">
@@ -254,13 +263,19 @@
                 </Grid>
             </controls:PanoramaItem>
 
-            <controls:PanoramaItem Header="Abschluss">
-                <Button Name="but_abschluss" Content="Abschluss" Background="White" Foreground="Black" Tap="Abschluss_Tap" />
-            </controls:PanoramaItem>
-
         </controls:Panorama>
     </Grid>
 
     <!--Panoramaanwendungen sollten keine ApplicationBar anzeigen.-->
-
+    <!--Beispielcode zur Verwendung von ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.check.rest.png" Text="Abschluss"/>
+            <!--<shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.feature.settings.rest.png" Text="Einstellungen"/>-->
+            <!--<shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Menüelement 1"/>
+                <shell:ApplicationBarMenuItem Text="Menüelement 2"/>
+            </shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

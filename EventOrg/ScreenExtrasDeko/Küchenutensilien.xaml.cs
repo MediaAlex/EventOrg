@@ -19,5 +19,12 @@ namespace EventOrg.ScreenExtrasDeko
         {
             InitializeComponent();
         }
+
+        List<string> küchUten = new List<string> { "Kochlöffel", "Bratpfanne", "Kochtopf", "Schöpfer", "Wender", "Kochlöffel" };
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            LP_kuKat.ItemsSource = küchUten;
+        }
     }
 }

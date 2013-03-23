@@ -50,7 +50,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Telefon Nr." FontSize="24" Height="34" />
-                    <TextBox Name="tB_phone" Width="313" Margin="20,0,0,0" Foreground="#FF040404" InputScope="Number" TextAlignment="Right"/>
+                    <TextBox Name="tB_phone" Width="313" Margin="20,0,0,0" Foreground="#FF040404" InputScope="TelephoneNumber" TextAlignment="Right"/>
                 </StackPanel>
                 
                 <TextBlock Text="Projekt" FontSize="34"/>
@@ -65,12 +65,12 @@
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock FontSize="24" Height="33" Margin="0,0,0,0" Text="Von"/>
                     <toolkit:DatePicker Name="dP_von" Margin="0,0,0,0" Foreground="#FF040404" />
-                    <TextBlock FontSize="24" Margin="70,0,0,0" Text="Bis" Height="34" />
-                    <toolkit:DatePicker Name="dP_bis" Margin="0,0,0,0" Foreground="#FF040404" />
+                    <TextBlock FontSize="24" Margin="50,0,0,0" Text="Bis" Height="34" />
+                    <toolkit:DatePicker Name="dP_bis" Margin="0,0,20,0" Foreground="#FF040404" />
                 </StackPanel>
                 
-                <Button x:Name="but_erstellen" Content="Erstellen" Height="84" Margin="0,0,10,90" VerticalAlignment="Bottom" Foreground="#FF040404" 
-                    BorderBrush="Black" Background="White" Click="but_erstellen_Click"></Button>
+                <Button x:Name="but_erstellen" Content="Erstellen" Width="460" Height="84" Margin="-20,0,0,0" VerticalAlignment="Bottom" 
+                        Foreground="#FF040404" BorderBrush="White" Background="White" Click="but_erstellen_Click"></Button>
             </StackPanel>
         	
         </Grid>

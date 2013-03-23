@@ -19,5 +19,17 @@ namespace EventOrg.ScreenExtrasDeko
         {
             InitializeComponent();
         }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            _ListenFüllen();
+        }
+
+        List<string> tischart = new List<string> { "Einfach, viereckig", "Einfach, rund", "Biergarten Tisch", "Echtholz", "Metall lackiert" };
+
+        private void _ListenFüllen()
+        {
+            LP_tischArt.ItemsSource = tischart;
+        }
     }
 }

@@ -19,5 +19,17 @@ namespace EventOrg.ScreenExtrasDeko
         {
             InitializeComponent();
         }
+
+        List<string> stuhlhart = new List<string> { "Einfach, Holz", "Einfach, Metall", "Biergarten Bank", "Echtholz", "Metall lackiert", "Klappstuhl" };
+
+        private void _ListenFüllen()
+        {
+            LP_stuhlArt.ItemsSource = stuhlhart;
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            _ListenFüllen();
+        }
     }
 }

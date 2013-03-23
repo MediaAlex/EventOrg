@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,7 +16,11 @@
 
     <!--LayoutRoot enthält das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
     <Grid x:Name="LayoutRoot">
-        <controls:Panorama Title="Event Guide">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="231*" />
+            <RowDefinition Height="465*" />
+        </Grid.RowDefinitions>
+        <controls:Panorama Title="Event Guide" Grid.RowSpan="2">
             
                 <controls:Panorama.Background>
                 <ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg" Opacity="0.4"/>
@@ -70,21 +74,21 @@
                         <StackPanel Name="StPan_locArt" Margin="0,0,0,0">
                             <TextBlock Text="Art der Location" Margin="0,0,0,0" FontSize="32" />
                             <toolkit:ListPicker FullModeHeader="Art der Location" Name="LP_loc"
-                                                Width="420" Margin="0,-10,0,0"/>
+                                                Width="420" Margin="0,-10,0,0" FontSize="32"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="StPan_locDatumVon" Margin="0,10,0,0">
                             <StackPanel Width="250">
                                 <TextBlock Text="Datum von" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Das Datum ab wann die Location gebraucht wird (z.B. für Vorbereitungen)" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <toolkit:DatePicker Height="70" FontSize="28" Margin="30,0,0,0"/>
+                            <toolkit:DatePicker Height="70" FontSize="28" Margin="20,0,0,0" ValueStringFormat="{}{0:dd.MM.yyyy}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="StPan_locDatumBis" Margin="0,10,0,0">
                             <StackPanel Width="250">
                                 <TextBlock Text="Datum bis" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Das Datum ab wann die Location gebraucht wird (z.B. für Vorbereitungen)" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <toolkit:DatePicker Height="70" FontSize="28" Margin="30,0,0,0"/>
+                            <toolkit:DatePicker Height="70" FontSize="28" Margin="20,0,0,0" ValueStringFormat="{}{0:dd.MM.yyyy}"/>
                         </StackPanel>
                         <StackPanel Name="StPan_ausstattung" Margin="0,0,0,0">
                             <TextBlock Text="Ausstattung" Margin="0,0,0,0" FontSize="32" />
@@ -116,7 +120,10 @@
                             <RadioButton Content="Selbstversorgung" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
                                          HorizontalAlignment="Left" HorizontalContentAlignment="Right" Width="420" Name="rB_catSVers" Tap="rB_catSVers_Tap" />
                             <Button Name="but_catSpWahl" Content="Speise Wahl" Width="440" Margin="-10,0,0,0" Tap="but_catSpWahl_Tap" />
-                    </StackPanel>
+                            <TextBlock Text="Getränke" Margin="0,0,0,0" FontSize="32" />
+                            <toolkit:ListPicker FullModeHeader="Getränke" SelectionMode="Multiple" Name="LP_getränke"
+                                                Width="420" Margin="0,-10,0,0"/>
+                        </StackPanel>
                 </Grid>
                 </ScrollViewer>
             </controls:PanoramaItem>
@@ -124,65 +131,73 @@
             <!--Panoramaelement vier: Personal-->
             <controls:PanoramaItem Header="Personal">
                 <ScrollViewer>
-                <Grid>
-                    <StackPanel Name="stPan_pers">
-                        <Grid Name="grid_persKoch">
-                            <TextBlock Text="Koch" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            <TextBox Text="0" MinWidth="70" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" 
-                                     Name="tB_persKoch" LostFocus="tB_persKoch_LostFocus" InputScope="Number"/>
-                            <Button Name="but_persKoch" Content="+" FontSize="32" FontWeight="Bold" Width="70" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
-                                    Background="White" Foreground="Black"/>
-                        </Grid>
-                        <Grid Name="grid_persKüHilfe">
-                            <TextBlock Text="Küchenhilfe" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            <TextBox Text="0" MinWidth="70" InputScope="Number" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
-                            <Button Name="but_persKüHi" Content="+" FontSize="32" FontWeight="Bold" Width="70" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
-                                    Background="White" Foreground="Black"/>
-                        </Grid>
-                        <Grid Name="grid_persKellner">
-                            <TextBlock Text="Kellener/Servicekraft" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            <TextBox Text="0" MinWidth="70" InputScope="Number" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
-                            <Button Name="but_persKell" Content="+" FontSize="32" FontWeight="Bold" Width="70" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
-                                    Background="White" Foreground="Black"/>
-                        </Grid>
-                        <Grid Name="grid_persPutzhilfe">
-                            <TextBlock Text="Koch" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            <TextBox Text="0" MinWidth="70" InputScope="Number" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
-                            <Button Name="but_persPuHi" Content="+" FontSize="32" FontWeight="Bold" Width="70" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
-                                    Background="White" Foreground="Black"/>
-                        </Grid>
-                        <Grid Name="grid_persAushilfe">
-                            <TextBlock Text="Aushilfe/Springer" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            <TextBox Text="0" MinWidth="70" InputScope="Number" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
-                            <Button Name="but_persAushi" Content="+" FontSize="32" FontWeight="Bold" Width="70" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
-                                    Background="White" Foreground="Black"/>
-                        </Grid>
-                        <Grid Name="grid_persBarkeeper">
-                            <TextBlock Text="Barkeeper" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            <TextBox Text="0" MinWidth="70" InputScope="Number" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
-                            <Button Name="but_persBark" Content="+" FontSize="32" FontWeight="Bold" Width="70" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
-                                    Background="White" Foreground="Black"/>
-                        </Grid>
-                        <Grid Name="grid_persTechniker">
-                            <TextBlock Text="Techniker" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            <TextBox Text="0" MinWidth="70" InputScope="Number" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
-                            <Button Name="but_persTechn" Content="+" FontSize="32" FontWeight="Bold" Width="70" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
-                                    Background="White" Foreground="Black"/>
-                        </Grid>
-                        <Grid Name="grid_persAnimateur">
-                            <TextBlock Text="Animateur" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            <TextBox Text="0" MinWidth="70" InputScope="Number" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
-                            <Button Name="but_persAnim" Content="+" FontSize="32" FontWeight="Bold" Width="70" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
-                                    Background="White" Foreground="Black"/>
-                        </Grid>
-                        <Grid Name="grid_persSecurity">
-                            <TextBlock Text="Security" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            <TextBox Text="0" MinWidth="70" InputScope="Number" TextAlignment="Right" Margin="0,0,0,0" FontSize="18" HorizontalAlignment="Right" />
-                            <Button Name="but_persSec" Content="+" FontSize="32" FontWeight="Bold" Width="70" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
-                                    Background="White" Foreground="Black"/>
-                        </Grid>
-                    </StackPanel>
-                </Grid>
+                    <Grid>
+                        <StackPanel Name="stPan_pers">
+                            <Grid Name="grid_persKoch">
+                                <TextBlock Text="Koch" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="0" TextAlignment="Right" Margin="0,0,-10,0" FontSize="32" HorizontalAlignment="Right" 
+                                         Name="tB_persKoch" LostFocus="tB_persKoch_LostFocus" InputScope="Number" Height="80" Width="80"/>
+                                <Button Name="but_persKoch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="grid_persKüHilfe">
+                                <TextBlock Text="Küchenhilfe" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="0" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
+                                <Button Name="but_persKüHi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="grid_persKellner">
+                                <TextBlock Text="Kellener/Servicekraft" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="0" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
+                                <Button Name="but_persKell" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="grid_persPutzhilfe">
+                                    <TextBlock Text="Putzhilfe" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="0" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
+                                <Button Name="but_persPuHi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="grid_persAushilfe">
+                                <TextBlock Text="Aushilfe/Springer" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="0" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
+                                <Button Name="but_persAushi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="grid_persBarkeeper">
+                                <TextBlock Text="Barkeeper" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="0" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
+                                <Button Name="but_persBark" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="grid_persTechniker">
+                                <TextBlock Text="Techniker" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="0" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
+                                <Button Name="but_persTechn" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="grid_persAnimateur">
+                                <TextBlock Text="Animateur" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="0" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
+                                <Button Name="but_persAnim" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="grid_persSecurity">
+                                <TextBlock Text="Security" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="0" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
+                                <Button Name="but_persSec" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
                 </ScrollViewer>
             </controls:PanoramaItem>
             
@@ -205,13 +220,13 @@
                             </StackPanel>
                             <CheckBox Name="Stühle" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Name="StPan_extraKüchenUt" Margin="0,10,0,0">
+                        <!--<StackPanel Orientation="Horizontal" Name="StPan_extraKüchenUt" Margin="0,10,0,0" Visibility="Collapsed">
                             <StackPanel Width="250">
                                 <TextBlock Text="Küchenutensilien" Margin="0,0,0,0" FontSize="32" />
                                     <TextBlock Name="tBl_Küchenutensilien" Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
                             <CheckBox Name="Küchenutensilien" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap"/>
-                        </StackPanel>
+                        </StackPanel>-->
                         <StackPanel Orientation="Horizontal" Name="StPan_extraGesch" Margin="0,10,0,0">
                             <StackPanel Width="250">
                                 <TextBlock Text="Geschirr/Besteck" Margin="0,0,0,0" FontSize="32" />
@@ -260,25 +275,27 @@
                             <StackPanel Name="StPan_musikWer" Margin="0,0,0,0">
                                 <TextBlock Text="Verantwortlich für Musik" Margin="0,0,0,0" FontSize="32" />
                                 <toolkit:ListPicker FullModeHeader="Art der Location" SelectionMode="Single" Name="LP_musikWer" 
-                                                        Width="400" Margin="-20,-10,0,0" SelectionChanged="LP_musikWer_SelectionChanged" />
+                                                        Width="400" Margin="-20,-10,0,0" SelectionChanged="LP_musikWer_SelectionChanged">
+                                    <!--<toolkit:ListPickerItem FontSize="32"/>-->
+                                </toolkit:ListPicker>
                             </StackPanel>
                             <StackPanel Name="stPan_musikBandDJ" Margin="0,10,0,0" Visibility="Collapsed">
                                 <TextBlock Text="Band/DJ" FontSize="40"/>
                                 <TextBlock Text="Musik Stil" FontSize="32" />
                                 <toolkit:ListPicker FullModeHeader="Musik Stil" SelectionMode="Multiple" Name="LP_musikStilDJ"
                                                         Width="400" Margin="-20,-10,0,0"/>
-                                <Grid>
+                                <Grid Margin="0,10,0,0">
                                     <TextBlock Text="Kosten" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
                                     <TextBox HorizontalAlignment="Right" MinWidth="70" Margin="0,0,10,0" InputScope="Number" TextAlignment="Right"/>
                                 </Grid>
-                                    <TextBlock Text="Spezielle Wünsche" FontSize="32"/>
-                                    <TextBox Margin="-10,-10,10,0" MinHeight="100"/>
+                                <TextBlock Text="Spezielle Wünsche" FontSize="32"/>
+                                <TextBox Margin="-10,-10,10,0" MinHeight="100"/>
                             </StackPanel>
                             <StackPanel Name="stPan_musikTechniker" Margin="0,10,0,0" Visibility="Collapsed">
                                 <TextBlock Text="Techniker" FontSize="40"/>
                                 <TextBlock Text="Musik Stil" FontSize="32" />
                                 <toolkit:ListPicker FullModeHeader="Musik Stil" SelectionMode="Multiple" Name="LP_musikStilTec"
-                                                        Width="400" Margin="-20,-10,0,0"/>
+                                                        Width="400" Margin="-20,-10,0,0" />
                                 <TextBlock Text="Spezielle Wünsche" FontSize="32"/>
                                 <TextBox Margin="-10,-10,10,0" MinHeight="100"/>
                             </StackPanel>
@@ -312,7 +329,6 @@
                                     <TextBlock Text="Stil" FontSize="32" Margin="10,0,0,0"/>
                                     <toolkit:ListPicker FullModeHeader="Musik Stil" SelectionMode="Multiple" Name="LP_einlStil"
                                                             Width="400" Margin="0,-10,0,0"/>
-                                    <TextBlock Text="Spezielle Wünsche" FontSize="32"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Name="StPan_einlEmail" Margin="0,10,0,0">
@@ -326,7 +342,8 @@
                                 <StackPanel Name="StPan_einlEmailDetail" Margin="0,10,0,0" Visibility="Collapsed">
                                     <Grid Width="400">
                                         <TextBlock Text="Adressen" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
-                                        <TextBox HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,10,0" TextAlignment="Right"/>
+                                        <TextBox HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,10,0" 
+                                                 TextAlignment="Left" InputScope="EmailSmtpAddress"/>
                                     </Grid>
                                     <Grid Width="400">
                                         <TextBlock Text="Betreff" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
@@ -385,5 +402,16 @@
     </Grid>
 
     <!--Panoramaanwendungen sollten keine ApplicationBar anzeigen.-->
+    <!--Beispielcode zur Verwendung von ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.check.rest.png" Text="Abschluss" Click="ApplicationBarIconButton_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.feature.settings.rest.png" Text="Einstellungen" Click="ApplicationBarIconButton_Click_1" />
+            <!--<shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Menüelement 1"/>
+                <shell:ApplicationBarMenuItem Text="Menüelement 2"/>
+            </shell:ApplicationBar.MenuItems>-->
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

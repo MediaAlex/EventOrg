@@ -19,5 +19,14 @@ namespace EventOrg.ScreenExtrasDeko
         {
             InitializeComponent();
         }
+
+        List<string> dekoStil = new List<string> { "Pastel Grün", "Gün", "Retro", "Modern", "Rockig", "Rottöne", "Erdfarben" };
+        List<string> wasDeko = new List<string> { "Tische", "Wände", "Decke", "Stühle", "Türe", "Fenster", "Eingang", "Garten" };
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            LP_DekoStil.ItemsSource = dekoStil;
+            LP_DekoWas.ItemsSource = wasDeko;
+        }
     }
 }

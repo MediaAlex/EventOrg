@@ -11,7 +11,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+    shell:SystemTray.IsVisible="True" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot ist das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
     <Grid x:Name="LayoutRoot">
@@ -32,21 +32,21 @@
         <!--ContentPanel - zusätzliche Inhalte hier platzieren-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <Grid >
-                    <TextBlock Text="Anzahl" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBox Text="" Width="90" Height="70" FontSize="28" Margin="80,0,0,0" HorizontalAlignment="Right"/>
-                </Grid>
                 <StackPanel HorizontalAlignment="Right">
                     <TextBlock Text="Art" Margin="0,0,0,0" FontSize="32" />
-                    <toolkit:ListPicker FullModeHeader="Art" Name="LP_tischArt" Width="445" Margin="0,-10,10,0"/>
+                    <toolkit:ListPicker FullModeHeader="Art" Name="LP_stuhlArt" Width="445" Margin="0,-10,10,0"/>
                 </StackPanel>
                 <Grid  Margin="0,10,0,0">
+                    <TextBlock Text="Anzahl" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox Text="" Width="90" Height="70" FontSize="28" Margin="80,0,0,0" HorizontalAlignment="Right" InputScope="Number" TextAlignment="Right"/>
+                </Grid>
+                <Grid  Margin="0,10,0,0">
                     <TextBlock Text="Abholdatum" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <toolkit:DatePicker Height="70" FontSize="28" Margin="0,0,0,0" HorizontalAlignment="Right"/>
+                    <toolkit:DatePicker Height="70" FontSize="28" Margin="0,0,0,0" HorizontalAlignment="Right" ValueStringFormat="{}{0:dd.MM.yyyy}"/>
                 </Grid>
                 <Grid>
                     <TextBlock Text="Kosten (in €)" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <TextBox Text="" MinWidth="90" Height="70" FontSize="28" Margin="80,0,0,0" HorizontalAlignment="Right"/>
+                    <TextBox Text="" MinWidth="90" Height="70" FontSize="28" Margin="80,0,0,0" HorizontalAlignment="Right" InputScope="Number" TextAlignment="Right"/>
                 </Grid>
             </StackPanel>
         </Grid>

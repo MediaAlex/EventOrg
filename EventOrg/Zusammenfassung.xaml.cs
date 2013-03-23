@@ -11,20 +11,13 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 
-namespace EventOrg.ScreenExtrasDeko
+namespace EventOrg
 {
-    public partial class Geschirr : PhoneApplicationPage
+    public partial class Zusammenfassung : PhoneApplicationPage
     {
-        public Geschirr()
+        public Zusammenfassung()
         {
             InitializeComponent();
-        }
-
-        List<string> geschirr = new List<string> { "Romantisch", "Modern", "Landhaus", "Design" };
-
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            LP_geschStil.ItemsSource = geschirr;
         }
     }
 }

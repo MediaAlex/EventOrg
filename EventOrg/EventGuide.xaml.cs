@@ -20,10 +20,11 @@ namespace EventOrg
             InitializeComponent();
         }
         List<string> geschlecht = new List<string> { "gemischt", "männlich", "weiblich" };
-        List<string> ausstattung = new List<string> {"Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
+        List<string> ausstattung = new List<string> { "Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
         List<string> location = new List<string> { "Stadthalle", "Turnhalle", "Restaurant", "Garten", "Strand", "Park", "Gemeindehaus", "Zuhause" };
         List<string> musikVerantw = new List<string> { "DJ", "Band", "Techniker", "Selbst"};
         List<string> musikStil = new List<string> { "Gemischt", "HipHop", "R&B", "House", "Elektro", "Rock", "HardRock", "PunkRock", "Classic Rock", "Indi", "Pop", "Classic" };
+        List<string> catGetränke = new List<string> { "Coca Cola", "Fanta", "Sprite", "Sprudel Classic", "Sprudel Medium", "Stilles Wasser", "Bier", "Rotwein", "Weißwein" };
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -33,13 +34,12 @@ namespace EventOrg
         private void _listPickerFüllen()
         {
             LP_geschlecht.ItemsSource = geschlecht;
-            LP_geschlecht.SelectedIndex = 2;
             LP_ausstattung.ItemsSource = ausstattung;
             LP_loc.ItemsSource = location;
             LP_musikWer.ItemsSource = musikVerantw;
-            LP_musikWer.SelectedIndex = 3;
             LP_musikStilDJ.ItemsSource = musikStil;
             LP_musikStilTec.ItemsSource = musikStil;
+            LP_getränke.ItemsSource = catGetränke;
         }
 
         private void rB_catSVers_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -137,6 +137,16 @@ namespace EventOrg
             {
                 StPan_einlGoogleDetail.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Zusammenfassung.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Einstellungen.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }
