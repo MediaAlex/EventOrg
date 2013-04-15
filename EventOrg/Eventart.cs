@@ -14,7 +14,9 @@ namespace EventOrg
 {
     public class Eventart
     {
-        public string event_name { get; set; }
-        List<Eventart> einstellung_eventart { get; set; }
+        public string evArtID { get; set; }
+        public string name { get; set; }
+        List<ListeInfo> listInfo { get; set; }
+        
     }
 }

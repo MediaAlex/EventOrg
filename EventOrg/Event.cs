@@ -8,15 +8,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
 
 namespace EventOrg
 {
-    public class GlobaleEinstellungen
+    public class Event
     {
-        int einstellung_gästemax { get; set; }
-        //public ObservableCollection<Eventart> collectionnamecomingsoon;
-        
+        public string name { get; set; }
+        public string kdID { get; set; }
+        public string datumVon { get; set; }
+        public string datumBis { get; set; }
+        public string eventartID { get; set; }
+        public List<ListeInfo> listInfo { get; set; }
     }
 }
