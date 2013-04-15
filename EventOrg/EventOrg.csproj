@@ -73,9 +73,6 @@
     <Compile Include="EventGuide.xaml.cs">
       <DependentUpon>EventGuide.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GlobaleEinstellungen.cs" />
-    <Compile Include="Gäste.cs" />
-    <Compile Include="GästeMerge.cs" />
     <Compile Include="Kunde.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
