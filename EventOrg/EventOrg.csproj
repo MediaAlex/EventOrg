@@ -83,7 +83,6 @@
     <Compile Include="NeuesProjekt.xaml.cs">
       <DependentUpon>NeuesProjekt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Projekt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="P_test.xaml.cs">
       <DependentUpon>P_test.xaml</DependentUpon>
