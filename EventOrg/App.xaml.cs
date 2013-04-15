@@ -76,7 +76,7 @@ namespace EventOrg
                 liste_eventart = new List<Eventart>();
                 liste_eventart.Add(new Eventart()
                 {
-                    event_name = "Hochzeit"
+                    //event_name = "Hochzeit"
                 });
             }
         }

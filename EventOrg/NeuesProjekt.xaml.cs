@@ -42,11 +42,11 @@ namespace EventOrg
             projekt.projekt_art = LP_eventart.SelectedItem.ToString();
             projekt.projekt_datumbis = (DateTime)dP_bis.Value;
             projekt.projekt_datumvon = (DateTime)dP_von.Value;
-            kunde.kunde_vorname = tB_vorname.Text;
-            kunde.kunde_nachname = tB_nachname.Text;
+            kunde._Vorname = tB_vorname.Text;
+            kunde._Nachname = tB_nachname.Text;
             if (tB_phone.Text != "")
             {
-                kunde.kunde_telefon = Int32.Parse((tB_phone as TextBox).Text.ToString());    
+                kunde._Telefon = Int32.Parse((tB_phone as TextBox).Text.ToString());    
             }
 
             NavigationService.Navigate(new Uri("/EventGuide.xaml", UriKind.RelativeOrAbsolute));

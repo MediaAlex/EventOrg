@@ -8,16 +8,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using System.Collections.Generic;
 
 namespace EventOrg
 {
-    public class Eventart
+    public class InfoPunkt
     {
-        public string evArtID { get; set; }
-        public string name { get; set; }
-        public List<ListeInfo> listInfo { get; set; }
-        
-
+        public string antwort { get; set; }
+        public string infoID { get; set; }
     }
 }
