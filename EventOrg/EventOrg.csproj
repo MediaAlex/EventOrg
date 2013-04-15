@@ -69,11 +69,13 @@
     <Compile Include="Einstellungen.xaml.cs">
       <DependentUpon>Einstellungen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Event.cs" />
     <Compile Include="Eventart.cs" />
     <Compile Include="EventGuide.xaml.cs">
       <DependentUpon>EventGuide.xaml</DependentUpon>
     </Compile>
     <Compile Include="Kunde.cs" />
+    <Compile Include="ListeInfo.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
