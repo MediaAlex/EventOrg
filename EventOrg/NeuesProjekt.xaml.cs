@@ -10,15 +10,16 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.Collections.ObjectModel;
 
 namespace EventOrg
 {
     public partial class NeuesProjekt : PhoneApplicationPage
     {
-        public List<Projekt> liste_projekt = new List<Projekt>();
-        public Projekt projekt = new Projekt();
+        public List<Event> liste_event = new List<Event>();
+        public Event ev = new Event();
         public Kunde kunde = new Kunde();
-
+        public ObservableCollection<Event> oc_neueprojekte = new ObservableCollection<Event>();
         public NeuesProjekt()
         {
             InitializeComponent();
@@ -38,16 +39,20 @@ namespace EventOrg
 
         private void but_erstellen_Click(object sender, RoutedEventArgs e)
         {
-            projekt.projekt_name = tB_projektname.Text;
-            projekt.projekt_art = LP_eventart.SelectedItem.ToString();
-            projekt.projekt_datumbis = (DateTime)dP_bis.Value;
-            projekt.projekt_datumvon = (DateTime)dP_von.Value;
-            kunde.kunde_vorname = tB_vorname.Text;
-            kunde.kunde_nachname = tB_nachname.Text;
+            ev.name = tB_projektname.Text;
+            ev.eventart = LP_eventart.SelectedItem.ToString();
+            ev.datumBis = dP_bis.Value.ToString();
+            ev.datumVon = dP_von.Value.ToString();
+            kunde._Vorname = tB_vorname.Text;
+            kunde._Nachname = tB_nachname.Text;
             if (tB_phone.Text != "")
             {
-                kunde.kunde_telefon = Int32.Parse((tB_phone as TextBox).Text.ToString());    
+                kunde._Telefon = Int32.Parse((tB_phone as TextBox).Text.ToString());    
             }
+
+            ev.kunde = kunde;
+
+            oc_neueprojekte.Add(ev);
 
             NavigationService.Navigate(new Uri("/EventGuide.xaml", UriKind.RelativeOrAbsolute));
         }

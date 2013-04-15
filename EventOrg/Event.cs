@@ -8,16 +8,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 namespace EventOrg
 {
     public class Event
     {
         public string name { get; set; }
-        public string kdID { get; set; }
+        public Kunde kunde { get; set; }
         public string datumVon { get; set; }
         public string datumBis { get; set; }
-        public string eventartID { get; set; }
+        public string eventart { get; set; }
         public List<ListeInfo> listInfo { get; set; }
     }
 }
