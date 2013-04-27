@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="EventOrg.P_test"
+    x:Class="EventOrg.NeuesEvent"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -10,7 +10,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot ist das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
@@ -22,35 +22,34 @@
 
         <!--TitlePanel enthält den Namen der Anwendung und den Seitentitel-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MEINE ANWENDUNG" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Seitenname" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="EventOrg" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Neues Event" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - zusätzliche Inhalte hier platzieren-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel Name="SP_maske">
-                <StackPanel Name="SP_anzG" Orientation="Horizontal">
-                    <TextBlock Text="Ges Z"/>
-                    <TextBox Text="{Binding gäste_anzahlgesamt}"/>
-                </StackPanel>
-                <StackPanel Name="SP_anzK" Orientation="Horizontal">
-                    <TextBlock Text="Kinder"/>
-                    <TextBox Text="{Binding gäste_anzahlkind}"/>
-                </StackPanel>
-            </StackPanel>
+            <TextBox Name="tB_eventName" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                     Width="456" Text=""/>
+            <ListBox Name="LB_punkte" ItemsSource="{Binding listInfo}" Margin="0,86,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding Path=infoID}" Height="72" HorizontalAlignment="Left" IsChecked="True" Margin="10" VerticalAlignment="Top" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
  
     <!--Beispielcode zur Verwendung von ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
+    <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Schaltfläche 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Schaltfläche 2"/>
-            <shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.check.rest.png" Text="Speichern" Click="Speichern_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.cancel.rest.png" Text="Abbrechen" Click="Abbrechen_Click" />
+            <!--<shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Menüelement 1"/>
                 <shell:ApplicationBarMenuItem Text="Menüelement 2"/>
-            </shell:ApplicationBar.MenuItems>
+            </shell:ApplicationBar.MenuItems>-->
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

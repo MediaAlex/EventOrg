@@ -19,5 +19,10 @@ namespace EventOrg
         {
             InitializeComponent();
         }
+
+        private void but_eventArt_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/EvArtVerwalten.xaml", UriKind.RelativeOrAbsolute));
+        }
     }
 }

@@ -26,5 +26,10 @@ namespace EventOrg
 
             NavigationService.Navigate(new Uri("/NeuesProjekt.xaml", UriKind.RelativeOrAbsolute));
         }
+
+        private void tBl_einstellung_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Einstellungen.xaml", UriKind.RelativeOrAbsolute));
+        }
     }
 }

@@ -19,7 +19,8 @@ namespace EventOrg
 {
     public partial class App : Application
     {
-        public List<Eventart> liste_eventart;
+        public static ObservableCollection<Eventart> _eventArten = new ObservableCollection<Eventart>();
+        public static int _aktEventArt = -1;
 
         /// <summary>
         /// Ermöglicht den einfachen Zugriff auf den Hauptframe der Phone-Anwendung.
@@ -61,20 +62,20 @@ namespace EventOrg
         // Dieser Code wird nicht ausgeführt, wenn die Anwendung reaktiviert wird.
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            if (IsolatedStorageSettings.ApplicationSettings.Contains("liste_eventart"))
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("_eventArten"))
             {
-                IsolatedStorageSettings.ApplicationSettings.TryGetValue("liste_eventart", out liste_eventart);
+                IsolatedStorageSettings.ApplicationSettings.TryGetValue("_eventArten", out _eventArten);
 
-                if (liste_eventart == null)
+                if (_eventArten == null)
                 {
 
-                    IsolatedStorageSettings.ApplicationSettings["liste_eventart"] = liste_eventart;
+                    IsolatedStorageSettings.ApplicationSettings["liste_eventart"] = _eventArten;
                 }
             }
             else
             {
-                liste_eventart = new List<Eventart>();
-                liste_eventart.Add(new Eventart()
+                _eventArten = new ObservableCollection<Eventart>();
+                _eventArten.Add(new Eventart()
                 {
                     //event_name = "Hochzeit"
                 });
