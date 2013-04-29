@@ -33,6 +33,7 @@ namespace EventOrg
                 App._aktEventArt = App._eventArten.Count;
                 App._eventArten.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = ListeInfo.pnkteGrundlage() });
                 neu = true;
+                tB_eventName.Text = "";
 
                 NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + tB_eventName.Text + "&neu=" + neu, UriKind.RelativeOrAbsolute));
             }
