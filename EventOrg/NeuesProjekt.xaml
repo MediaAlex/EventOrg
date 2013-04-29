@@ -60,7 +60,13 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0,0,0,0" Text="Eventart" FontSize="24" Height="34" />
-                    <toolkit:ListPicker FullModeHeader="Eventart" Margin="55,0,0,0" Width="290" Name="LP_eventart"/>
+                    <toolkit:ListPicker FullModeHeader="Eventart" Margin="55,0,0,0" Width="290" Name="LP_eventart">
+                        <toolkit:ListPicker.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding nameEA}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.ItemTemplate>
+                    </toolkit:ListPicker>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock FontSize="24" Height="33" Margin="0,0,0,0" Text="Von"/>

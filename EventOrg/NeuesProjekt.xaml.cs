@@ -25,11 +25,9 @@ namespace EventOrg
             InitializeComponent();
         }
 
-        List<string> eventart = new List<string> { "Hochzeit", "Geburtstag" };
-
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            LP_eventart.ItemsSource = eventart;
+            LP_eventart.ItemsSource = App._eventArten;
         }
 
         private void tBl_wahlEventart_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
