@@ -65,20 +65,20 @@ namespace EventOrg
             if (IsolatedStorageSettings.ApplicationSettings.Contains("_eventArten"))
             {
                 IsolatedStorageSettings.ApplicationSettings.TryGetValue("_eventArten", out _eventArten);
+                _aktEventArt = _eventArten.Count -1;
 
                 if (_eventArten == null)
                 {
 
-                    IsolatedStorageSettings.ApplicationSettings["liste_eventart"] = _eventArten;
+                    IsolatedStorageSettings.ApplicationSettings["_eventArten"] = _eventArten;
                 }
             }
             else
             {
-                _eventArten = new ObservableCollection<Eventart>();
-                _eventArten.Add(new Eventart()
-                {
+                //_eventArten.Add(new Eventart()
+                //{
                     //event_name = "Hochzeit"
-                });
+                //});
             }
         }
 
@@ -98,6 +98,8 @@ namespace EventOrg
         // Dieser Code wird nicht ausgeführt, wenn die Anwendung deaktiviert wird.
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            IsolatedStorageSettings.ApplicationSettings["_eventArten"] = _eventArten;
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         // Bei einem Navigationsfehler auszuführender Code

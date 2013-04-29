@@ -19,6 +19,7 @@ namespace EventOrg
         {
             InitializeComponent();
         }
+        bool neu = true;
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -30,9 +31,10 @@ namespace EventOrg
             if (tB_eventName.Text != "")
             {
                 App._aktEventArt = App._eventArten.Count;
-                App._eventArten.Add(new Eventart { name = tB_eventName.Text, listInfo = ListeInfo.pnkteGrundlage() });
+                App._eventArten.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = ListeInfo.pnkteGrundlage() });
+                neu = true;
 
-                NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + tB_eventName.Text, UriKind.RelativeOrAbsolute));
+                NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + tB_eventName.Text + "&neu=" + neu, UriKind.RelativeOrAbsolute));
             }
             else
                 MessageBox.Show("Bitte geben sie der neuen Eventart einen Namen.");
@@ -44,11 +46,20 @@ namespace EventOrg
 
             if (myMsgResult == MessageBoxResult.OK)
             {
-                int delEventAn = lB_eventarten.SelectedIndex;
-                App._eventArten.RemoveAt(delEventAn);
+                int delEventArt = lB_eventarten.SelectedIndex;
+                App._eventArten.RemoveAt(delEventArt);
                 lB_eventarten.ItemsSource = App._eventArten;
                 App._aktEventArt -= 1;
             }
+        }
+
+        private void tBl_eventName_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            string aktEventArt = lB_eventarten.SelectedIndex.ToString();
+            string nameEventArt = (sender as TextBlock).Text;
+            neu = false;
+
+            NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + nameEventArt + "&indx=" + aktEventArt + "&neu=" + neu, UriKind.RelativeOrAbsolute));
         }
     }
 }

@@ -38,7 +38,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="tBl_eventName" Text="{Binding eventname}" Hold="tBl_eventName_Hold" />
+                            <TextBlock Name="tBl_eventName" Text="{Binding nameEA}" Hold="tBl_eventName_Hold" Tap="tBl_eventName_Tap" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

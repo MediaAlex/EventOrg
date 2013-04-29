@@ -19,30 +19,51 @@ namespace EventOrg
         {
             InitializeComponent();
         }
+        bool neu = true;
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            ContentPanel.DataContext = App._eventArten[App._aktEventArt];
         }
+
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             string msg = "";
+            string indx;
+            string neueEA;
+            
 
             if (NavigationContext.QueryString.TryGetValue("msg", out msg))
-
                 tB_eventName.Text = msg;
+
+            if (NavigationContext.QueryString.TryGetValue("indx", out indx))
+            {
+                int i;
+                Int32.TryParse(indx, out i);
+                App._aktEventArt = i;
+            }
+
+            if (NavigationContext.QueryString.TryGetValue("neu", out neueEA))
+            {
+                bool.TryParse(neueEA, out neu);
+            }
+            ContentPanel.DataContext = App._eventArten[App._aktEventArt];
         }
 
         private void Speichern_Click(object sender, EventArgs e)
         {
-
+            App._aktEventArt = App._eventArten.Count - 1;
+            NavigationService.GoBack();
         }
 
         private void Abbrechen_Click(object sender, EventArgs e)
         {
+            if (neu)
+                App._eventArten.RemoveAt(App._aktEventArt);
 
+            App._aktEventArt = App._eventArten.Count - 1;
+            NavigationService.GoBack();
         }
     }
 }

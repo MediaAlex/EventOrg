@@ -33,7 +33,7 @@
             <ListBox Name="LB_punkte" ItemsSource="{Binding listInfo}" Margin="0,86,0,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <CheckBox Content="{Binding Path=infoID}" Height="72" HorizontalAlignment="Left" IsChecked="True" Margin="10" VerticalAlignment="Top" />
+                        <CheckBox Content="{Binding Path=infoID}" Height="72" HorizontalAlignment="Left" IsChecked="{Binding Path=aktiv, Mode=TwoWay}" Margin="10" VerticalAlignment="Top" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
