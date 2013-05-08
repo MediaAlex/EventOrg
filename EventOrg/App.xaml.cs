@@ -21,6 +21,8 @@ namespace EventOrg
     {
         public static ObservableCollection<Eventart> _eventArten = new ObservableCollection<Eventart>();
         public static int _aktEventArt = -1;
+        public static ObservableCollection<Eventart> aktEventArt = new ObservableCollection<Eventart>();
+        public static List<ListeInfoPunkte> punkte = new List<ListeInfoPunkte>();
 
         /// <summary>
         /// Ermöglicht den einfachen Zugriff auf den Hauptframe der Phone-Anwendung.
@@ -64,13 +66,13 @@ namespace EventOrg
         {
             if (IsolatedStorageSettings.ApplicationSettings.Contains("_eventArten"))
             {
-                IsolatedStorageSettings.ApplicationSettings.TryGetValue("_eventArten", out _eventArten);
-                _aktEventArt = _eventArten.Count -1;
+                IsolatedStorageSettings.ApplicationSettings.TryGetValue("_eventArten", out aktEventArt);
+                _aktEventArt = aktEventArt.Count -1;
 
-                if (_eventArten == null)
+                if (aktEventArt == null)
                 {
 
-                    IsolatedStorageSettings.ApplicationSettings["_eventArten"] = _eventArten;
+                    IsolatedStorageSettings.ApplicationSettings["_eventArten"] = aktEventArt;
                 }
             }
             else
@@ -98,7 +100,7 @@ namespace EventOrg
         // Dieser Code wird nicht ausgeführt, wenn die Anwendung deaktiviert wird.
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            IsolatedStorageSettings.ApplicationSettings["_eventArten"] = _eventArten;
+            IsolatedStorageSettings.ApplicationSettings["_eventArten"] = aktEventArt;
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 

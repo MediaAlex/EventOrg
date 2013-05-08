@@ -28,7 +28,24 @@ namespace EventOrg
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            _listPickerFüllen();    
+            _listPickerFüllen();
+            _filtern();
+        }
+
+        private void _filtern()
+        {
+            string bezeichnung = "";
+            foreach (var item in App.punkte)
+            {
+                if (item.aktiv == false)
+                {
+                    bezeichnung = item.infoID;
+                    Visibility = Visibility.Collapsed;
+                    (StackPanel).
+
+                    // stackpanel mit der bezeichnung collapsed
+                }
+            }
         }
 
         private void _listPickerFüllen()

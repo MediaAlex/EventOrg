@@ -78,7 +78,9 @@
       <DependentUpon>EventGuide.xaml</DependentUpon>
     </Compile>
     <Compile Include="Kunde.cs" />
-    <Compile Include="ListeInfo.cs" />
+    <Compile Include="InfoElement.cs" />
+    <Compile Include="ListeInfoPunkte.cs" />
+    <Compile Include="ListInfo.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

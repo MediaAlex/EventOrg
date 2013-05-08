@@ -19,6 +19,6 @@ namespace EventOrg
         public string datumVon { get; set; }
         public string datumBis { get; set; }
         public string eventart { get; set; }
-        public List<ListeInfo> listInfo { get; set; }
+        public List<InfoElement> listInfo { get; set; }
     }
 }

@@ -48,21 +48,21 @@ namespace EventOrg
             {
                 bool.TryParse(neueEA, out neu);
             }
-            ContentPanel.DataContext = App._eventArten[App._aktEventArt];
+            ContentPanel.DataContext = App.aktEventArt[App._aktEventArt];
         }
 
         private void Speichern_Click(object sender, EventArgs e)
         {
-            App._aktEventArt = App._eventArten.Count - 1;
+            App._aktEventArt = App.aktEventArt.Count - 1;
             NavigationService.GoBack();
         }
 
         private void Abbrechen_Click(object sender, EventArgs e)
         {
             if (neu)
-                App._eventArten.RemoveAt(App._aktEventArt);
+                App.aktEventArt.RemoveAt(App._aktEventArt);
 
-            App._aktEventArt = App._eventArten.Count - 1;
+            App._aktEventArt = App.aktEventArt.Count - 1;
             NavigationService.GoBack();
         }
     }

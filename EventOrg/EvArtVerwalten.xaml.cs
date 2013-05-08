@@ -23,15 +23,15 @@ namespace EventOrg
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            lB_eventarten.ItemsSource = App._eventArten;
+            lB_eventarten.ItemsSource = App.aktEventArt;
         }
 
         private void but_eventHinzu_Click(object sender, RoutedEventArgs e)
         {
             if (tB_eventName.Text != "")
             {
-                App._aktEventArt = App._eventArten.Count;
-                App._eventArten.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = ListeInfo.pnkteGrundlage() });
+                App._aktEventArt = App.aktEventArt.Count;
+                App.aktEventArt.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = InfoElement.pnkteGrundlage() });
                 neu = true;
                 tB_eventName.Text = "";
 
@@ -48,8 +48,8 @@ namespace EventOrg
             if (myMsgResult == MessageBoxResult.OK)
             {
                 int delEventArt = lB_eventarten.SelectedIndex;
-                App._eventArten.RemoveAt(delEventArt);
-                lB_eventarten.ItemsSource = App._eventArten;
+                App.aktEventArt.RemoveAt(delEventArt);
+                lB_eventarten.ItemsSource = App.aktEventArt;
                 App._aktEventArt -= 1;
             }
         }
