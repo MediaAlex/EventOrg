@@ -23,6 +23,7 @@ namespace EventOrg
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            tB_eventName.Text = "";
             lB_eventarten.ItemsSource = App._eventArten;
         }
 
@@ -33,7 +34,7 @@ namespace EventOrg
                 App._aktEAPoint = App._eventArten.Count;
                 App._eventArten.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = ListInfo.pnkteGrundlage() });//Füllen der Liste richtig?
                 neu = true;
-                tB_eventName.Text = "";
+                //tB_eventName.Text = "";
 
                 NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + tB_eventName.Text + "&neu=" + neu, UriKind.RelativeOrAbsolute));
             }

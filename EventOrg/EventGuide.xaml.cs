@@ -40,10 +40,16 @@ namespace EventOrg
                 if (item.aktiv == false)
                 {
                     bezeichnung = item.infoID;
-                    Visibility = Visibility.Collapsed;
-                    (StackPanel).
-
-                    // stackpanel mit der bezeichnung collapsed
+                    if (bezeichnung == "persKoch" || bezeichnung == "persKüHi" || bezeichnung == "persKüHi" || bezeichnung == "persKellner" || bezeichnung == "persPutzh" || bezeichnung == "persAushilfe" || bezeichnung == "persTechn" || bezeichnung == "persAnim" || bezeichnung == "persSecur")
+                    {
+                        Grid grid = (Grid)LayoutRoot.FindName(bezeichnung);
+                        grid.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        StackPanel stPan = (StackPanel)LayoutRoot.FindName(bezeichnung);
+                        stPan.Visibility = Visibility.Collapsed;
+                    }
                 }
             }
         }
@@ -56,7 +62,7 @@ namespace EventOrg
             LP_musikWer.ItemsSource = musikVerantw;
             LP_musikStilDJ.ItemsSource = musikStil;
             LP_musikStilTec.ItemsSource = musikStil;
-            LP_getränke.ItemsSource = catGetränke;
+            LP_caterGetr.ItemsSource = catGetränke;
         }
 
         private void rB_catSVers_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -101,18 +107,18 @@ namespace EventOrg
         {
             if ((string)LP_musikWer.SelectedItem == "DJ" || (string)LP_musikWer.SelectedItem == "Band")
             {
-                stPan_musikBandDJ.Visibility = Visibility.Visible;
-                stPan_musikTechniker.Visibility = Visibility.Collapsed;
+                musikBandDJ.Visibility = Visibility.Visible;
+                musikTechn.Visibility = Visibility.Collapsed;
             }
             if ((string)LP_musikWer.SelectedItem == "Techniker")
             {
-                stPan_musikBandDJ.Visibility = Visibility.Collapsed;
-                stPan_musikTechniker.Visibility = Visibility.Visible;
+                musikBandDJ.Visibility = Visibility.Collapsed;
+                musikTechn.Visibility = Visibility.Visible;
             }
             if ((string)LP_musikWer.SelectedItem == "Selbst")
             {
-                stPan_musikBandDJ.Visibility = Visibility.Collapsed;
-                stPan_musikTechniker.Visibility = Visibility.Collapsed;
+                musikBandDJ.Visibility = Visibility.Collapsed;
+                musikTechn.Visibility = Visibility.Collapsed;
             }
         }
 

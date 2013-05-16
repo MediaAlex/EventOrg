@@ -16,9 +16,7 @@ namespace EventOrg
 {
     public partial class NeuesProjekt : PhoneApplicationPage
     {
-        public List<Event> liste_event = new List<Event>();
-        public Event ev = new Event();
-        public Kunde kunde = new Kunde();
+        //public List<Event> liste_event = new List<Event>();
         public ObservableCollection<Event> oc_neueprojekte = new ObservableCollection<Event>();
         public NeuesProjekt()
         {
@@ -27,7 +25,7 @@ namespace EventOrg
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            LP_eventart.ItemsSource = App.aktEventArt;
+            LP_eventart.ItemsSource = App._eventArten;
         }
 
         private void tBl_wahlEventart_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -37,6 +35,8 @@ namespace EventOrg
 
         private void but_erstellen_Click(object sender, RoutedEventArgs e)
         {
+            Kunde kunde = new Kunde();
+            Event ev = new Event();
             int index;
             index = LP_eventart.SelectedIndex;
             ev.name = tB_projektname.Text;
@@ -49,6 +49,8 @@ namespace EventOrg
             {
                 kunde._Telefon = Int32.Parse((tB_phone as TextBox).Text.ToString());    
             }
+
+            App.punkte.Clear();
 
             foreach (var item in App._eventArten[index].listInfo)
             {
