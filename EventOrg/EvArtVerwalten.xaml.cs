@@ -23,15 +23,15 @@ namespace EventOrg
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            lB_eventarten.ItemsSource = App.aktEventArt;
+            lB_eventarten.ItemsSource = App._eventArten;
         }
 
         private void but_eventHinzu_Click(object sender, RoutedEventArgs e)
         {
             if (tB_eventName.Text != "")
             {
-                App._aktEventArt = App.aktEventArt.Count;
-                App.aktEventArt.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = InfoElement.pnkteGrundlage() });
+                App._aktEAPoint = App._eventArten.Count;
+                App._eventArten.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = ListInfo.pnkteGrundlage() });//Füllen der Liste richtig?
                 neu = true;
                 tB_eventName.Text = "";
 
@@ -48,19 +48,19 @@ namespace EventOrg
             if (myMsgResult == MessageBoxResult.OK)
             {
                 int delEventArt = lB_eventarten.SelectedIndex;
-                App.aktEventArt.RemoveAt(delEventArt);
-                lB_eventarten.ItemsSource = App.aktEventArt;
-                App._aktEventArt -= 1;
+                App._eventArten.RemoveAt(delEventArt);
+                lB_eventarten.ItemsSource = App._eventArten;
+                App._aktEAPoint -= 1;
             }
         }
 
         private void tBl_eventName_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            string aktEventArt = lB_eventarten.SelectedIndex.ToString();
+            string neuEventArt = lB_eventarten.SelectedIndex.ToString();
             string nameEventArt = (sender as TextBlock).Text;
             neu = false;
 
-            NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + nameEventArt + "&indx=" + aktEventArt + "&neu=" + neu, UriKind.RelativeOrAbsolute));
+            NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + nameEventArt + "&indx=" + neuEventArt + "&neu=" + neu, UriKind.RelativeOrAbsolute));
         }
     }
 }

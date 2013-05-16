@@ -41,28 +41,28 @@ namespace EventOrg
             {
                 int i;
                 Int32.TryParse(indx, out i);
-                App._aktEventArt = i;
+                App._aktEAPoint = i;
             }
 
             if (NavigationContext.QueryString.TryGetValue("neu", out neueEA))
             {
                 bool.TryParse(neueEA, out neu);
             }
-            ContentPanel.DataContext = App.aktEventArt[App._aktEventArt];
+            ContentPanel.DataContext = App._eventArten[App._aktEAPoint];
         }
 
         private void Speichern_Click(object sender, EventArgs e)
         {
-            App._aktEventArt = App.aktEventArt.Count - 1;
+            App._aktEAPoint = App._eventArten.Count - 1;
             NavigationService.GoBack();
         }
 
         private void Abbrechen_Click(object sender, EventArgs e)
         {
             if (neu)
-                App.aktEventArt.RemoveAt(App._aktEventArt);
+                App._eventArten.RemoveAt(App._aktEAPoint);
 
-            App._aktEventArt = App.aktEventArt.Count - 1;
+            App._aktEAPoint = App._eventArten.Count - 1;
             NavigationService.GoBack();
         }
     }

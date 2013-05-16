@@ -20,7 +20,7 @@ namespace EventOrg
     public partial class App : Application
     {
         public static ObservableCollection<Eventart> _eventArten = new ObservableCollection<Eventart>();
-        public static int _aktEventArt = -1;
+        public static int _aktEAPoint = -1;
         public static ObservableCollection<Eventart> aktEventArt = new ObservableCollection<Eventart>();
         public static List<ListeInfoPunkte> punkte = new List<ListeInfoPunkte>();
 
@@ -66,13 +66,13 @@ namespace EventOrg
         {
             if (IsolatedStorageSettings.ApplicationSettings.Contains("_eventArten"))
             {
-                IsolatedStorageSettings.ApplicationSettings.TryGetValue("_eventArten", out aktEventArt);
-                _aktEventArt = aktEventArt.Count -1;
+                IsolatedStorageSettings.ApplicationSettings.TryGetValue("_eventArten", out _eventArten);
+                _aktEAPoint = aktEventArt.Count -1;
 
-                if (aktEventArt == null)
+                if (_eventArten == null)
                 {
 
-                    IsolatedStorageSettings.ApplicationSettings["_eventArten"] = aktEventArt;
+                    IsolatedStorageSettings.ApplicationSettings["_eventArten"] = _eventArten;
                 }
             }
             else
@@ -100,7 +100,7 @@ namespace EventOrg
         // Dieser Code wird nicht ausgeführt, wenn die Anwendung deaktiviert wird.
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            IsolatedStorageSettings.ApplicationSettings["_eventArten"] = aktEventArt;
+            IsolatedStorageSettings.ApplicationSettings["_eventArten"] = _eventArten;
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
