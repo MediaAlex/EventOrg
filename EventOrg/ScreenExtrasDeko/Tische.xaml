@@ -55,10 +55,10 @@
                     <TextBlock Text="Abholdatum" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <toolkit:DatePicker Height="70" FontSize="28" Margin="0,0,0,0" HorizontalAlignment="Right" ValueStringFormat="{}{0:dd.MM.yyyy}"/>
                 </Grid>
-                <Grid>
+                <!--<Grid>
                     <TextBlock Text="Kosten (in €/Tag)" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <TextBox Text="" MinWidth="90" Height="70" FontSize="28" Margin="80,0,0,0" HorizontalAlignment="Right" InputScope="Number" TextAlignment="Right"/>
-                </Grid>
+                </Grid>-->
             </StackPanel>
         </Grid>
     </Grid>

@@ -46,6 +46,12 @@ namespace EventOrg
 
             ev.gäste = new Gäste();
             ev.location = new Location();
+            ev.catering = new Catering();
+            ev.catering.getränke = new List<string>();
+            ev.personal = new Personal();
+            ev.extras = new Extras();
+            ev.musik = new Musik();
+            ev.einladungen = new Einladungen();
 
             kunde._Vorname = tB_vorname.Text;
             kunde._Nachname = tB_nachname.Text;

@@ -36,6 +36,11 @@ namespace EventOrg
             _filtern();
             gr_gast.DataContext = App.oc_neueprojekte[0].gäste;
             gr_loc.DataContext = App.oc_neueprojekte[0].location;
+            gr_catering.DataContext = App.oc_neueprojekte[0].catering;
+            gr_personal.DataContext = App.oc_neueprojekte[0].personal;
+            gr_extras.DataContext = App.oc_neueprojekte[0].extras;
+            gr_musik.DataContext = App.oc_neueprojekte[0].musik;
+            gr_einladungen.DataContext = App.oc_neueprojekte[0].einladungen;
         }
 
         private void _filtern()
@@ -170,12 +175,18 @@ namespace EventOrg
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
+            write <ObservableCollection<Event>>(App.oc_neueprojekte, "test.xml");
             TextWriter writer = new StreamWriter("test.xml");
             XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<Event>));
             ser.Serialize(writer, App.oc_neueprojekte);
             writer.Close();
 
             NavigationService.Navigate(new Uri("/Zusammenfassung.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void write<T>(T observableCollection, string datei)
+        {
+            // hinzufügen   throw new NotImplementedException();
         }
 
         private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
@@ -189,6 +200,26 @@ namespace EventOrg
             {
                 App.punkte[0].antwort = (sender as ListPicker).SelectedItem.ToString();                
             }
+        }
+
+        private void LP_caterGetr_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LP_caterGetr.SelectedItems != null)
+                foreach (var y in LP_caterGetr.SelectedItems)
+                    App.oc_neueprojekte[0].catering.getränke.Add(y.ToString());
+        }
+
+        private void LP_ausstattung_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LP_ausstattung.SelectedItems != null)
+                foreach (var y in LP_caterGetr.SelectedItems)
+                    App.oc_neueprojekte[0].location.ausstattung.Add(y.ToString());
+        }
+
+        private void LP_loc_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LP_loc.SelectedItems != null)
+                App.oc_neueprojekte[0].location.loc_art = (sender as ListPicker).SelectedItem.ToString();
         }
     }
 }
