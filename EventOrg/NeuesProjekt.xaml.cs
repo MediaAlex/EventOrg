@@ -43,6 +43,10 @@ namespace EventOrg
             ev.eventart = LP_eventart.SelectedItem.ToString();
             ev.datumBis = dP_bis.Value.ToString();
             ev.datumVon = dP_von.Value.ToString();
+
+            ev.gäste = new Gäste();
+            ev.location = new Location();
+
             kunde._Vorname = tB_vorname.Text;
             kunde._Nachname = tB_nachname.Text;
             if (tB_phone.Text != "")

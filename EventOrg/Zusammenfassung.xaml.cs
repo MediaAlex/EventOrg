@@ -10,6 +10,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using System.Collections.ObjectModel;
 
 namespace EventOrg
 {
@@ -19,5 +23,24 @@ namespace EventOrg
         {
             InitializeComponent();
         }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                TextReader reader = new StreamReader("test.xml");
+                XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<Event>));
+
+                App.oc_neueprojekte = (ObservableCollection<Event>)ser.Deserialize(reader);
+                zus.Text = reader.ReadToEnd();
+                reader.Close();
+            }
+            catch
+            {
+                
+                throw;
+            }
+        }
+
     }
 }

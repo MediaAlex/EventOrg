@@ -65,5 +65,17 @@ namespace EventOrg
             App._aktEAPoint = App._eventArten.Count - 1;
             NavigationService.GoBack();
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult myMsgResult = MessageBox.Show("Eventart löschen", "Wirklich löschen?", MessageBoxButton.OKCancel);
+
+            if (myMsgResult == MessageBoxResult.OK)
+            {
+                int delEventArt = App._aktEAPoint;
+                App._eventArten.RemoveAt(delEventArt);
+                App._aktEAPoint -= 1;
+            }
+        }
     }
 }

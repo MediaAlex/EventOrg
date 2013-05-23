@@ -42,7 +42,7 @@
                                 <TextBlock Text="Anzahl 1-12" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Anzahl der Gäste unter 12 Jahren" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <TextBox Text="{Binding gäste_anzahlU12, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0" 
+                            <TextBox Text="{Binding bis_12}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0" 
                                      InputScope="Number" TextAlignment="Right"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="gastÜ12" Margin="0,10,0,0">
@@ -50,7 +50,7 @@
                                 <TextBlock Text="Anzahl 13-60" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Anzahl der Gäste über 12 Jahren" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <TextBox Text="{Binding gäste_anzahlÜ12, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0"
+                            <TextBox Text="{Binding bis_60}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0"
                                      InputScope="Number" TextAlignment="Right"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="gastÜ60" Margin="0,10,0,0">
@@ -58,7 +58,7 @@
                                 <TextBlock Text="Anzahl über 60" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Anzahl der Gäste über 60 Jahren" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <TextBox Text="{Binding gäste_anzahlÜ60, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0"
+                            <TextBox Text="{Binding bis_99}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0"
                                      InputScope="Number" TextAlignment="Right"/>
                         </StackPanel>
                         
@@ -111,7 +111,7 @@
             <!--Panoramaelement drei: Catering -->
             <controls:PanoramaItem Header="Catering">
                 <ScrollViewer>
-                <Grid>
+                <Grid Name="gr_catering">
                         <StackPanel>
                             <StackPanel Name="cater">
                             <RadioButton Content="In Location" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"

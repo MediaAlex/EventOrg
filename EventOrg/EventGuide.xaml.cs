@@ -10,6 +10,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Collections.ObjectModel;
 
 namespace EventOrg
 {
@@ -30,6 +34,8 @@ namespace EventOrg
         {
             _listPickerFüllen();
             _filtern();
+            gr_gast.DataContext = App.oc_neueprojekte[0].gäste;
+            gr_loc.DataContext = App.oc_neueprojekte[0].location;
         }
 
         private void _filtern()
@@ -164,6 +170,11 @@ namespace EventOrg
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
+            TextWriter writer = new StreamWriter("test.xml");
+            XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<Event>));
+            ser.Serialize(writer, App.oc_neueprojekte);
+            writer.Close();
+
             NavigationService.Navigate(new Uri("/Zusammenfassung.xaml", UriKind.RelativeOrAbsolute));
         }
 
@@ -174,7 +185,10 @@ namespace EventOrg
 
         private void geschl_gewählt(object sender, SelectionChangedEventArgs e)
         {
-            App.punkte[0].antwort = (sender as ListPicker).SelectedItem.ToString();
+            if ((sender as ListPicker).SelectedItem != null)
+            {
+                App.punkte[0].antwort = (sender as ListPicker).SelectedItem.ToString();                
+            }
         }
     }
 }

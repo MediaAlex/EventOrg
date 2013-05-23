@@ -7,9 +7,9 @@ namespace EventOrg
 {
     public abstract class InfoElement
     {
-        public string antwort { get; set; }
         public string infoID { get; set; }
         public bool aktiv { get; set; }
+        public string antwort { get; set; }
 
     }
 }
