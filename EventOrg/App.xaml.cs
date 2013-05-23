@@ -19,6 +19,7 @@ namespace EventOrg
 {
     public partial class App : Application
     {
+        public static ObservableCollection<Event> oc_neueprojekte = new ObservableCollection<Event>();
         public static ObservableCollection<Eventart> _eventArten = new ObservableCollection<Eventart>();
         public static int _aktEAPoint = -1;
         public static ObservableCollection<Eventart> aktEventArt = new ObservableCollection<Eventart>();

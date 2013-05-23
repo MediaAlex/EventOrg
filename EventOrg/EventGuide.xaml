@@ -413,6 +413,7 @@
                     
             </controls:PanoramaItem>
         </controls:Panorama>
+        <Button Content="speichertest" Height="72" HorizontalAlignment="Left" Margin="199,159,0,0" Name="button_speichertest" VerticalAlignment="Top" Width="297" Click="btnspeichern_Click"/>
     </Grid>
 
     <!--Panoramaanwendungen sollten keine ApplicationBar anzeigen.-->

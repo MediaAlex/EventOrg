@@ -17,7 +17,7 @@ namespace EventOrg
     public partial class NeuesProjekt : PhoneApplicationPage
     {
         //public List<Event> liste_event = new List<Event>();
-        public ObservableCollection<Event> oc_neueprojekte = new ObservableCollection<Event>();
+    
         public NeuesProjekt()
         {
             InitializeComponent();
@@ -61,7 +61,7 @@ namespace EventOrg
 
             ev.kunde = kunde;
 
-            oc_neueprojekte.Add(ev);
+            App.oc_neueprojekte.Add(ev);
 
             NavigationService.Navigate(new Uri("/EventGuide.xaml", UriKind.RelativeOrAbsolute));
         }
