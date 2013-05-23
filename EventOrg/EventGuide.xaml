@@ -35,7 +35,7 @@
                                 <TextBlock Text="Weiblich, männlich oder gemischt" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
                             <toolkit:ListPicker Header="Geschlecht" FullModeHeader="Wähle ein Geschlecht" Name="LP_geschlecht" Width="160"
-                                                Margin="0,0,0,0"/>
+                                                Margin="0,0,0,0" SelectionChanged="geschl_gewählt"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="gastU12" Margin="0,10,0,0">
                             <StackPanel Width="250">
@@ -413,7 +413,6 @@
                     
             </controls:PanoramaItem>
         </controls:Panorama>
-        <Button Content="speichertest" Height="72" HorizontalAlignment="Left" Margin="199,159,0,0" Name="button_speichertest" VerticalAlignment="Top" Width="297" Click="btnspeichern_Click"/>
     </Grid>
 
     <!--Panoramaanwendungen sollten keine ApplicationBar anzeigen.-->

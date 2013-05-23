@@ -10,9 +10,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-using System.IO.IsolatedStorage;
-using System.Xml;
-using System.IO;
 
 namespace EventOrg
 {
@@ -125,52 +122,6 @@ namespace EventOrg
             }
         }
 
-        private void btnspeichern_Click(object sender, RoutedEventArgs e)
-        {
-            using (IsolatedStorageFile ISF = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream("eventorg.xml", FileMode.Create, ISF))
-                {
-                    XmlWriterSettings settings = new XmlWriterSettings();
-                    settings.Indent = true;
-                    using (XmlWriter writer = XmlWriter.Create(isoStream, settings))
-                    {
-                        writer.WriteStartDocument();
-                        writer.WriteStartElement("projekt");
-                        writer.WriteStartElement("kunde");
-                        writer.WriteElementString("vorname", App.oc_neueprojekte[0].kunde._Vorname);
-                        writer.WriteElementString("nachname", App.oc_neueprojekte[0].kunde._Nachname);
-                        writer.WriteElementString("ort", App.oc_neueprojekte[0].kunde._Ort);
-                        writer.WriteElementString("strasse", App.oc_neueprojekte[0].kunde._Strasse);
-                        writer.WriteElementString("telefon", App.oc_neueprojekte[0].kunde._Telefon.ToString());
-                        writer.WriteElementString("kundenID", App.oc_neueprojekte[0].kunde._KundenID.ToString());
-                        writer.WriteElementString("datumbis", App.oc_neueprojekte[0].datumBis);
-                        writer.WriteElementString("datumvon", App.oc_neueprojekte[0].datumVon);
-                        writer.WriteElementString("eventart", App.oc_neueprojekte[0].eventart);
-                        writer.WriteElementString("eventname", App.oc_neueprojekte[0].name);
-                        writer.WriteEndElement();
-
-
-                        foreach (ListeInfoPunkte item in App.punkte)
-                        {
-                            writer.WriteStartElement("xml");
-
-                            writer.WriteElementString("infoID", item.infoID);
-                            writer.WriteElementString("antwort", item.antwort);
-
-                            writer.WriteEndElement();
-                        }
-
-                        writer.WriteEndElement();
-                        writer.WriteEndDocument();
-                        writer.Flush();
-                        }
-                }
-            }
-            NavigationService.Navigate(new Uri("/Page_test.xaml", UriKind.RelativeOrAbsolute));
-        }
-
-
         private void Einladung_Checked(object sender, RoutedEventArgs e)
         {
             if ((sender as CheckBox).Name == "Einladungskarten")
@@ -219,6 +170,11 @@ namespace EventOrg
         private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/Einstellungen.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void geschl_gewählt(object sender, SelectionChangedEventArgs e)
+        {
+            App.punkte[0].antwort = (sender as ListPicker).SelectedItem.ToString();
         }
     }
 }
