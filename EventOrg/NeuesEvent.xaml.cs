@@ -20,6 +20,7 @@ namespace EventOrg
             InitializeComponent();
         }
         bool neu = true;
+        int ind;
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -41,28 +42,26 @@ namespace EventOrg
             {
                 int i;
                 Int32.TryParse(indx, out i);
-                App._aktEAPoint = i;
+                ind = i;
             }
 
             if (NavigationContext.QueryString.TryGetValue("neu", out neueEA))
             {
                 bool.TryParse(neueEA, out neu);
             }
-            ContentPanel.DataContext = App._eventArten[App._aktEAPoint];
+            ContentPanel.DataContext = App._eventArten[ind];
         }
 
         private void Speichern_Click(object sender, EventArgs e)
         {
-            App._aktEAPoint = App._eventArten.Count - 1;
             NavigationService.GoBack();
         }
 
         private void Abbrechen_Click(object sender, EventArgs e)
         {
             if (neu)
-                App._eventArten.RemoveAt(App._aktEAPoint);
+                App._eventArten.RemoveAt(ind);
 
-            App._aktEAPoint = App._eventArten.Count - 1;
             NavigationService.GoBack();
         }
 
@@ -72,9 +71,7 @@ namespace EventOrg
 
             if (myMsgResult == MessageBoxResult.OK)
             {
-                int delEventArt = App._aktEAPoint;
-                App._eventArten.RemoveAt(delEventArt);
-                App._aktEAPoint -= 1;
+                App._eventArten.RemoveAt(ind);
             }
         }
     }

@@ -8,11 +8,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace EventOrg
 {
     public class Kunde
-    { 
+    {
         public string vorname;
         public string nachname;
         public string strasse;

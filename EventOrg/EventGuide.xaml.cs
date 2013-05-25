@@ -14,6 +14,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Collections.ObjectModel;
+using System.IO.IsolatedStorage;
 
 namespace EventOrg
 {
@@ -23,24 +24,38 @@ namespace EventOrg
         {
             InitializeComponent();
         }
+        List<string> leereFelder = new List<string>();
+
         List<string> geschlecht = new List<string> { "gemischt", "männlich", "weiblich" };
         List<string> ausstattung = new List<string> { "Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
         List<string> location = new List<string> { "Stadthalle", "Turnhalle", "Restaurant", "Garten", "Strand", "Park", "Gemeindehaus", "Zuhause" };
         List<string> musikVerantw = new List<string> { "DJ", "Band", "Techniker", "Selbst"};
         List<string> musikStil = new List<string> { "Gemischt", "HipHop", "R&B", "House", "Elektro", "Rock", "HardRock", "PunkRock", "Classic Rock", "Indi", "Pop", "Classic" };
         List<string> catGetränke = new List<string> { "Coca Cola", "Fanta", "Sprite", "Sprudel Classic", "Sprudel Medium", "Stilles Wasser", "Bier", "Rotwein", "Weißwein" };
+        List<string> einlStil = new List<string> { "Retro", "Stilisch", "Auto", "Star Wars", "Rot", "Grün", "Blau", "Weis", "Schwarz", "Electro" };
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             _listPickerFüllen();
             _filtern();
-            gr_gast.DataContext = App.oc_neueprojekte[0].gäste;
-            gr_loc.DataContext = App.oc_neueprojekte[0].location;
-            gr_catering.DataContext = App.oc_neueprojekte[0].catering;
-            gr_personal.DataContext = App.oc_neueprojekte[0].personal;
-            gr_extras.DataContext = App.oc_neueprojekte[0].extras;
-            gr_musik.DataContext = App.oc_neueprojekte[0].musik;
-            gr_einladungen.DataContext = App.oc_neueprojekte[0].einladungen;
+            gr_gast.DataContext = App.oc_alleProjekte[App._aktEventPoint].gäste;
+            gr_loc.DataContext = App.oc_alleProjekte[App._aktEventPoint].location;
+            gr_catering.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering;
+            gr_personal.DataContext = App.oc_alleProjekte[App._aktEventPoint].personal;
+            gr_extras.DataContext = App.oc_alleProjekte[App._aktEventPoint].extras;
+            gr_musik.DataContext = App.oc_alleProjekte[App._aktEventPoint].musik;
+            gr_einladungen.DataContext = App.oc_alleProjekte[App._aktEventPoint].einladungen;
+        }
+
+        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Einstellungen.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnBackKeyPress(e);
+            NavigationService.GoBack();
         }
 
         private void _filtern()
@@ -74,6 +89,7 @@ namespace EventOrg
             LP_musikStilDJ.ItemsSource = musikStil;
             LP_musikStilTec.ItemsSource = musikStil;
             LP_caterGetr.ItemsSource = catGetränke;
+            LP_einlStil.ItemsSource = einlStil;
         }
 
         private void rB_catSVers_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -82,6 +98,8 @@ namespace EventOrg
                 but_catSpWahl.IsEnabled = true;
             else
                 but_catSpWahl.IsEnabled = false;
+
+            App.oc_alleProjekte[App._aktEventPoint].catering.wo = (sender as RadioButton).GetValue(RadioButton.ContentProperty).ToString();
         }
 
         private void but_catSpWahl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -101,125 +119,303 @@ namespace EventOrg
                 ((sender as TextBox).Parent as Grid).Children[2].Visibility = Visibility.Visible;
         }
 
-        private void cB_tische_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            string name = (sender as CheckBox).Name.ToString();
-            if ((sender as CheckBox).IsChecked == true)
-                NavigationService.Navigate(new Uri("/ScreenExtrasDeko/" + name + ".xaml", UriKind.RelativeOrAbsolute));
-
-            if ((sender as CheckBox).IsChecked == false)
-            {
-                string tBlName = "tBl_" + name;
-                (((sender as CheckBox).Parent as StackPanel).FindName(tBlName) as TextBlock).Text = "";
-            }
-        }
-
-        private void LP_musikWer_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if ((string)LP_musikWer.SelectedItem == "DJ" || (string)LP_musikWer.SelectedItem == "Band")
-            {
-                musikBandDJ.Visibility = Visibility.Visible;
-                musikTechn.Visibility = Visibility.Collapsed;
-            }
-            if ((string)LP_musikWer.SelectedItem == "Techniker")
-            {
-                musikBandDJ.Visibility = Visibility.Collapsed;
-                musikTechn.Visibility = Visibility.Visible;
-            }
-            if ((string)LP_musikWer.SelectedItem == "Selbst")
-            {
-                musikBandDJ.Visibility = Visibility.Collapsed;
-                musikTechn.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void Einladung_Checked(object sender, RoutedEventArgs e)
+        private void cB_Checked(object sender, RoutedEventArgs e)
         {
             if ((sender as CheckBox).Name == "Einladungskarten")
             {
                 StPan_einlKartenDetail.Visibility = Visibility.Visible;
+                tB_einlKartAnz.Text = (App.berechnung.pers_u12 + App.berechnung.pers_ü12 + App.berechnung.pers_ü60).ToString();
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.einl_kart = "Einladungskarten";
             }
+
             if ((sender as CheckBox).Name == "Email")
             {
                 StPan_einlEmailDetail.Visibility = Visibility.Visible;
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.email = "Email";
             }
+
             if ((sender as CheckBox).Name == "Facebook")
             {
                 StPan_einlFBDetail.Visibility = Visibility.Visible;
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.facebook = "Facebook";
             }
+
             if ((sender as CheckBox).Name == "Google")
             {
                 StPan_einlGoogleDetail.Visibility = Visibility.Visible;
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.google = "Google";
             }
+
+            if ((sender as CheckBox).Name == "tS_bühne")
+                App.oc_alleProjekte[App._aktEventPoint].extras.bühne = "Bühne";
+
+            if ((sender as CheckBox).Name == "tS_absperr")
+                App.oc_alleProjekte[App._aktEventPoint].extras.absperrung = "Absperrung";
         }
 
-        private void Einladung_Unchecked(object sender, RoutedEventArgs e)
+        private void cB_Unchecked(object sender, RoutedEventArgs e)
         {
             if ((sender as CheckBox).Name == "Einladungskarten")
             {
                 StPan_einlKartenDetail.Visibility = Visibility.Collapsed;
+                tB_einlKartAnz.Text = "0";
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.einl_kart = "";
             }
+
             if ((sender as CheckBox).Name == "Email")
             {
                 StPan_einlEmailDetail.Visibility = Visibility.Collapsed;
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.email = "";
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.email_adressen = "";
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.email_betreff = "";
             }
+
             if ((sender as CheckBox).Name == "Facebook")
             {
                 StPan_einlFBDetail.Visibility = Visibility.Collapsed;
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.facebook = "";
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.facebook_namen = "";
             }
+
             if ((sender as CheckBox).Name == "Google")
             {
                 StPan_einlGoogleDetail.Visibility = Visibility.Collapsed;
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.google = "";
+                App.oc_alleProjekte[App._aktEventPoint].einladungen.google_namen = "";
+            }
+
+            if ((sender as CheckBox).Name == "tS_bühne")
+                App.oc_alleProjekte[App._aktEventPoint].extras.bühne = "";
+
+            if ((sender as CheckBox).Name == "tS_absperr")
+                App.oc_alleProjekte[App._aktEventPoint].extras.absperrung = "";
+        }
+
+        private void LP_SingleSelection(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ListPicker).SelectedItem != null)
+            {
+                if ((sender as ListPicker).Name == "LP_loc")
+                {
+                    string locArt = App.oc_alleProjekte[App._aktEventPoint].location.loc_art = (sender as ListPicker).SelectedItem.ToString();
+                    if (locArt == "Stadthalle" || locArt == "Restaurant")
+                    {
+                        ((cater as StackPanel).Children[0] as RadioButton).IsChecked = true;
+                        ausstattung = null;
+                        App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Clear();
+                        ausstattung = new List<string> {"Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
+                        LP_ausstattung.IsEnabled = true;
+                    }
+
+                    if (locArt == "Garten" || locArt == "Park" || locArt == "Strand")
+                    {
+                        ((cater as StackPanel).Children[1] as RadioButton).IsChecked = true;
+                        ausstattung = null;
+                        App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Clear();
+                        ausstattung = new List<string> { "", ""};
+                        LP_ausstattung.IsEnabled = false;
+                    }
+
+                    if (locArt == "Turnhalle" || locArt == "Gemeindehaus")
+                    {
+                        ((cater as StackPanel).Children[1] as RadioButton).IsChecked = true;
+                        ausstattung = null;
+                        App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Clear();
+                        ausstattung = new List<string> { "Bühne", "Küche", "Tische", "Stühle", "Garten/Wiese", "Soundsystem" };
+                        LP_ausstattung.IsEnabled = true;
+                    }
+
+                    if (locArt == "Zuhause")
+                    {
+                        ((cater as StackPanel).Children[2] as RadioButton).IsChecked = true;
+                        ausstattung = null;
+                        App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Clear();
+                        ausstattung = new List<string> { "Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
+                        LP_ausstattung.IsEnabled = true;
+                    }
+                }
+
+                if ((sender as ListPicker).Name == "LP_geschlecht")
+                    App.oc_alleProjekte[App._aktEventPoint].gäste.sex = (sender as ListPicker).SelectedItem.ToString();
+
+                if ((sender as ListPicker).Name == "LP_musikWer")
+                {
+                    if ((string)LP_musikWer.SelectedItem == "DJ" || (string)LP_musikWer.SelectedItem == "Band")
+                    {
+                        musikBandDJ.Visibility = Visibility.Visible;
+                        musikTechn.Visibility = Visibility.Collapsed;
+                        App.oc_alleProjekte[App._aktEventPoint].musik.musik_verantwortlich = LP_musikWer.SelectedItem.ToString();
+                    }
+                    if ((string)LP_musikWer.SelectedItem == "Techniker")
+                    {
+                        musikBandDJ.Visibility = Visibility.Collapsed;
+                        musikTechn.Visibility = Visibility.Visible;
+                        App.oc_alleProjekte[App._aktEventPoint].musik.musik_verantwortlich = LP_musikWer.SelectedItem.ToString();
+                    }
+                    if ((string)LP_musikWer.SelectedItem == "Selbst")
+                    {
+                        musikBandDJ.Visibility = Visibility.Collapsed;
+                        musikTechn.Visibility = Visibility.Collapsed;
+                        App.oc_alleProjekte[App._aktEventPoint].musik.musik_verantwortlich = LP_musikWer.SelectedItem.ToString();
+                    }
+                }
+            }
+        }
+
+        private void LP_MultipleSelection(object sender, SelectionChangedEventArgs e)
+        {
+            if (LP_caterGetr.SelectedItems != null)
+            {
+                if ((sender as ListPicker).Name == "LP_caterGetr")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.getränke.Clear();
+                    foreach (var y in LP_caterGetr.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.getränke.Add(y.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_ausstattung")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Clear();
+                    foreach (var y in LP_ausstattung.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Add(y.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_musikStilDJ")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].musik.musik_stil.Clear();
+                    foreach (var y in LP_musikStilDJ.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].musik.musik_stil.Add(y.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_musikStilTec")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].musik.musik_stil.Clear();
+                    foreach (var y in LP_musikStilTec.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].musik.musik_stil.Add(y.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_einlStil")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].einladungen.einl_stil.Clear();
+                    foreach (var y in LP_einlStil.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].einladungen.einl_stil.Add(y.ToString());
+                }
+            }
+        }
+
+        private void datum_von_gew(object sender, DateTimeValueChangedEventArgs e)
+        {
+            if (dP_loc_dat_von != null)
+                App.oc_alleProjekte[App._aktEventPoint].location.dat_von = dP_loc_dat_von.ToString();
+        }
+
+        private void datum_bis_gew(object sender, DateTimeValueChangedEventArgs e)
+        {
+            if (dP_loc_dat_bis != null)
+                App.oc_alleProjekte[App._aktEventPoint].location.dat_von = dP_loc_dat_von.ToString();
+        }
+
+        private void berechnungen_lostFocus(object sender, RoutedEventArgs e)
+        {
+            if ((sender as TextBox).Name == "tB_u12")
+            {
+                if ((sender as TextBox).Text == "")
+                    (sender as TextBox).SetValue(TextBox.TextProperty, "0");
+
+                int anz;
+                Int32.TryParse(tB_u12.Text, out anz);
+                App.berechnung.pers_u12 = anz;
+
+                berechnen(App.berechnung.pers_u12, App.berechnung.pers_ü12, App.berechnung.pers_ü60);
+            }
+            if ((sender as TextBox).Name == "tB_ü12")
+            {
+                if ((sender as TextBox).Text == "")
+                    (sender as TextBox).SetValue(TextBox.TextProperty, "0");
+
+                int anz;
+                Int32.TryParse(tB_ü12.Text, out anz);
+                App.berechnung.pers_ü12 = anz;
+
+                berechnen(App.berechnung.pers_u12, App.berechnung.pers_ü12, App.berechnung.pers_ü60);
+            }
+            if ((sender as TextBox).Name == "tB_ü60")
+            {
+                if ((sender as TextBox).Text == "")
+                    (sender as TextBox).SetValue(TextBox.TextProperty, "0");
+
+                int anz;
+                Int32.TryParse(tB_ü60.Text, out anz);
+                App.berechnung.pers_ü60 = anz;
+
+                berechnen(App.berechnung.pers_u12, App.berechnung.pers_ü12, App.berechnung.pers_ü60);
+            }
+        }
+
+        private void berechnen(int p, int p_2, int p_3)
+        {
+            int persGesamt = p + p_2 + p_3;
+
+            tB_extrTische.Text = (persGesamt / 5).ToString();
+            tB_extrStühle.Text = persGesamt.ToString();
+            tB_extrGesch.Text = persGesamt.ToString();
+
+            if (StPan_einlKartenDetail.Visibility == Visibility.Visible)
+                tB_einlKartAnz.Text = persGesamt.ToString();
+
+            if (persGesamt == 0 || persGesamt == null)
+            {
+                but_tisch.Visibility = Visibility.Visible;
+                but_stuhl.Visibility = Visibility.Visible;
+                but_gesch.Visibility = Visibility.Visible;
             }
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
-            write <ObservableCollection<Event>>(App.oc_neueprojekte, "test.xml");
-            TextWriter writer = new StreamWriter("test.xml");
-            XmlSerializer ser = new XmlSerializer(typeof(ObservableCollection<Event>));
-            ser.Serialize(writer, App.oc_neueprojekte);
-            writer.Close();
-
-            NavigationService.Navigate(new Uri("/Zusammenfassung.xaml", UriKind.RelativeOrAbsolute));
+            check();
         }
 
-        private void write<T>(T observableCollection, string datei)
+        private void check()
         {
-            // hinzufügen   throw new NotImplementedException();
-        }
+            // Instantiate a list of TextBoxes
+            List<TextBox> textBoxList = new List<TextBox>();
 
-        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Einstellungen.xaml", UriKind.RelativeOrAbsolute));
-        }
+            // Call GetTextBoxes function, passing in the root element,
+            // and the empty list of textboxes (LayoutRoot in this example)
+            GetTextBoxes(this.LayoutRoot, textBoxList);
 
-        private void geschl_gewählt(object sender, SelectionChangedEventArgs e)
-        {
-            if ((sender as ListPicker).SelectedItem != null)
+            for (int i = 0; i < textBoxList.Count; i++)
+                if (textBoxList[i].Text != "" || textBoxList[i].Text != "0")
+                    textBoxList.RemoveAt(i);
+
+            if (textBoxList.Count != 0)
             {
-                App.punkte[0].antwort = (sender as ListPicker).SelectedItem.ToString();                
+                string ausgabe = "";
+
+                foreach (var obj in textBoxList)
+                    ausgabe += (obj + " < " + obj + "\n");
+
+                MessageBoxResult myMsgResult = MessageBox.Show(
+                    "Zusammenfassung des Events",
+                    "Sie haben noch nicht alle Felder ausgefüllt. Möchten sie trotzdem fortfahren?\n\n"
+                    + "Fehlende Felder: \n" + ausgabe, MessageBoxButton.OKCancel);
+
+                if (myMsgResult == MessageBoxResult.OK)
+                    NavigationService.Navigate(new Uri("/Zusammenfassung.xaml", UriKind.RelativeOrAbsolute));
             }
+            if (textBoxList.Count == 0)
+                NavigationService.Navigate(new Uri("/Zusammenfassung.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        private void LP_caterGetr_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void GetTextBoxes(UIElement uiElement, List<TextBox> textBoxList)
         {
-            if (LP_caterGetr.SelectedItems != null)
-                foreach (var y in LP_caterGetr.SelectedItems)
-                    App.oc_neueprojekte[0].catering.getränke.Add(y.ToString());
-        }
-
-        private void LP_ausstattung_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (LP_ausstattung.SelectedItems != null)
-                foreach (var y in LP_caterGetr.SelectedItems)
-                    App.oc_neueprojekte[0].location.ausstattung.Add(y.ToString());
-        }
-
-        private void LP_loc_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (LP_loc.SelectedItems != null)
-                App.oc_neueprojekte[0].location.loc_art = (sender as ListPicker).SelectedItem.ToString();
+            TextBox textBox = uiElement as TextBox;
+            foreach (var ctrl in LayoutRoot.Children)
+                if (ctrl is TextBox)
+                    if (ctrl != null)
+                        // If the UIElement is a Textbox, add it to the list.
+                        textBoxList.Add((TextBox)ctrl);
         }
     }
 }

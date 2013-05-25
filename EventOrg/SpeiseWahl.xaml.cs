@@ -23,6 +23,12 @@ namespace EventOrg
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             _listPickerFüllen();
+            gr_caterer.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering.caterer;
+            gr_sektempf.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering.sektempfang;
+            gr_vorspeise.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise;
+            gr_hauptgericht.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht;
+            gr_desert.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering.desert;
+            gr_bar.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering.bar;
         }
 
         List<string> catServ = new List<string> { "Eigener", "Willi's Catering", "Metzgerei Heinrich"};
@@ -39,12 +45,16 @@ namespace EventOrg
         List<string> desCreme = new List<string> { "Schokopudding", "Vanillepudding", "Apfel-Zimt Creme", "Crème brûlée", "Mascarpone - Himbeer - Quark", "Tiramissu" };
         List<string> desEis = new List<string> { "Osteiscake", "Schwarzwälder Parfait", "Eistorte", "Große Eisplatte", "Mittlere Eisplatte", "Kleine Eisplatte" };
         List<string> desFrüchte = new List<string> { "Apfel", "Ananas", "Trauben weiß", "Trauben blau", "Orangen", "Kiwi", "Mango", "Passions Frucht" };
+        List<string> desGetränk = new List<string> { "Kaffee", "Tee (Schwarz)", "Tee (Früchte)", "Tee (Grün)", "Milch" };
         List<string> kplWurst = new List<string> { "Räucherschinken", "Kochschinken", "Rindswurst", "Spanische Luftgetrocknete Salami", "Ungarische Salami" };
         List<string> kplFisch = new List<string> { "Räucherlachs", "Tunfisch", "Schrimps", "Jacobsmuscheln", "Garnelen" };
         List<string> kplKäse = new List<string> { "Gouda", "Brie", "Bergkäse", "Blauschimmel Käse", "Cheddar" };
         List<string> kplFrüchte = new List<string> { "Apfel", "Ananas", "Trauben weiß", "Trauben blau", "Orangen", "Kiwi", "Mango", "Passions Frucht" };
         List<string> kplBrot = new List<string> { "Brot", "Vollkornbrot", "Baguette", "Ciabatta", "Sesam Brötchen", "Mohn Brötchen", "Vollkorn Brötchen", "Brötchen" };
-        List<string> desGetränk = new List<string> { "Kaffee", "Tee (Schwarz)", "Tee (Früchte)", "Tee (Grün)", "Milch" };
+        List<string> barAlk = new List<string> { "Bier", "Rotwein", "Weiswein", "Wodka", "Whisky", "Cognac", "Rum" };
+        List<string> barAlkFrei = new List<string> { "Cola", "Fanta", "Sprite", "Eistee", "Milch" };
+        List<string> barCocktAlk = new List<string> { "Pina Colada", "Bahama Mama", "Tequila Sunrise", "Caipirinha", "Mojito" };
+        List<string> barCocktAlkFrei = new List<string> { "Simply Red", "Paddling Pool", "Fruit Cup", "Florida Sun Virgin", "Coconut Kiss" };
 
         private void _listPickerFüllen()
         {
@@ -68,43 +78,244 @@ namespace EventOrg
             LP_kplFrüchte.ItemsSource = kplFrüchte;
             LP_kplBrot.ItemsSource = kplBrot;
             LP_desGetränke.ItemsSource = desGetränk;
+            LP_barAlk.ItemsSource = barAlk;
+            LP_barAlkFrei.ItemsSource = barAlkFrei;
+            LP_barCocktAlk.ItemsSource = barCocktAlk;
+            LP_barCocktAlkFrei.ItemsSource = barCocktAlkFrei;
         }
 
-        private void SektEmpf_Checked(object sender, RoutedEventArgs e)
+        private void cB_Checked(object sender, RoutedEventArgs e)
         {
-            StPan_seGetr.Visibility = Visibility.Visible;
-            StPan_seSnacks.Visibility = Visibility.Visible;
-            StPan_seKosten.Visibility = Visibility.Visible;
-        }
-
-        private void SektEmpf_Unchecked(object sender, RoutedEventArgs e)
-        {
-            StPan_seGetr.Visibility = Visibility.Collapsed;
-            StPan_seSnacks.Visibility = Visibility.Collapsed;
-            StPan_seKosten.Visibility = Visibility.Collapsed;
-
-            tBl_seKosten.Text = "";
-        }
-
-        private void Vorspeisen_Checked(object sender, RoutedEventArgs e)
-        {
-            if ((sender as CheckBox).Name == "cB_suppe")
-                StPan_vsSuppe.Visibility = Visibility.Visible;
+            if ((sender as CheckBox).Name == "cB_seEmpf")
+            {
+                StPan_seGetr.Visibility = Visibility.Visible;
+                StPan_seSnacks.Visibility = Visibility.Visible;
+                App.oc_alleProjekte[App._aktEventPoint].catering.sektempfang.se_gewünscht = "Sektempfang";
+            }
 
             if ((sender as CheckBox).Name == "cB_aufstrich")
+            {
                 StPan_vsBagAufstrich.Visibility = Visibility.Visible;
-        }
+                App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_aufstr_gewünscht = "Aufstrich";                
+            }
 
-        private void Vorspeisen_Unchecked(object sender, RoutedEventArgs e)
-        {
             if ((sender as CheckBox).Name == "cB_suppe")
-                StPan_vsSuppe.Visibility = Visibility.Collapsed;
+            {
+                StPan_vsSuppe.Visibility = Visibility.Visible;
+                App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_sup_gewünscht = "Suppe";
+            }
 
-            if ((sender as CheckBox).Name == "cB_aufstrich")
-                StPan_vsBagAufstrich.Visibility = Visibility.Collapsed;
+            if ((sender as CheckBox).Name == "cB_krabbCockt")
+                App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_krabCockt = "Krabben Cocktail";
         }
 
-        private void Abschluss_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void cB_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).Name == "cB_seEmpf")
+            {
+                StPan_seGetr.Visibility = Visibility.Collapsed;
+                StPan_seSnacks.Visibility = Visibility.Collapsed;
+                App.oc_alleProjekte[App._aktEventPoint].catering.sektempfang.se_gewünscht = "";
+                App.oc_alleProjekte[App._aktEventPoint].catering.sektempfang.se_getränke.Clear();
+                App.oc_alleProjekte[App._aktEventPoint].catering.sektempfang.se_snacks.Clear();
+            }
+
+            if ((sender as CheckBox).Name == "cB_suppe")
+            {
+                StPan_vsSuppe.Visibility = Visibility.Collapsed;
+                App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_sup_gewünscht = "";
+                App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_suppe.Clear();
+            }
+            
+            if ((sender as CheckBox).Name == "cB_aufstrich")
+            {
+                StPan_vsBagAufstrich.Visibility = Visibility.Collapsed;
+                App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_aufstr_gewünscht = "";
+                App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_aufstr.Clear();
+
+            }
+
+            if ((sender as CheckBox).Name == "cB_krabbCockt")
+                App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_krabCockt = "";
+        }
+
+        private void single_Selection(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ListPicker).SelectedItem != null)
+	        {
+                if ((sender as ListPicker).Name == "LP_CatVorschl")
+                    App.oc_alleProjekte[App._aktEventPoint].catering.caterer.cat_vorschlag = LP_CatVorschl.SelectedItem.ToString();
+	        }
+        }
+
+        private void multiple_selection(object sender, SelectionChangedEventArgs e)
+        {
+            if ((sender as ListPicker).SelectedItems != null)
+            {
+                if ((sender as ListPicker).Name == "LP_seGetränke")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.sektempfang.se_getränke.Clear();
+                    foreach (var item in LP_seGetränke.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.sektempfang.se_getränke.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_seSnacks")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.sektempfang.se_snacks.Clear();
+                    foreach (var item in LP_seSnacks.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.sektempfang.se_snacks.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_vsSuppe")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_suppe.Clear();
+                    foreach (var item in LP_vsSuppe.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_suppe.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_vsAufstrich")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_aufstr.Clear();
+                    foreach (var item in LP_vsAufstrich.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_aufstr.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_hsFleisch")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_fleisch.Clear();
+                    foreach (var item in LP_hsFleisch.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_fleisch.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_hsFisch")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_fisch.Clear();
+                    foreach (var item in LP_hsFisch.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_fisch.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_hsVegitarisch")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_vegitarisches.Clear();
+                    foreach (var item in LP_hsVegitarisch.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_vegitarisches.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_hsVegan")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_veganes.Clear();
+                    foreach (var item in LP_hsVegan.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_veganes.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_hsBeilagen")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_beilagen.Clear();
+                    foreach (var item in LP_hsBeilagen.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht.hs_beilagen.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_desKuchen")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.desert.des_kuchen.Clear();
+                    foreach (var item in LP_desKuchen.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.desert.des_kuchen.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_desCreme")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.desert.des_creme.Clear();
+                    foreach (var item in LP_desCreme.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.desert.des_creme.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_desEis")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_suppe.Clear();
+                    foreach (var item in LP_desEis.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.desert.des_eis.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_desFrüchte")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.desert.des_früchte.Clear();
+                    foreach (var item in LP_desFrüchte.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.desert.des_früchte.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_desGetränke")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.desert.des_getränke.Clear();
+                    foreach (var item in LP_desGetränke.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.desert.des_getränke.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_kplWurst")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_wurst.Clear();
+                    foreach (var item in LP_kplWurst.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_wurst.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_kplKäse")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_käse.Clear();
+                    foreach (var item in LP_kplKäse.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_käse.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_kplFrüchte")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_früchte.Clear();
+                    foreach (var item in LP_kplFrüchte.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_früchte.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_kplFisch")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_fisch.Clear();
+                    foreach (var item in LP_kplFisch.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_fisch.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_kplBrot")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_brot.Clear();
+                    foreach (var item in LP_kplBrot.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.kaltePlatte.kP_brot.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_barAlkFrei")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.bar.bar_alkFrei.Clear();
+                    foreach (var item in LP_barAlkFrei.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.bar.bar_alkFrei.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_barAlk")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.bar.bar_alk.Clear();
+                    foreach (var item in LP_barAlk.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.bar.bar_alk.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_barCocktAlkFrei")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.bar.bar_cocktAlkFrei.Clear();
+                    foreach (var item in LP_barCocktAlkFrei.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.bar.bar_cocktAlkFrei.Add(item.ToString());
+                }
+
+                if ((sender as ListPicker).Name == "LP_barCocktAlk")
+                {
+                    App.oc_alleProjekte[App._aktEventPoint].catering.bar.bar_cocktAlk.Clear();
+                    foreach (var item in LP_barCocktAlk.SelectedItems)
+                        App.oc_alleProjekte[App._aktEventPoint].catering.bar.bar_cocktAlk.Add(item.ToString());
+                }
+            }
+        }
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
             NavigationService.GoBack();
         }

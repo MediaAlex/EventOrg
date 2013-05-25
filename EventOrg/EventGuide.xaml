@@ -21,47 +21,47 @@
             <RowDefinition Height="465*" />
         </Grid.RowDefinitions>
         <controls:Panorama Title="Event Guide" Grid.RowSpan="2">
-            
-                <controls:Panorama.Background>
+
+            <controls:Panorama.Background>
                 <ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg" Opacity="0.4"/>
-        	</controls:Panorama.Background>
+            </controls:Panorama.Background>
             <!--Panoramaelement eins: Gäste-->
             <controls:PanoramaItem Header="Gäste">
                 <Grid Name="gr_gast">
-                	<StackPanel>
+                    <StackPanel Name="stPan_gast">
                         <StackPanel Orientation="Horizontal" Name="gastGender" Margin="0,0,0,0">
                             <StackPanel Width="250">
                                 <TextBlock Text="Geschlecht" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Weiblich, männlich oder gemischt" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
                             <toolkit:ListPicker Header="Geschlecht" FullModeHeader="Wähle ein Geschlecht" Name="LP_geschlecht" Width="160"
-                                                Margin="0,0,0,0" SelectionChanged="geschl_gewählt"/>
+                                                Margin="0,0,0,0" SelectionChanged="LP_SingleSelection"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="gastU12" Margin="0,10,0,0">
                             <StackPanel Width="250">
                                 <TextBlock Text="Anzahl 1-12" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Anzahl der Gäste unter 12 Jahren" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <TextBox Text="{Binding bis_12}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0" 
-                                     InputScope="Number" TextAlignment="Right"/>
+                            <TextBox Text="{Binding bis_12, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0" 
+                                     InputScope="Number" TextAlignment="Right" LostFocus="berechnungen_lostFocus" Name="tB_u12"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="gastÜ12" Margin="0,10,0,0">
                             <StackPanel Width="250">
                                 <TextBlock Text="Anzahl 13-60" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Anzahl der Gäste über 12 Jahren" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <TextBox Text="{Binding bis_60}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0"
-                                     InputScope="Number" TextAlignment="Right"/>
+                            <TextBox Text="{Binding bis_60, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0"
+                                     InputScope="Number" TextAlignment="Right" LostFocus="berechnungen_lostFocus" Name="tB_ü12"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="gastÜ60" Margin="0,10,0,0">
                             <StackPanel Width="250">
                                 <TextBlock Text="Anzahl über 60" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Anzahl der Gäste über 60 Jahren" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                             </StackPanel>
-                            <TextBox Text="{Binding bis_99}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0"
-                                     InputScope="Number" TextAlignment="Right"/>
+                            <TextBox Text="{Binding bis_99, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="80,0,0,0"
+                                     InputScope="Number" TextAlignment="Right" LostFocus="berechnungen_lostFocus" Name="tB_ü60"/>
                         </StackPanel>
-                        
+
                     </StackPanel>
                 </Grid>
             </controls:PanoramaItem>
@@ -69,33 +69,35 @@
             <!--Panoramaelement zwei: Location-->
             <controls:PanoramaItem Header="Location">
                 <ScrollViewer>
-                <Grid Name="gr_loc">
-                    <StackPanel>
+                    <Grid Name="gr_loc">
+                        <StackPanel>
                             <StackPanel Name="locArt" Margin="0,0,0,0">
-                            <TextBlock Text="Art der Location" Margin="0,0,0,0" FontSize="32" />
-                            <toolkit:ListPicker FullModeHeader="Art der Location" Name="LP_loc"
-                                                Width="420" Margin="0,-10,0,0" FontSize="32" SelectionChanged="LP_loc_SelectionChanged" />
-                        </StackPanel>
+                                <TextBlock Text="Art der Location" Margin="0,0,0,0" FontSize="32" />
+                                <toolkit:ListPicker FullModeHeader="Art der Location" Name="LP_loc"
+                                                Width="420" Margin="0,-10,0,0" FontSize="32" SelectionChanged="LP_SingleSelection" />
+                            </StackPanel>
                             <StackPanel Orientation="Horizontal" Name="locVon" Margin="0,10,0,0">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Datum von" Margin="0,0,0,0" FontSize="32" />
-                                <TextBlock Text="Das Datum ab wann die Location gebraucht wird (z.B. für Vorbereitungen)" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                <StackPanel Width="250">
+                                    <TextBlock Text="Datum von" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Text="Das Datum ab wann die Location gebraucht wird (z.B. für Vorbereitungen)" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <toolkit:DatePicker Height="70" FontSize="28" Margin="20,0,0,0" ValueStringFormat="{}{0:dd.MM.yyyy}" 
+                                                ValueChanged="datum_von_gew" Name="dP_loc_dat_von"/>
                             </StackPanel>
-                            <toolkit:DatePicker Height="70" FontSize="28" Margin="20,0,0,0" ValueStringFormat="{}{0:dd.MM.yyyy}"/>
-                        </StackPanel>
                             <StackPanel Orientation="Horizontal" Name="locBis" Margin="0,10,0,0">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Datum bis" Margin="0,0,0,0" FontSize="32" />
-                                <TextBlock Text="Das Datum ab wann die Location gebraucht wird (z.B. für Vorbereitungen)" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                <StackPanel Width="250">
+                                    <TextBlock Text="Datum bis" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Text="Das Datum ab wann die Location gebraucht wird (z.B. für Vorbereitungen)" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <toolkit:DatePicker Height="70" FontSize="28" Margin="20,0,0,0" ValueStringFormat="{}{0:dd.MM.yyyy}"
+                                                Name="dP_loc_dat_bis" ValueChanged="datum_bis_gew" />
                             </StackPanel>
-                            <toolkit:DatePicker Height="70" FontSize="28" Margin="20,0,0,0" ValueStringFormat="{}{0:dd.MM.yyyy}"/>
-                        </StackPanel>
                             <StackPanel Name="locAusst" Margin="0,0,0,0">
-                            <TextBlock Text="Ausstattung" Margin="0,0,0,0" FontSize="32" />
-                            <toolkit:ListPicker FullModeHeader="Ausstattung" SelectionMode="Multiple" Name="LP_ausstattung"
-                                                Width="420" Margin="0,-10,0,0" SelectionChanged="LP_ausstattung_SelectionChanged" />
-                        </StackPanel>
-                        <!--<StackPanel Name="StPan_locKosten" Orientation="Horizontal" Margin="0,0,0,0">
+                                <TextBlock Text="Ausstattung der Location" Margin="0,0,0,0" FontSize="32" />
+                                <toolkit:ListPicker FullModeHeader="Ausstattung" SelectionMode="Multiple" Name="LP_ausstattung"
+                                                Width="420" Margin="0,-10,0,0" SelectionChanged="LP_MultipleSelection" />
+                            </StackPanel>
+                            <!--<StackPanel Name="StPan_locKosten" Orientation="Horizontal" Margin="0,0,0,0">
                             <StackPanel Width="250">
                                 <TextBlock Text="Kosten" Margin="0,0,0,0" FontSize="32" />
                                 <TextBlock Text="Max Kosten für Location" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
@@ -103,33 +105,37 @@
                             <TextBox Text="{Binding gäste_anzahlÜ60, Mode=TwoWay}" Width="90" Height="70" FontSize="28" Margin="90,0,0,0"
                                      InputScope="Number" TextAlignment="Right"/>
                         </StackPanel>-->
-                    </StackPanel>
-                </Grid>
+                        </StackPanel>
+                    </Grid>
                 </ScrollViewer>
             </controls:PanoramaItem>
-            
+
             <!--Panoramaelement drei: Catering -->
             <controls:PanoramaItem Header="Catering">
                 <ScrollViewer>
-                <Grid Name="gr_catering">
+                    <Grid Name="gr_catering">
                         <StackPanel>
-                            <StackPanel Name="cater">
-                            <RadioButton Content="In Location" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
+                            <StackPanel Name="cater" Visibility="Visible">
+                                <RadioButton Content="In Location" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
                                          HorizontalAlignment="Left" HorizontalContentAlignment="Right" Width="420" Tap="rB_catSVers_Tap"/>
-                            <RadioButton Content="Catering Service" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
+                                <RadioButton Content="Catering Service" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
                                          HorizontalAlignment="Left" HorizontalContentAlignment="Right" Width="420" Tap="rB_catSVers_Tap"/>
-                            <RadioButton Content="Selbstversorgung" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
+                                <RadioButton Content="Selbstversorgung" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
                                          HorizontalAlignment="Left" HorizontalContentAlignment="Right" Width="420" Name="rB_catSVers" Tap="rB_catSVers_Tap" />
-                            <Button Name="but_catSpWahl" Content="Speise Wahl" Width="440" Margin="-10,0,0,0" Tap="but_catSpWahl_Tap" />
-                            <TextBlock Text="Getränke" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Getränke" Margin="0,0,0,0" FontSize="32" />
+                                <Button Name="but_catSpWahl" Content="Speise Wahl" Width="440" Margin="-10,0,0,0" Tap="but_catSpWahl_Tap" />
                             </StackPanel>
                             <toolkit:ListPicker FullModeHeader="Getränke" SelectionMode="Multiple" Name="LP_caterGetr"
-                                                Width="420" Margin="0,-10,0,0" SelectionChanged="LP_caterGetr_SelectionChanged"/>
+                                                Width="420" Margin="0,-10,0,0" SelectionChanged="LP_MultipleSelection"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <TextBlock Text="Wieviel Liter/Person?" FontSize="32"/>
+                                <TextBox Text="{Binding getr_literPrPers, Mode=TwoWay}" Margin="35,0,0,0" Width="100"/>
+                            </StackPanel>
                         </StackPanel>
-                </Grid>
+                    </Grid>
                 </ScrollViewer>
             </controls:PanoramaItem>
-            
+
             <!--Panoramaelement vier: Personal-->
             <controls:PanoramaItem Header="Personal">
                 <ScrollViewer>
@@ -137,63 +143,63 @@
                         <StackPanel Name="stPan_pers">
                             <Grid Name="persKoch">
                                 <TextBlock Text="Koch" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_koch}" TextAlignment="Right" Margin="0,0,-10,0" FontSize="32" HorizontalAlignment="Right" 
+                                <TextBox Text="{Binding anz_koch, Mode=TwoWay}" TextAlignment="Right" Margin="0,0,-10,0" FontSize="32" HorizontalAlignment="Right" 
                                          Name="tB_persKoch" LostFocus="tB_persKoch_LostFocus" InputScope="Number" Height="80" Width="80"/>
                                 <Button Name="but_persKoch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persKüHi">
                                 <TextBlock Text="Küchenhilfe" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_küchenhilfe}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_küchenhilfe, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
                                 <Button Name="but_persKüHi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persKellner">
                                 <TextBlock Text="Kellener/Servicekraft" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_kellner}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_kellner, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
                                 <Button Name="but_persKell" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persPutzh">
-                                    <TextBlock Text="Putzhilfe" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_putzhilfe}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBlock Text="Putzhilfe" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <TextBox Text="{Binding anz_putzhilfe, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
                                 <Button Name="but_persPuHi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persAushilfe">
                                 <TextBlock Text="Aushilfe/Springer" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_aushilfe}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_aushilfe, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
                                 <Button Name="but_persAushi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persBark">
                                 <TextBlock Text="Barkeeper" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_barkeeper}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_barkeeper, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
                                 <Button Name="but_persBark" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persTechn">
                                 <TextBlock Text="Techniker" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_techniker}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_techniker, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
                                 <Button Name="but_persTechn" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persAnim">
                                 <TextBlock Text="Animateur" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_animateur}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_animateur, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
                                 <Button Name="but_persAnim" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persSecur">
                                 <TextBlock Text="Security" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_security}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_security, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
                                 <Button Name="but_persSec" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
                                         Background="White" Foreground="Black"/>
@@ -202,73 +208,81 @@
                     </Grid>
                 </ScrollViewer>
             </controls:PanoramaItem>
-            
+
             <!--Panoramaelement fünf: Extras/Deko-->
             <controls:PanoramaItem Header="Extras/Deko">
                 <ScrollViewer>
                     <Grid Name="gr_extras">
-                    <StackPanel>
-                            <StackPanel Orientation="Horizontal" Name="extraTisch" Margin="0,10,0,0">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Tische" Margin="0,0,0,0" FontSize="32" />
-                                <TextBlock Name="tBl_Tische" Text="15, 6 Pers, viereckig, 45,00 €, 25.07.2013" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                            </StackPanel>
-                            <CheckBox Name="Tische" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap" />
+                        <StackPanel>
+                            <Grid Name="extraTisch" Margin="0,10,0,0" Visibility="Visible">
+                                <StackPanel Width="250" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock Text="Tische" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Name="tBl_Tische" Text="4-6 Pers/Tisch" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <TextBox Text="{Binding tisch_anz, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80" Name="tB_extrTische"/>
+                                <Button Name="but_tisch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="extraStuhl" Margin="0,10,0,0" Visibility="Visible">
+                                <StackPanel Width="250" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock Text="Stühle" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Name="tBl_Stühle" Text="Anzahl Stühle?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <TextBox Text="{Binding stuhl_anz, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80" Name="tB_extrStühle"/>
+                                <Button Name="but_stuhl" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="extraGesch" Margin="0,10,0,0" Visibility="Visible">
+                                <StackPanel Width="250" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock Text="Geschirr/Besteck" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Name="tBl_Geschirr" Text="Geschirr und Besteck für wieviel Gäste?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <TextBox Text="{Binding gesch_best_anz}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80" Name="tB_extrGesch"/>
+                                <Button Name="but_gesch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                        Background="White" Foreground="Black"/>
+                            </Grid>
+                            <Grid Name="extraKühlw" Margin="0,10,0,0" Visibility="Visible">
+                                <StackPanel Width="250" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock Text="Kühlwagen" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Name="tBl_Kühlwagen" Text="Wieviele Kühlwagen" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <TextBox Text="{Binding kühlwagen_anz, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80" Name="tB_extrKühlw"/>
+                                <Button Name="but_kühlw" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" 
+                                        Tap="but_persKoch_Tap" Background="White" Foreground="Black" />
+                            </Grid>
+                            <Grid Name="extraDeko" Margin="0,10,0,0" Visibility="Visible">
+                                <StackPanel Width="250" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock Text="Deko" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Name="tBl_Deko" Text="Deko Stil/Farben" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <TextBox Text="{Binding deko_stil, Mode=TwoWay}" TextAlignment="Left" Margin="-10,60,0,0" FontSize="32" HorizontalAlignment="Left" 
+                                         MinHeight="80" Width="440" VerticalAlignment="Top" TextWrapping="Wrap" Name="tB_extrDeko"/>
+                            </Grid>
+                            <Grid Name="extraBühne" Margin="0,10,0,0">
+                                <StackPanel Width="250" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock Text="Bühne" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Name="tBl_Bühne" Text="Wird eine extra (erhöhte) Bühne benötigt?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <CheckBox Content="" Name="tS_bühne" Checked="cB_Checked" Unchecked="cB_Unchecked" Margin="0,0,0,0"
+                                          HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Grid Name="extraAbsperr" Margin="0,10,0,0">
+                                <StackPanel Width="250" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock Text="Absperrung" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Name="tBl_Absperrung" Text="Absperrung des Geländes?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <CheckBox Content="" Name="tS_absperr" Margin="0,0,0,0" HorizontalAlignment="Right"
+                                           Checked="cB_Checked" Unchecked="cB_Unchecked" />
+                            </Grid>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Name="extraStuhl" Margin="0,10,0,0">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Stühle" Margin="0,0,0,0" FontSize="32" />
-                                    <TextBlock Name="tBl_Stühle" Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                            </StackPanel>
-                            <CheckBox Name="Stühle" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap"/>
-                        </StackPanel>
-                        <!--<StackPanel Orientation="Horizontal" Name="StPan_extraKüchenUt" Margin="0,10,0,0" Visibility="Collapsed">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Küchenutensilien" Margin="0,0,0,0" FontSize="32" />
-                                    <TextBlock Name="tBl_Küchenutensilien" Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                            </StackPanel>
-                            <CheckBox Name="Küchenutensilien" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap"/>
-                        </StackPanel>-->
-                            <StackPanel Orientation="Horizontal" Name="extraGesch" Margin="0,10,0,0">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Geschirr/Besteck" Margin="0,0,0,0" FontSize="32" />
-                                <TextBlock Name="tBl_Geschirr" Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                            </StackPanel>
-                            <CheckBox Name="Geschirr" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap"/>
-                        </StackPanel>
-                            <StackPanel Orientation="Horizontal" Name="extraKühlw" Margin="0,10,0,0">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Kühlwagen" Margin="0,0,0,0" FontSize="32" />
-                                <TextBlock Name="tBl_Kühlwagen" Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                            </StackPanel>
-                            <CheckBox Name="Kühlwagen" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap"/>
-                        </StackPanel>
-                            <StackPanel Orientation="Horizontal" Name="extraDeko" Margin="0,10,0,0">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Deko" Margin="0,0,0,0" FontSize="32" />
-                                <TextBlock Name="tBl_Deko" Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                            </StackPanel>
-                            <CheckBox Name="Deko" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap"/>
-                        </StackPanel>
-                            <StackPanel Orientation="Horizontal" Name="extraBühn" Margin="0,10,0,0">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Bühnenelement" Margin="0,0,0,0" FontSize="32" />
-                                <TextBlock Name="tBl_Bühne" Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                            </StackPanel>
-                            <CheckBox Name="Bühne" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap"/>
-                        </StackPanel>
-                            <StackPanel Orientation="Horizontal" Name="extraAbsp" Margin="0,10,0,0">
-                            <StackPanel Width="250">
-                                <TextBlock Text="Absperrung" Margin="0,0,0,0" FontSize="32" />
-                                <TextBlock Name="tBl_Absperrung" Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                            </StackPanel>
-                            <CheckBox Name="Absperrung" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" Tap="cB_tische_Tap"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
+                    </Grid>
                 </ScrollViewer>
             </controls:PanoramaItem>
-            
+
             <!--Panoramaelement sechs: Musik-->
             <controls:PanoramaItem Header="Musik">
                 <ScrollViewer>
@@ -277,7 +291,7 @@
                             <StackPanel Name="musikWer" Margin="0,0,0,0">
                                 <TextBlock Text="Verantwortlich für Musik" Margin="0,0,0,0" FontSize="32" />
                                 <toolkit:ListPicker FullModeHeader="Art der Location" SelectionMode="Single" Name="LP_musikWer" 
-                                                        Width="400" Margin="-20,-10,0,0" SelectionChanged="LP_musikWer_SelectionChanged">
+                                                        Width="400" Margin="-20,-10,0,0" SelectionChanged="LP_SingleSelection">
                                     <!--<toolkit:ListPickerItem FontSize="32"/>-->
                                 </toolkit:ListPicker>
                             </StackPanel>
@@ -286,7 +300,7 @@
                                 <StackPanel Name="musikBandDJStil">
                                     <TextBlock Text="Musik Stil" FontSize="32" />
                                     <toolkit:ListPicker FullModeHeader="Musik Stil" SelectionMode="Multiple" Name="LP_musikStilDJ"
-                                                        Width="400" Margin="-20,-10,0,0"/>
+                                                        Width="400" Margin="-20,-10,0,0" SelectionChanged="LP_MultipleSelection" />
                                 </StackPanel>
                                 <!--<Grid Margin="0,10,0,0">
                                     <TextBlock Text="Kosten" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
@@ -294,7 +308,7 @@
                                 </Grid>-->
                                 <StackPanel Name="musikBandDJSpezWunsch">
                                     <TextBlock Text="Spezielle Wünsche" FontSize="32"/>
-                                    <TextBox Text="{Binding musik_spez_wünsche}" Margin="-10,-10,10,0" MinHeight="100"/>
+                                    <TextBox Text="{Binding musik_spez_wünsche, Mode=TwoWay}" Margin="-10,-10,10,0" MinHeight="100"/>
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Name="musikTechn" Margin="0,10,0,0" Visibility="Collapsed">
@@ -302,111 +316,110 @@
                                 <StackPanel Name="musikTechnStil">
                                     <TextBlock Text="Musik Stil" FontSize="32" />
                                     <toolkit:ListPicker FullModeHeader="Musik Stil" SelectionMode="Multiple" Name="LP_musikStilTec"
-                                                            Width="400" Margin="-20,-10,0,0" />
+                                                            Width="400" Margin="-20,-10,0,0" SelectionChanged="LP_MultipleSelection"/>
                                 </StackPanel>
                                 <StackPanel Name="musikTechnSpezWunsch">
                                     <TextBlock Text="Spezielle Wünsche" FontSize="32"/>
-                                    <TextBox Text="{Binding musik_spez_wünsche}" Margin="-10,-10,10,0" MinHeight="100"/>
+                                    <TextBox Text="{Binding musik_spez_wünsche, Mode=TwoWay}" Margin="-10,-10,10,0" MinHeight="100"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
-                    </ScrollViewer>
-                </controls:PanoramaItem>
-            
-                <!--Panoramaelement sieben: Einladungen-->
-                <controls:PanoramaItem Header="Einladungen">
-                    <ScrollViewer>
+                </ScrollViewer>
+            </controls:PanoramaItem>
+
+            <!--Panoramaelement sieben: Einladungen-->
+            <controls:PanoramaItem Header="Einladungen">
+                <ScrollViewer>
                     <Grid Name="gr_einladungen">
-                            <StackPanel>
-                                <StackPanel Orientation="Horizontal" Name="einlKart" Margin="0,10,0,0">
-                                    <StackPanel Width="250">
-                                        <TextBlock Text="Einladungskarten" Margin="0,0,0,0" FontSize="32" />
-                                        <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                                    </StackPanel>
-                                    <CheckBox Name="Einladungskarten" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" 
-                                              Checked="Einladung_Checked" Unchecked="Einladung_Unchecked" />
-                                    
-                                    <StackPanel Name="StPan_einlKartenDetail" Margin="0,10,0,0" Visibility="Collapsed">
-                                        <Grid Width="400">
-                                            <TextBlock Text="Wie viele?" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
-                                        <TextBox Text="{Binding einl_kart_anz}" HorizontalAlignment="Right" MinWidth="70" Margin="0,0,10,0" InputScope="Number" TextAlignment="Right"/>
-                                        </Grid>
-                                        <TextBlock Text="Stil" FontSize="32" Margin="10,0,0,0"/>
-                                        <toolkit:ListPicker FullModeHeader="Musik Stil" SelectionMode="Multiple" Name="LP_einlStil"
-                                                                Width="400" Margin="0,-10,0,0"/>
-                                    </StackPanel>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Name="einlKart" Margin="0,10,0,0">
+                                <StackPanel Width="250">
+                                    <TextBlock Text="Einladungskarten" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                                 </StackPanel>
+                                <CheckBox Name="Einladungskarten" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" 
+                                              Checked="cB_Checked" Unchecked="cB_Unchecked" />
+                            </StackPanel>
+                            <StackPanel Name="StPan_einlKartenDetail" Margin="0,10,0,0" Visibility="Collapsed">
+                                <Grid Width="400">
+                                    <TextBlock Text="Wie viele?" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                    <TextBox Text="{Binding einl_kart_anz, Mode=TwoWay}" HorizontalAlignment="Right" MinWidth="70" Margin="0,0,50,0" 
+                                             InputScope="Number" TextAlignment="Right" Name="tB_einlKartAnz"/>
+                                </Grid>
+
+                            </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Name="einlEmail" Margin="0,10,0,0">
-                                    <StackPanel Width="250">
-                                        <TextBlock Text="E-Mail Einladung" Margin="0,0,0,0" FontSize="32" />
-                                        <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                                    </StackPanel>
-                                    <CheckBox Name="Email" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" 
-                                              Checked="Einladung_Checked" Unchecked="Einladung_Unchecked"/>
-                                
-                                <StackPanel Name="StPan_einlEmailDetail" Margin="0,10,0,0" Visibility="Collapsed">
-                                    <Grid Width="400">
-                                        <TextBlock Text="Adressen" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
-                                        <TextBox Text="{Binding email_adressen}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,10,0" 
-                                                 TextAlignment="Left" InputScope="EmailSmtpAddress"/>
-                                    </Grid>
-                                    <Grid Width="400">
-                                        <TextBlock Text="Betreff" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
-                                        <TextBox Text="{Binding email_betreff}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,10,0" TextAlignment="Right"/>
-                                    </Grid>
-                                    <Grid Width="400">
-                                        <TextBlock Text="Email Text" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
-                                        <TextBox Text="{Binding einlad_text}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,10,0" TextAlignment="Right"/>
-                                    </Grid>
+                                <StackPanel Width="250">
+                                    <TextBlock Text="E-Mail Einladung" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                                 </StackPanel>
+                                <CheckBox Name="Email" Width="60" Height="70" FontSize="28" Margin="50,0,0,0" 
+                                              Checked="cB_Checked" Unchecked="cB_Unchecked"/>
+                            </StackPanel>
+                            <StackPanel Name="StPan_einlEmailDetail" Margin="0,10,0,0" Visibility="Collapsed">
+                                <Grid Width="400">
+                                    <TextBlock Text="Adressen" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                    <TextBox Text="{Binding email_adressen, Mode=TwoWay}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,10,0" 
+                                                 TextAlignment="Left" InputScope="EmailSmtpAddress" MinHeight="50"/>
+                                </Grid>
+                                <Grid Width="400">
+                                    <TextBlock Text="Betreff" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                    <TextBox Text="{Binding email_betreff}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" 
+                                             MinHeight="50" Margin="0,0,10,0" TextAlignment="Right"/>
+                                </Grid>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Name="einlFB" Margin="0,10,0,0">
-                                    <StackPanel Width="250">
-                                        <TextBlock Text="Facebook Event" Margin="0,0,0,0" FontSize="32" />
-                                        <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                                    </StackPanel>
-                                    <CheckBox Name="Facebook" Width="60" Height="70" FontSize="28" Margin="50,0,0,0"
-                                              Checked="Einladung_Checked" Unchecked="Einladung_Unchecked"/>
-                                
-                                <StackPanel Name="StPan_einlFBDetail" Margin="0,10,0,0" Visibility="Collapsed">
-                                    <Grid Width="400">
-                                        <TextBlock Text="Adressaten" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
-                                        <TextBox Text="{Binding facebook_namen}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,0,0" TextAlignment="Right"/>
-                                    </Grid>
-                                    <Grid Width="400">
-                                        <TextBlock Text="Einl. Text" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
-                                        <TextBox Text="{Binding einlad_text}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,0,0" TextAlignment="Right"/>
-                                    </Grid>
+                                <StackPanel Width="250">
+                                    <TextBlock Text="Facebook Event" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                                 </StackPanel>
+                                <CheckBox Name="Facebook" Width="60" Height="70" FontSize="28" Margin="50,0,0,0"
+                                              Checked="cB_Checked" Unchecked="cB_Unchecked"/>
+                            </StackPanel>
+                            <StackPanel Name="StPan_einlFBDetail" Margin="0,10,0,0" Visibility="Collapsed">
+                                <Grid Width="400">
+                                    <TextBlock Text="Adressaten" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                    <TextBox Text="{Binding facebook_namen, Mode=TwoWay}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" 
+                                             MinHeight="50" Margin="0,0,0,0" TextAlignment="Right"/>
+                                </Grid>
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Name="einlG" Margin="0,10,0,0">
-                                    <StackPanel Width="250">
-                                        <TextBlock Text="Google+" Margin="0,0,0,0" FontSize="32" />
-                                        <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
-                                    </StackPanel>
-                                    <CheckBox Name="Google" Width="60" Height="70" FontSize="28" Margin="50,0,0,0"
-                                              Checked="Einladung_Checked" Unchecked="Einladung_Unchecked"/>
+                            <StackPanel Orientation="Horizontal" Name="einlG" Margin="0,10,0,0" Visibility="Collapsed">
+                                <StackPanel Width="250">
+                                    <TextBlock Text="Google+" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
+                                </StackPanel>
+                                <CheckBox Name="Google" Width="60" Height="70" FontSize="28" Margin="50,0,0,0"
+                                              Checked="cB_Checked" Unchecked="cB_Unchecked"/>
+                            </StackPanel>
+                            <StackPanel Name="StPan_einlGoogleDetail" Margin="0,10,0,0" Visibility="Collapsed">
+                                <Grid Width="400">
+                                    <TextBlock Text="Adressaten" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
+                                    <TextBox Text="{Binding google_namen, Mode=TwoWay}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" 
+                                             MinHeight="50" Margin="0,0,0,0" TextAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
 
-                                <StackPanel Name="StPan_einlGoogleDetail" Margin="0,10,0,0" Visibility="Collapsed">
-                                    <Grid Width="400">
-                                        <TextBlock Text="Adressaten" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
-                                        <TextBox Text="{Binding google_namen}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,0,0" TextAlignment="Right"/>
-                                    </Grid>
-                                    <Grid Width="400">
-                                        <TextBlock Text="Einl. Text" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32"/>
-                                        <TextBox Text="{Binding einlad_text}" HorizontalAlignment="Right" Width="250" TextWrapping="Wrap" Margin="0,0,0,0" TextAlignment="Right"/>
-                                    </Grid>
+                            <StackPanel Name="einlTextStil" Margin="0,10,0,0">
+                                <StackPanel HorizontalAlignment="Left" >
+                                    <TextBlock Text="Einladungstext" Margin="0,0,0,0" FontSize="32" />
+                                    <TextBox Text="{Binding einlad_text, Mode=TwoWay}" TextWrapping="Wrap" Margin="-10,0,0,0" FontSize="28" 
+                                             Width="440"/>
+                                </StackPanel>
+                                <StackPanel Margin="0,10,0,0">
+                                    <TextBlock Text="Stil" FontSize="32" Margin="0,0,0,0"/>
+                                    <toolkit:ListPicker FullModeHeader="Einladungs Stil" SelectionMode="Multiple" Name="LP_einlStil"
+                                                                Width="420" Margin="0,-10,0,0" SelectionChanged="LP_MultipleSelection" />
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
-                    
+
                 </ScrollViewer>
-                    
+
             </controls:PanoramaItem>
         </controls:Panorama>
     </Grid>

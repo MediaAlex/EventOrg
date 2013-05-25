@@ -50,7 +50,8 @@
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Telefon Nr." FontSize="24" Height="34" />
-                    <TextBox Name="tB_phone" Width="313" Margin="20,0,0,0" Foreground="#FF040404" InputScope="TelephoneNumber" TextAlignment="Right"/>
+                    <TextBox Name="tB_phone" Width="313" Margin="20,0,0,0" Foreground="#FF040404" InputScope="TelephoneNumber" 
+                             TextAlignment="Right"/>
                 </StackPanel>
                 
                 <TextBlock Text="Projekt" FontSize="34"/>

@@ -14,16 +14,19 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.IO.IsolatedStorage;
 using System.Collections.ObjectModel;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace EventOrg
 {
     public partial class App : Application
     {
-        public static ObservableCollection<Event> oc_neueprojekte = new ObservableCollection<Event>();
+        public static ObservableCollection<Event> oc_alleProjekte = new ObservableCollection<Event>();
         public static ObservableCollection<Eventart> _eventArten = new ObservableCollection<Eventart>();
-        public static int _aktEAPoint = -1;
+        public static int _aktEventPoint = 0;
         public static ObservableCollection<Eventart> aktEventArt = new ObservableCollection<Eventart>();
         public static List<ListeInfoPunkte> punkte = new List<ListeInfoPunkte>();
+        public static Berechnung berechnung;
 
         /// <summary>
         /// Ermöglicht den einfachen Zugriff auf den Hauptframe der Phone-Anwendung.
@@ -68,20 +71,37 @@ namespace EventOrg
             if (IsolatedStorageSettings.ApplicationSettings.Contains("_eventArten"))
             {
                 IsolatedStorageSettings.ApplicationSettings.TryGetValue("_eventArten", out _eventArten);
-                _aktEAPoint = aktEventArt.Count -1;
+                _aktEventPoint = aktEventArt.Count -1;
 
                 if (_eventArten == null)
                 {
-
                     IsolatedStorageSettings.ApplicationSettings["_eventArten"] = _eventArten;
                 }
             }
             else
             {
-                //_eventArten.Add(new Eventart()
-                //{
-                    //event_name = "Hochzeit"
-                //});
+                _eventArten.Add(new Eventart { nameEA = "Geburtstag", listInfo = ListInfo.pnkteGrundlage()});
+                _eventArten.Add(new Eventart { nameEA = "Hochzeit", listInfo = ListInfo.pnkteGrundlage() });
+
+            }
+
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("Projekte.xml"))
+                oc_alleProjekte = Read<ObservableCollection<Event>>("Projekte.xml");
+        }
+
+        private T Read<T>(string datei)
+        {
+            try
+            {
+                var store = IsolatedStorageFile.GetUserStoreForApplication();
+                IsolatedStorageFileStream stream = store.OpenFile(datei, FileMode.Open);
+
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                return (T)serializer.Deserialize(stream);
+            }
+            catch (Exception emAll)
+            {
+                throw emAll;
             }
         }
 

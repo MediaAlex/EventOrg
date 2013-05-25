@@ -31,10 +31,8 @@ namespace EventOrg
         {
             if (tB_eventName.Text != "")
             {
-                App._aktEAPoint = App._eventArten.Count;
                 App._eventArten.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = ListInfo.pnkteGrundlage() });//Füllen der Liste richtig?
                 neu = true;
-                //tB_eventName.Text = "";
 
                 NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + tB_eventName.Text + "&neu=" + neu, UriKind.RelativeOrAbsolute));
             }
@@ -51,17 +49,16 @@ namespace EventOrg
                 int delEventArt = lB_eventarten.SelectedIndex;
                 App._eventArten.RemoveAt(delEventArt);
                 lB_eventarten.ItemsSource = App._eventArten;
-                App._aktEAPoint -= 1;
             }
         }
 
         private void tBl_eventName_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            string neuEventArt = lB_eventarten.SelectedIndex.ToString();
+            string indNeuEA = lB_eventarten.SelectedIndex.ToString();
             string nameEventArt = (sender as TextBlock).Text;
             neu = false;
 
-            NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + nameEventArt + "&indx=" + neuEventArt + "&neu=" + neu, UriKind.RelativeOrAbsolute));
+            NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + nameEventArt + "&indx=" + indNeuEA + "&neu=" + neu, UriKind.RelativeOrAbsolute));
         }
     }
 }

@@ -18,13 +18,14 @@ namespace EventOrg
         public MainPage()
         {
             InitializeComponent();
+            App._aktEventPoint = 0;
         }
 
         private void tBl_neuProjekt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //NavigationService.Navigate(new Uri("/P_test.xaml", UriKind.RelativeOrAbsolute));
+            string navVonMain = "main";
 
-            NavigationService.Navigate(new Uri("/NeuesProjekt.xaml", UriKind.RelativeOrAbsolute));
+            NavigationService.Navigate(new Uri("/NeuesProjekt.xaml?nav=" + navVonMain, UriKind.RelativeOrAbsolute));
         }
 
         private void tBl_einstellung_Tap(object sender, System.Windows.Input.GestureEventArgs e)

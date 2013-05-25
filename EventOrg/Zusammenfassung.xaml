@@ -10,11 +10,14 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot ist das Stammraster, in dem alle anderen Seiteninhalte platziert werden-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+    	<Grid.Background>
+    		<ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg" Opacity="0.4"/>
+    	</Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -29,31 +32,83 @@
 
         <!--ContentPanel - zusätzliche Inhalte hier platzieren-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox Name="lB_zusfass">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Name="tBl_label" Text="{Binding bezeichnung}" FontSize="20"/>
-                            <TextBlock Name="tBl_value" Text="{Binding wert}" FontSize="20" Margin="20,0,0,0"/>
-                            <Image Height="30"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <TextBlock MinHeight="30" HorizontalAlignment="Left" Margin="6,6,0,0" Name="zus" Text="TextBlock" VerticalAlignment="Top" Width="444" />
+            <ScrollViewer>
+                <Grid>
+                    <StackPanel Name="stPan_zusFas">
+                        <!--<ListBox Height="202" HorizontalAlignment="Left" Margin="6,62,0,0" Name="lB_zusFasAlles" VerticalAlignment="Top" Width="450">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                        <TextBlock Width="10" Margin="0,0,0,0" Text="{Binding FirstLetter}"/>
+                                        <ListBox Margin="18,0,0,0" ItemsSource="{Binding Words}" Width="auto" BorderBrush="White"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>-->
+                        <TextBlock Text="Kunde" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_kunde"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Projekt" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_projekt"
+                                 VerticalAlignment="Top" Width="340" />
+                        <TextBlock Text="Gäste" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_gäste"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Location" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_location"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Catering" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_catering"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Caterer" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_caterer"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Sektempfang" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_sektempf"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Vorspeise" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_vs"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Hauptgericht" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_hs"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Desert" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_des"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Kalte Platte" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_kP"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Bar" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_bar"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Personal" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_pers"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Extras" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_extr"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Musik" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_mus"
+                                 VerticalAlignment="Top" Width="340"/>
+                        <TextBlock Text="Einladungen" FontSize="26"/>
+                        <ListBox Height="auto" HorizontalAlignment="Left" Margin="10,0,0,20" Name="lB_einl"
+                                 VerticalAlignment="Top" Width="340"/>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Grid>
  
     <!--Beispielcode zur Verwendung von ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
+    <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Schaltfläche 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Schaltfläche 2"/>
-            <shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.check.rest.png" Text="Schaltfläche 1" Click="ApplicationBarIconButton_Click" />
+            <!--<shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Schaltfläche 2"/>-->
+            <!--<shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Menüelement 1"/>
                 <shell:ApplicationBarMenuItem Text="Menüelement 2"/>
-            </shell:ApplicationBar.MenuItems>
+            </shell:ApplicationBar.MenuItems>-->
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
