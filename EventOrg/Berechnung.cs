@@ -16,5 +16,6 @@ namespace EventOrg
         public int pers_u12 { get; set; }
         public int pers_ü12 { get; set; }
         public int pers_ü60 { get; set; }
+        public int pers_gesamt { get; set; }
     }
 }

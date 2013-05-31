@@ -7,7 +7,7 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -26,7 +26,7 @@
             </controls:Panorama.Background>
 
             <!--Panoramaelement eins: Bestimmter Caterer-->
-            <controls:PanoramaItem Header="Caterer">
+            <controls:PanoramaItem Header="Caterer" Name="catCaterer" >
                 <ScrollViewer>
                     <Grid Name="gr_caterer">
                         <StackPanel>
@@ -45,7 +45,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement zwei: Sektempfang-->
-            <controls:PanoramaItem Header="Sektempfang">
+            <controls:PanoramaItem Header="Sektempfang" Name="catSektEmpfang">
                 <ScrollViewer>
                     <Grid Name="gr_sektempf">
                         <StackPanel>
@@ -73,7 +73,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement drei: Vorspeisen-->
-            <controls:PanoramaItem Header="Vorspeisen">
+            <controls:PanoramaItem Header="Vorspeisen" Name="catVorspeise">
                 <ScrollViewer>
                     <Grid Name="gr_vorspeise">
                         <StackPanel>
@@ -121,7 +121,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement vier: Hauptgericht-->
-            <controls:PanoramaItem Header="Hauptgericht">
+            <controls:PanoramaItem Header="Hauptgericht" Name="catHauptgericht">
                 <ScrollViewer>
                     <Grid Name="gr_hauptgericht">
                         <StackPanel>
@@ -160,7 +160,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement fünf: Dessert-->
-            <controls:PanoramaItem Header="Dessert">
+            <controls:PanoramaItem Header="Dessert" Name="catDesert">
                 <ScrollViewer>
                     <Grid Name="gr_desert">
                         <StackPanel>
@@ -199,7 +199,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement sechs: Kalte Platte-->
-            <controls:PanoramaItem Header="Kalte Platte">
+            <controls:PanoramaItem Header="Kalte Platte" Name="catKaltePlatte">
                 <ScrollViewer>
                     <Grid Name="gr_kaltePlatte">
                         <StackPanel>
@@ -238,7 +238,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement sieben: Bar-->
-            <controls:PanoramaItem Header="Bar">
+            <controls:PanoramaItem Header="Bar" Name="catBar">
                 <ScrollViewer>
                     <Grid Name="gr_bar">
                         <StackPanel>
@@ -276,14 +276,14 @@
 
     <!--Panoramaanwendungen sollten keine ApplicationBar anzeigen.-->
     <!--Beispielcode zur Verwendung von ApplicationBar-->
-    <phone:PhoneApplicationPage.ApplicationBar>
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.check.rest.png" Text="Abschluss" Click="ApplicationBarIconButton_Click" />
-            <!--<shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.feature.settings.rest.png" Text="Einstellungen"/>-->
-            <!--<shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton IconUri="/Images/dark/appbar.feature.settings.rest.png" Text="Einstellungen"/>
+            <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Menüelement 1"/>
                 <shell:ApplicationBarMenuItem Text="Menüelement 2"/>
-            </shell:ApplicationBar.MenuItems>-->
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
 </phone:PhoneApplicationPage>

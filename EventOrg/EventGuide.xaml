@@ -20,13 +20,13 @@
             <RowDefinition Height="231*" />
             <RowDefinition Height="465*" />
         </Grid.RowDefinitions>
-        <controls:Panorama Title="Event Guide" Grid.RowSpan="2">
+        <controls:Panorama Name="panorama" Title="Event Guide" Grid.RowSpan="2">
 
             <controls:Panorama.Background>
                 <ImageBrush Stretch="UniformToFill" ImageSource="/EventBackground06.jpg" Opacity="0.4"/>
             </controls:Panorama.Background>
             <!--Panoramaelement eins: Gäste-->
-            <controls:PanoramaItem Header="Gäste">
+            <controls:PanoramaItem Header="Gäste" Name="gäste">
                 <Grid Name="gr_gast">
                     <StackPanel Name="stPan_gast">
                         <StackPanel Orientation="Horizontal" Name="gastGender" Margin="0,0,0,0">
@@ -67,7 +67,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement zwei: Location-->
-            <controls:PanoramaItem Header="Location">
+            <controls:PanoramaItem Header="Location" Name="location">
                 <ScrollViewer>
                     <Grid Name="gr_loc">
                         <StackPanel>
@@ -111,20 +111,22 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement drei: Catering -->
-            <controls:PanoramaItem Header="Catering">
+            <controls:PanoramaItem Header="Verpflegung" Name="catering">
                 <ScrollViewer>
                     <Grid Name="gr_catering">
                         <StackPanel>
                             <StackPanel Name="cater" Visibility="Visible">
+                                <TextBlock Text="Catering" FontSize="42"/>
                                 <RadioButton Content="In Location" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
                                          HorizontalAlignment="Left" HorizontalContentAlignment="Right" Width="420" Tap="rB_catSVers_Tap"/>
                                 <RadioButton Content="Catering Service" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
                                          HorizontalAlignment="Left" HorizontalContentAlignment="Right" Width="420" Tap="rB_catSVers_Tap"/>
                                 <RadioButton Content="Selbstversorgung" FontSize="32" FlowDirection="RightToLeft" GroupName="Catering Service" UseLayoutRounding="True"
                                          HorizontalAlignment="Left" HorizontalContentAlignment="Right" Width="420" Name="rB_catSVers" Tap="rB_catSVers_Tap" />
-                                <TextBlock Text="Getränke" Margin="0,0,0,0" FontSize="32" />
+                                <TextBlock Text="Getränke" Margin="0,0,0,0" FontSize="42" />
                                 <Button Name="but_catSpWahl" Content="Speise Wahl" Width="440" Margin="-10,0,0,0" Tap="but_catSpWahl_Tap" />
                             </StackPanel>
+                            <TextBlock Text="Getränke" FontSize="42"/>
                             <toolkit:ListPicker FullModeHeader="Getränke" SelectionMode="Multiple" Name="LP_caterGetr"
                                                 Width="420" Margin="0,-10,0,0" SelectionChanged="LP_MultipleSelection"/>
                             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -137,71 +139,71 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement vier: Personal-->
-            <controls:PanoramaItem Header="Personal">
+            <controls:PanoramaItem Header="Personal" Name="personal">
                 <ScrollViewer>
                     <Grid Name="gr_personal">
                         <StackPanel Name="stPan_pers">
                             <Grid Name="persKoch">
                                 <TextBlock Text="Koch" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                 <TextBox Text="{Binding anz_koch, Mode=TwoWay}" TextAlignment="Right" Margin="0,0,-10,0" FontSize="32" HorizontalAlignment="Right" 
-                                         Name="tB_persKoch" LostFocus="tB_persKoch_LostFocus" InputScope="Number" Height="80" Width="80"/>
-                                <Button Name="but_persKoch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                         Name="tB_persKoch" LostFocus="tB_pers_LostFocus" InputScope="Number" Height="80" Width="80"/>
+                                <Button Name="but_persKoch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persKüHi">
                                 <TextBlock Text="Küchenhilfe" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_küchenhilfe, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
-                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
-                                <Button Name="but_persKüHi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <TextBox Text="{Binding anz_küchenhilfe, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                         FontSize="32" HorizontalAlignment="Right" Height="80" Width="80" Name="tB_küchHi"/>
+                                <Button Name="but_persKüHi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persKellner">
                                 <TextBlock Text="Kellener/Servicekraft" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_kellner, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_kellner, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
-                                <Button Name="but_persKell" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_persKell" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persPutzh">
                                 <TextBlock Text="Putzhilfe" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_putzhilfe, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_putzhilfe, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
-                                <Button Name="but_persPuHi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_persPuHi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persAushilfe">
                                 <TextBlock Text="Aushilfe/Springer" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_aushilfe, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_aushilfe, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
-                                <Button Name="but_persAushi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_persAushi" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persBark">
                                 <TextBlock Text="Barkeeper" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_barkeeper, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_barkeeper, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
-                                <Button Name="but_persBark" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_persBark" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persTechn">
                                 <TextBlock Text="Techniker" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_techniker, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_techniker, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
-                                <Button Name="but_persTechn" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_persTechn" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persAnim">
                                 <TextBlock Text="Animateur" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_animateur, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_animateur, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
-                                <Button Name="but_persAnim" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_persAnim" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="persSecur">
                                 <TextBlock Text="Security" Margin="0,0,0,0" FontSize="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                                <TextBox Text="{Binding anz_security, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding anz_security, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80"/>
-                                <Button Name="but_persSec" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_persSec" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                         </StackPanel>
@@ -210,7 +212,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement fünf: Extras/Deko-->
-            <controls:PanoramaItem Header="Extras/Deko">
+            <controls:PanoramaItem Header="Extras/Deko" Name="extras">
                 <ScrollViewer>
                     <Grid Name="gr_extras">
                         <StackPanel>
@@ -219,9 +221,9 @@
                                     <TextBlock Text="Tische" Margin="0,0,0,0" FontSize="32" />
                                     <TextBlock Name="tBl_Tische" Text="4-6 Pers/Tisch" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                                 </StackPanel>
-                                <TextBox Text="{Binding tisch_anz, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding tisch_anz, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80" Name="tB_extrTische"/>
-                                <Button Name="but_tisch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_tisch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="extraStuhl" Margin="0,10,0,0" Visibility="Visible">
@@ -229,9 +231,9 @@
                                     <TextBlock Text="Stühle" Margin="0,0,0,0" FontSize="32" />
                                     <TextBlock Name="tBl_Stühle" Text="Anzahl Stühle?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                                 </StackPanel>
-                                <TextBox Text="{Binding stuhl_anz, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding stuhl_anz, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80" Name="tB_extrStühle"/>
-                                <Button Name="but_stuhl" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_stuhl" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="extraGesch" Margin="0,10,0,0" Visibility="Visible">
@@ -239,9 +241,9 @@
                                     <TextBlock Text="Geschirr/Besteck" Margin="0,0,0,0" FontSize="32" />
                                     <TextBlock Name="tBl_Geschirr" Text="Geschirr und Besteck für wieviel Gäste?" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                                 </StackPanel>
-                                <TextBox Text="{Binding gesch_best_anz}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding gesch_best_anz}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80" Name="tB_extrGesch"/>
-                                <Button Name="but_gesch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_persKoch_Tap" 
+                                <Button Name="but_gesch" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" Tap="but_pers_Tap" 
                                         Background="White" Foreground="Black"/>
                             </Grid>
                             <Grid Name="extraKühlw" Margin="0,10,0,0" Visibility="Visible">
@@ -249,10 +251,10 @@
                                     <TextBlock Text="Kühlwagen" Margin="0,0,0,0" FontSize="32" />
                                     <TextBlock Name="tBl_Kühlwagen" Text="Wieviele Kühlwagen" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
                                 </StackPanel>
-                                <TextBox Text="{Binding kühlwagen_anz, Mode=TwoWay}" LostFocus="tB_persKoch_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
+                                <TextBox Text="{Binding kühlwagen_anz, Mode=TwoWay}" LostFocus="tB_pers_LostFocus" InputScope="Number" TextAlignment="Right" Margin="0,0,-10,0" 
                                          FontSize="32" HorizontalAlignment="Right" Height="80" Width="80" Name="tB_extrKühlw"/>
                                 <Button Name="but_kühlw" Content="+" FontSize="32" FontWeight="Bold" Width="80" Margin="350,0,0,0" 
-                                        Tap="but_persKoch_Tap" Background="White" Foreground="Black" />
+                                        Tap="but_pers_Tap" Background="White" Foreground="Black" />
                             </Grid>
                             <Grid Name="extraDeko" Margin="0,10,0,0" Visibility="Visible">
                                 <StackPanel Width="250" HorizontalAlignment="Left" Margin="0,0,0,0">
@@ -284,7 +286,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement sechs: Musik-->
-            <controls:PanoramaItem Header="Musik">
+            <controls:PanoramaItem Header="Musik" Name="musik">
                 <ScrollViewer>
                     <Grid Name="gr_musik">
                         <StackPanel>
@@ -329,7 +331,7 @@
             </controls:PanoramaItem>
 
             <!--Panoramaelement sieben: Einladungen-->
-            <controls:PanoramaItem Header="Einladungen">
+            <controls:PanoramaItem Header="Einladungen" Name="einladungen">
                 <ScrollViewer>
                     <Grid Name="gr_einladungen">
                         <StackPanel>
@@ -387,7 +389,7 @@
                                 </Grid>
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Name="einlG" Margin="0,10,0,0" Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal" Name="einlG" Margin="0,10,0,0" Visibility="Visible">
                                 <StackPanel Width="250">
                                     <TextBlock Text="Google+" Margin="0,0,0,0" FontSize="32" />
                                     <TextBlock Text="" TextWrapping="Wrap" Margin="0,0,0,0" FontSize="18" />
@@ -403,11 +405,11 @@
                                 </Grid>
                             </StackPanel>
 
-                            <StackPanel Name="einlTextStil" Margin="0,10,0,0">
+                            <StackPanel Name="einlTextStil" Margin="0,10,0,0" Visibility="Collapsed">
                                 <StackPanel HorizontalAlignment="Left" >
                                     <TextBlock Text="Einladungstext" Margin="0,0,0,0" FontSize="32" />
                                     <TextBox Text="{Binding einlad_text, Mode=TwoWay}" TextWrapping="Wrap" Margin="-10,0,0,0" FontSize="28" 
-                                             Width="440"/>
+                                             Width="440" Name="TB_einlText"/>
                                 </StackPanel>
                                 <StackPanel Margin="0,10,0,0">
                                     <TextBlock Text="Stil" FontSize="32" Margin="0,0,0,0"/>

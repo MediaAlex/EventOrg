@@ -223,6 +223,10 @@ namespace EventOrg
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
             Write<Event>(App.oc_alleProjekte[App._aktEventPoint], "Projekte.xml");
+            NavigationService.RemoveBackEntry();
+            NavigationService.RemoveBackEntry();
+            NavigationService.RemoveBackEntry();
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void Write<T>(T observableCollection, string datei)

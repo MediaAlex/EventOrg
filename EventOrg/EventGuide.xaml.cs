@@ -28,7 +28,7 @@ namespace EventOrg
 
         List<string> geschlecht = new List<string> { "gemischt", "männlich", "weiblich" };
         List<string> ausstattung = new List<string> { "Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
-        List<string> location = new List<string> { "Stadthalle", "Turnhalle", "Restaurant", "Garten", "Strand", "Park", "Gemeindehaus", "Zuhause" };
+        List<string> loc = new List<string> { "Stadthalle", "Turnhalle", "Restaurant", "Garten", "Strand", "Park", "Gemeindehaus", "Zuhause" };
         List<string> musikVerantw = new List<string> { "DJ", "Band", "Techniker", "Selbst"};
         List<string> musikStil = new List<string> { "Gemischt", "HipHop", "R&B", "House", "Elektro", "Rock", "HardRock", "PunkRock", "Classic Rock", "Indi", "Pop", "Classic" };
         List<string> catGetränke = new List<string> { "Coca Cola", "Fanta", "Sprite", "Sprudel Classic", "Sprudel Medium", "Stilles Wasser", "Bier", "Rotwein", "Weißwein" };
@@ -66,15 +66,16 @@ namespace EventOrg
                 if (item.aktiv == false)
                 {
                     bezeichnung = item.infoID;
-                    if (bezeichnung == "persKoch" || bezeichnung == "persKüHi" || bezeichnung == "persKüHi" || bezeichnung == "persKellner" || bezeichnung == "persPutzh" || bezeichnung == "persAushilfe" || bezeichnung == "persTechn" || bezeichnung == "persAnim" || bezeichnung == "persSecur")
+
+                    try
                     {
-                        Grid grid = (Grid)LayoutRoot.FindName(bezeichnung);
-                        grid.Visibility = Visibility.Collapsed;
+                        PanoramaItem panIt = (PanoramaItem)LayoutRoot.FindName(bezeichnung);
+
+                        panIt.Visibility = Visibility.Collapsed;
                     }
-                    else
+                    catch
                     {
-                        StackPanel stPan = (StackPanel)LayoutRoot.FindName(bezeichnung);
-                        stPan.Visibility = Visibility.Collapsed;
+                        
                     }
                 }
             }
@@ -84,7 +85,7 @@ namespace EventOrg
         {
             LP_geschlecht.ItemsSource = geschlecht;
             LP_ausstattung.ItemsSource = ausstattung;
-            LP_loc.ItemsSource = location;
+            LP_loc.ItemsSource = loc;
             LP_musikWer.ItemsSource = musikVerantw;
             LP_musikStilDJ.ItemsSource = musikStil;
             LP_musikStilTec.ItemsSource = musikStil;
@@ -95,9 +96,21 @@ namespace EventOrg
         private void rB_catSVers_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             if (rB_catSVers.IsChecked == false)
+            {
                 but_catSpWahl.IsEnabled = true;
+                persKoch.Visibility = Visibility.Visible;
+                persKüHi.Visibility = Visibility.Visible;
+            }
             else
+            {
                 but_catSpWahl.IsEnabled = false;
+                persKoch.Visibility = Visibility.Collapsed;
+                tB_persKoch.Text = "0";
+                (tB_persKoch.Parent as Grid).Children[2].Visibility = Visibility.Visible;
+                persKüHi.Visibility = Visibility.Collapsed;
+                tB_küchHi.Text = "0";
+                (tB_küchHi.Parent as Grid).Children[2].Visibility = Visibility.Visible;
+            }
 
             App.oc_alleProjekte[App._aktEventPoint].catering.wo = (sender as RadioButton).GetValue(RadioButton.ContentProperty).ToString();
         }
@@ -107,13 +120,23 @@ namespace EventOrg
             NavigationService.Navigate(new Uri("/SpeiseWahl.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        private void but_persKoch_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void but_pers_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             (sender as Button).Visibility = Visibility.Collapsed;
-            ((sender as Button).Parent as Grid).Children[1].SetValue(TextBox.TextProperty, "1");
+            if (((sender as Button).Parent as Grid).Children[1].GetValue(TextBox.NameProperty) == "tB_extrTische")
+                tB_extrTische.Text = (App.berechnung.pers_gesamt/5).ToString();
+
+            else if (((sender as Button).Parent as Grid).Children[1].GetValue(TextBox.NameProperty) == "tB_extrStühle")
+                tB_extrStühle.Text = App.berechnung.pers_gesamt.ToString();
+
+            else if (((sender as Button).Parent as Grid).Children[1].GetValue(TextBox.NameProperty) == "tB_extrGesch")
+                tB_extrGesch.Text = App.berechnung.pers_gesamt.ToString();
+
+            else
+                ((sender as Button).Parent as Grid).Children[1].SetValue(TextBox.TextProperty, "1");
         }
 
-        private void tB_persKoch_LostFocus(object sender, RoutedEventArgs e)
+        private void tB_pers_LostFocus(object sender, RoutedEventArgs e)
         {
             if (((sender as TextBox).Text.ToString() == "") || (Int32.Parse((sender as TextBox).Text) < 1))
                 ((sender as TextBox).Parent as Grid).Children[2].Visibility = Visibility.Visible;
@@ -126,24 +149,28 @@ namespace EventOrg
                 StPan_einlKartenDetail.Visibility = Visibility.Visible;
                 tB_einlKartAnz.Text = (App.berechnung.pers_u12 + App.berechnung.pers_ü12 + App.berechnung.pers_ü60).ToString();
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.einl_kart = "Einladungskarten";
+                einlTextStil.Visibility = Visibility.Visible;
             }
 
             if ((sender as CheckBox).Name == "Email")
             {
                 StPan_einlEmailDetail.Visibility = Visibility.Visible;
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.email = "Email";
+                einlTextStil.Visibility = Visibility.Visible;
             }
 
             if ((sender as CheckBox).Name == "Facebook")
             {
                 StPan_einlFBDetail.Visibility = Visibility.Visible;
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.facebook = "Facebook";
+                einlTextStil.Visibility = Visibility.Visible;
             }
 
             if ((sender as CheckBox).Name == "Google")
             {
                 StPan_einlGoogleDetail.Visibility = Visibility.Visible;
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.google = "Google";
+                einlTextStil.Visibility = Visibility.Visible;
             }
 
             if ((sender as CheckBox).Name == "tS_bühne")
@@ -160,6 +187,7 @@ namespace EventOrg
                 StPan_einlKartenDetail.Visibility = Visibility.Collapsed;
                 tB_einlKartAnz.Text = "0";
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.einl_kart = "";
+                einlTextStil.Visibility = Visibility.Collapsed;
             }
 
             if ((sender as CheckBox).Name == "Email")
@@ -168,6 +196,7 @@ namespace EventOrg
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.email = "";
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.email_adressen = "";
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.email_betreff = "";
+                einlTextStil.Visibility = Visibility.Collapsed;
             }
 
             if ((sender as CheckBox).Name == "Facebook")
@@ -175,6 +204,7 @@ namespace EventOrg
                 StPan_einlFBDetail.Visibility = Visibility.Collapsed;
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.facebook = "";
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.facebook_namen = "";
+                einlTextStil.Visibility = Visibility.Collapsed;
             }
 
             if ((sender as CheckBox).Name == "Google")
@@ -182,6 +212,7 @@ namespace EventOrg
                 StPan_einlGoogleDetail.Visibility = Visibility.Collapsed;
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.google = "";
                 App.oc_alleProjekte[App._aktEventPoint].einladungen.google_namen = "";
+                einlTextStil.Visibility = Visibility.Collapsed;
             }
 
             if ((sender as CheckBox).Name == "tS_bühne")
@@ -200,29 +231,41 @@ namespace EventOrg
                     string locArt = App.oc_alleProjekte[App._aktEventPoint].location.loc_art = (sender as ListPicker).SelectedItem.ToString();
                     if (locArt == "Stadthalle" || locArt == "Restaurant")
                     {
-                        ((cater as StackPanel).Children[0] as RadioButton).IsChecked = true;
+                        ((cater as StackPanel).Children[1] as RadioButton).IsChecked = true;
                         ausstattung = null;
                         App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Clear();
                         ausstattung = new List<string> {"Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
                         LP_ausstattung.IsEnabled = true;
+                        dP_loc_dat_von.SetValue(DatePicker.ValueProperty, DateTime.Today);
+                        dP_loc_dat_bis.SetValue(DatePicker.ValueProperty, DateTime.Today);
+                        dP_loc_dat_von.IsEnabled = true;
+                        dP_loc_dat_bis.IsEnabled = true;
                     }
 
                     if (locArt == "Garten" || locArt == "Park" || locArt == "Strand")
                     {
-                        ((cater as StackPanel).Children[1] as RadioButton).IsChecked = true;
+                        ((cater as StackPanel).Children[2] as RadioButton).IsChecked = true;
                         ausstattung = null;
                         App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Clear();
                         ausstattung = new List<string> { "", ""};
                         LP_ausstattung.IsEnabled = false;
+                        dP_loc_dat_von = null;
+                        dP_loc_dat_bis = null;
+                        dP_loc_dat_von.IsEnabled = false;
+                        dP_loc_dat_bis.IsEnabled = false;
                     }
 
                     if (locArt == "Turnhalle" || locArt == "Gemeindehaus")
                     {
-                        ((cater as StackPanel).Children[1] as RadioButton).IsChecked = true;
+                        ((cater as StackPanel).Children[3] as RadioButton).IsChecked = true;
                         ausstattung = null;
                         App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Clear();
                         ausstattung = new List<string> { "Bühne", "Küche", "Tische", "Stühle", "Garten/Wiese", "Soundsystem" };
                         LP_ausstattung.IsEnabled = true;
+                        dP_loc_dat_von.SetValue(DatePicker.ValueProperty, DateTime.Today);
+                        dP_loc_dat_bis.SetValue(DatePicker.ValueProperty, DateTime.Today);
+                        dP_loc_dat_von.IsEnabled = true;
+                        dP_loc_dat_bis.IsEnabled = true;
                     }
 
                     if (locArt == "Zuhause")
@@ -230,8 +273,12 @@ namespace EventOrg
                         ((cater as StackPanel).Children[2] as RadioButton).IsChecked = true;
                         ausstattung = null;
                         App.oc_alleProjekte[App._aktEventPoint].location.ausstattung.Clear();
-                        ausstattung = new List<string> { "Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
-                        LP_ausstattung.IsEnabled = true;
+                        ausstattung = new List<string> { "", "" };
+                        LP_ausstattung.IsEnabled = false;
+                        dP_loc_dat_von = null;
+                        dP_loc_dat_bis = null;
+                        dP_loc_dat_von.IsEnabled = false;
+                        dP_loc_dat_bis.IsEnabled = false;
                     }
                 }
 
@@ -317,58 +364,23 @@ namespace EventOrg
 
         private void berechnungen_lostFocus(object sender, RoutedEventArgs e)
         {
-            if ((sender as TextBox).Name == "tB_u12")
-            {
-                if ((sender as TextBox).Text == "")
-                    (sender as TextBox).SetValue(TextBox.TextProperty, "0");
+            int anz;
 
-                int anz;
-                Int32.TryParse(tB_u12.Text, out anz);
+            if ((sender as TextBox).Text == "")
+                (sender as TextBox).SetValue(TextBox.TextProperty, "0");
+
+            Int32.TryParse((sender as TextBox).Text, out anz);
+
+            if ((sender as TextBox).Name == "tB_u12")
                 App.berechnung.pers_u12 = anz;
 
-                berechnen(App.berechnung.pers_u12, App.berechnung.pers_ü12, App.berechnung.pers_ü60);
-            }
             if ((sender as TextBox).Name == "tB_ü12")
-            {
-                if ((sender as TextBox).Text == "")
-                    (sender as TextBox).SetValue(TextBox.TextProperty, "0");
-
-                int anz;
-                Int32.TryParse(tB_ü12.Text, out anz);
                 App.berechnung.pers_ü12 = anz;
 
-                berechnen(App.berechnung.pers_u12, App.berechnung.pers_ü12, App.berechnung.pers_ü60);
-            }
             if ((sender as TextBox).Name == "tB_ü60")
-            {
-                if ((sender as TextBox).Text == "")
-                    (sender as TextBox).SetValue(TextBox.TextProperty, "0");
-
-                int anz;
-                Int32.TryParse(tB_ü60.Text, out anz);
                 App.berechnung.pers_ü60 = anz;
 
-                berechnen(App.berechnung.pers_u12, App.berechnung.pers_ü12, App.berechnung.pers_ü60);
-            }
-        }
-
-        private void berechnen(int p, int p_2, int p_3)
-        {
-            int persGesamt = p + p_2 + p_3;
-
-            tB_extrTische.Text = (persGesamt / 5).ToString();
-            tB_extrStühle.Text = persGesamt.ToString();
-            tB_extrGesch.Text = persGesamt.ToString();
-
-            if (StPan_einlKartenDetail.Visibility == Visibility.Visible)
-                tB_einlKartAnz.Text = persGesamt.ToString();
-
-            if (persGesamt == 0 || persGesamt == null)
-            {
-                but_tisch.Visibility = Visibility.Visible;
-                but_stuhl.Visibility = Visibility.Visible;
-                but_gesch.Visibility = Visibility.Visible;
-            }
+            App.berechnung.pers_gesamt = App.berechnung.pers_u12 + App.berechnung.pers_ü12 + App.berechnung.pers_ü60;
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
@@ -383,7 +395,8 @@ namespace EventOrg
 
             // Call GetTextBoxes function, passing in the root element,
             // and the empty list of textboxes (LayoutRoot in this example)
-            GetTextBoxes(this.LayoutRoot, textBoxList);
+            GetTextBoxes(ref this.panorama, ref textBoxList);
+            //EvaluateStackpanel(ref this.stPan_gast, ref textBoxList);
 
             for (int i = 0; i < textBoxList.Count; i++)
                 if (textBoxList[i].Text != "" || textBoxList[i].Text != "0")
@@ -397,25 +410,67 @@ namespace EventOrg
                     ausgabe += (obj + " < " + obj + "\n");
 
                 MessageBoxResult myMsgResult = MessageBox.Show(
-                    "Zusammenfassung des Events",
-                    "Sie haben noch nicht alle Felder ausgefüllt. Möchten sie trotzdem fortfahren?\n\n"
+                    "Sie haben noch nicht alle Felder ausgefüllt. Möchten sie trotzdem fortfahren?\n\n",
+                    "Zusammenfassung des Events"
                     + "Fehlende Felder: \n" + ausgabe, MessageBoxButton.OKCancel);
 
                 if (myMsgResult == MessageBoxResult.OK)
+                {
+                    if (Einladungskarten.IsChecked == false && Email.IsChecked == false && Facebook.IsChecked == false && Google.IsChecked == false)
+                    {
+                        TB_einlText.Text = "";
+                        LP_einlStil.SelectedIndex = -1;
+                    }
                     NavigationService.Navigate(new Uri("/Zusammenfassung.xaml", UriKind.RelativeOrAbsolute));
+                }
             }
             if (textBoxList.Count == 0)
                 NavigationService.Navigate(new Uri("/Zusammenfassung.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        private void GetTextBoxes(UIElement uiElement, List<TextBox> textBoxList)
+        private void GetTextBoxes(ref Panorama uiElement,ref List<TextBox> textBoxList)
         {
-            TextBox textBox = uiElement as TextBox;
+            /*TextBox textBox = uiElement as TextBox;
             foreach (var ctrl in LayoutRoot.Children)
                 if (ctrl is TextBox)
                     if (ctrl != null)
                         // If the UIElement is a Textbox, add it to the list.
-                        textBoxList.Add((TextBox)ctrl);
+                        textBoxList.Add((TextBox)ctrl);*/
+
+            foreach (var ctrl in uiElement.Items)
+            {
+                if (ctrl is PanoramaItem)
+                {
+                    if (((PanoramaItem)ctrl).Content is Grid)
+                    {
+                        Grid grd = (Grid)((PanoramaItem)ctrl).Content;
+                        foreach (var grdCtrl in grd.Children)
+                        {
+                            if (grdCtrl is StackPanel)
+                            {
+                                StackPanel panel = (StackPanel)grdCtrl;
+                                EvaluateStackpanel(ref panel, ref textBoxList);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void EvaluateStackpanel(ref StackPanel panel, ref List<TextBox> textBoxList)
+        {
+            foreach (var ctrl in panel.Children)
+            {
+                if (ctrl is StackPanel)
+                {
+                    StackPanel nextPanel = (StackPanel)ctrl;
+                    EvaluateStackpanel(ref nextPanel, ref textBoxList);
+                }
+                else if (ctrl is TextBox)
+                {
+                    textBoxList.Add((TextBox)ctrl);
+                }
+            }
         }
     }
 }

@@ -32,5 +32,14 @@ namespace EventOrg
         {
             NavigationService.Navigate(new Uri("/Einstellungen.xaml", UriKind.RelativeOrAbsolute));
         }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            string nav = e.NavigationMode.ToString();
+            if (nav == "New")
+                if (NavigationService.CanGoBack == true)
+                    NavigationService.RemoveBackEntry();
+        }
     }
 }

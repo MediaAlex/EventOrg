@@ -29,6 +29,7 @@ namespace EventOrg
             gr_hauptgericht.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering.hauptgericht;
             gr_desert.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering.desert;
             gr_bar.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering.bar;
+            _filtern();
         }
 
         List<string> catServ = new List<string> { "Eigener", "Willi's Catering", "Metzgerei Heinrich"};
@@ -82,6 +83,29 @@ namespace EventOrg
             LP_barAlkFrei.ItemsSource = barAlkFrei;
             LP_barCocktAlk.ItemsSource = barCocktAlk;
             LP_barCocktAlkFrei.ItemsSource = barCocktAlkFrei;
+        }
+
+        private void _filtern()
+        {
+            string bezeichnung = "";
+            foreach (var item in App.punkte)
+            {
+                if (item.aktiv == false)
+                {
+                    bezeichnung = item.infoID;
+
+                    try
+                    {
+                        PanoramaItem panIt = (PanoramaItem)LayoutRoot.FindName(bezeichnung);
+
+                        panIt.Visibility = Visibility.Collapsed;
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
         }
 
         private void cB_Checked(object sender, RoutedEventArgs e)
