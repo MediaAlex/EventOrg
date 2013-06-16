@@ -24,5 +24,15 @@ namespace EventOrg
         {
             NavigationService.Navigate(new Uri("/EvArtVerwalten.xaml", UriKind.RelativeOrAbsolute));
         }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            maxG.Text = App.maxGast.ToString();
+        }
+
+        private void maxG_KeyUp(object sender, KeyEventArgs e)
+        {
+            Int32.TryParse(maxG.Text, out App.maxGast);
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace EventOrg
         }
         List<string> leereFelder = new List<string>();
 
+        //Listen für ListPicker erstellen
         List<string> geschlecht = new List<string> { "gemischt", "männlich", "weiblich" };
         List<string> ausstattung = new List<string> { "Bühne", "Küche", "Tische", "Stühle", "Cateringservice", "Getränke", "Garten/Wiese", "Soundsystem" };
         List<string> loc = new List<string> { "Stadthalle", "Turnhalle", "Restaurant", "Garten", "Strand", "Park", "Gemeindehaus", "Zuhause" };
@@ -38,6 +39,8 @@ namespace EventOrg
         {
             _listPickerFüllen();
             _filtern();
+
+            //DataContexte für alle Abschnitte einrichten
             gr_gast.DataContext = App.oc_alleProjekte[App._aktEventPoint].gäste;
             gr_loc.DataContext = App.oc_alleProjekte[App._aktEventPoint].location;
             gr_catering.DataContext = App.oc_alleProjekte[App._aktEventPoint].catering;
@@ -58,6 +61,7 @@ namespace EventOrg
             NavigationService.GoBack();
         }
 
+        //filtern der Punkte, die in den Einstellungen in der jeweiligen Projektart deaktiviert wurden
         private void _filtern()
         {
             string bezeichnung = "";
@@ -81,6 +85,7 @@ namespace EventOrg
             }
         }
 
+        //ListPicker mit dem jeweiligen Content befüllen
         private void _listPickerFüllen()
         {
             LP_geschlecht.ItemsSource = geschlecht;
@@ -93,6 +98,7 @@ namespace EventOrg
             LP_einlStil.ItemsSource = einlStil;
         }
 
+        //Ereignisse und Filter bei RadioButton Catering Selbstversorgung 
         private void rB_catSVers_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             if (rB_catSVers.IsChecked == false)
@@ -120,9 +126,11 @@ namespace EventOrg
             NavigationService.Navigate(new Uri("/SpeiseWahl.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        //Behandlung der TextBoxen beim Betätigen von "+" Buttons und deren verschwinden
         private void but_pers_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             (sender as Button).Visibility = Visibility.Collapsed;
+
             if (((sender as Button).Parent as Grid).Children[1].GetValue(TextBox.NameProperty) == "tB_extrTische")
                 tB_extrTische.Text = (App.berechnung.pers_gesamt/5).ToString();
 
@@ -136,12 +144,14 @@ namespace EventOrg
                 ((sender as Button).Parent as Grid).Children[1].SetValue(TextBox.TextProperty, "1");
         }
 
+        //Wenn in TextBoxen bei Personal oder Extras nichts oder 0 drin steht werden die "+" Buttons wieder sichtbar gemacht
         private void tB_pers_LostFocus(object sender, RoutedEventArgs e)
         {
             if (((sender as TextBox).Text.ToString() == "") || (Int32.Parse((sender as TextBox).Text) < 1))
                 ((sender as TextBox).Parent as Grid).Children[2].Visibility = Visibility.Visible;
         }
 
+        //Behandlung verschiedener ComboBoxen bei Checked
         private void cB_Checked(object sender, RoutedEventArgs e)
         {
             if ((sender as CheckBox).Name == "Einladungskarten")
@@ -180,6 +190,7 @@ namespace EventOrg
                 App.oc_alleProjekte[App._aktEventPoint].extras.absperrung = "Absperrung";
         }
 
+        //Behandlung verschiedener ComboBoxen bei Unchecked
         private void cB_Unchecked(object sender, RoutedEventArgs e)
         {
             if ((sender as CheckBox).Name == "Einladungskarten")
@@ -222,12 +233,15 @@ namespace EventOrg
                 App.oc_alleProjekte[App._aktEventPoint].extras.absperrung = "";
         }
 
+        //ListPicker mit SingleSelection bei SelectionChanged
         private void LP_SingleSelection(object sender, SelectionChangedEventArgs e)
         {
             if ((sender as ListPicker).SelectedItem != null)
             {
+                //ListPicker Location
                 if ((sender as ListPicker).Name == "LP_loc")
                 {
+                    //hier wird anhand der jeweilig gewählten Location die Liste für die Ausstattung neu generiert und mit anderen Sachen befüllt 
                     string locArt = App.oc_alleProjekte[App._aktEventPoint].location.loc_art = (sender as ListPicker).SelectedItem.ToString();
                     if (locArt == "Stadthalle" || locArt == "Restaurant")
                     {
@@ -309,9 +323,10 @@ namespace EventOrg
             }
         }
 
+        //ListPicker mit MultiSelection bei SelectionChanged
         private void LP_MultipleSelection(object sender, SelectionChangedEventArgs e)
         {
-            if (LP_caterGetr.SelectedItems != null)
+            if ((sender as ListPicker).SelectedItems != null)
             {
                 if ((sender as ListPicker).Name == "LP_caterGetr")
                 {
@@ -350,18 +365,21 @@ namespace EventOrg
             }
         }
 
+        //Datum der Location Buchung von
         private void datum_von_gew(object sender, DateTimeValueChangedEventArgs e)
         {
             if (dP_loc_dat_von != null)
                 App.oc_alleProjekte[App._aktEventPoint].location.dat_von = dP_loc_dat_von.ToString();
         }
 
+        //Datum der Location Buchung bis
         private void datum_bis_gew(object sender, DateTimeValueChangedEventArgs e)
         {
             if (dP_loc_dat_bis != null)
                 App.oc_alleProjekte[App._aktEventPoint].location.dat_von = dP_loc_dat_von.ToString();
         }
 
+        //Berechnung der Gäste insgesammt
         private void berechnungen_lostFocus(object sender, RoutedEventArgs e)
         {
             int anz;
@@ -381,27 +399,37 @@ namespace EventOrg
                 App.berechnung.pers_ü60 = anz;
 
             App.berechnung.pers_gesamt = App.berechnung.pers_u12 + App.berechnung.pers_ü12 + App.berechnung.pers_ü60;
+
+            //Wenn die maximale Anzahl der Gäste, die in den Einstellungen festgelegt wurde, überschritten wird
+            if (App.berechnung.pers_gesamt > App.maxGast)
+            {
+                MessageBox.Show("Die Gesammtzahl an Gästen darf nicht höher sein, als " + App.maxGast + ".");
+                (sender as TextBox).SetValue(TextBox.TextProperty, "0");
+                App.berechnung.pers_gesamt = App.berechnung.pers_u12 + App.berechnung.pers_ü12 + App.berechnung.pers_ü60;
+            }
         }
 
+        //Beim Tap auf den Haken
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
             check();
         }
 
+        //Checken, ob in allen TextBoxen was eingetragen wurde oder nicht
         private void check()
         {
-            // Instantiate a list of TextBoxes
+            // Liste der TextBoxen initialisieren
             List<TextBox> textBoxList = new List<TextBox>();
 
-            // Call GetTextBoxes function, passing in the root element,
-            // and the empty list of textboxes (LayoutRoot in this example)
+            //Methode zum suchen aller TextBoxen aufrufen
             GetTextBoxes(ref this.panorama, ref textBoxList);
-            //EvaluateStackpanel(ref this.stPan_gast, ref textBoxList);
 
+            //Die Liste "textBoxList" durchgehen und die rausnehmen, in denen was drin steht bzw. in denen Werte größer Null drin stehen
             for (int i = 0; i < textBoxList.Count; i++)
                 if (textBoxList[i].Text != "" || textBoxList[i].Text != "0")
                     textBoxList.RemoveAt(i);
 
+            //Wenn die Liste "textBoxList" nicht leer ist
             if (textBoxList.Count != 0)
             {
                 string ausgabe = "";
@@ -414,6 +442,7 @@ namespace EventOrg
                     "Zusammenfassung des Events"
                     + "Fehlende Felder: \n" + ausgabe, MessageBoxButton.OKCancel);
 
+                //Wenn trotzdem OK getappt wird weiter zur Zusammenfassung
                 if (myMsgResult == MessageBoxResult.OK)
                 {
                     if (Einladungskarten.IsChecked == false && Email.IsChecked == false && Facebook.IsChecked == false && Google.IsChecked == false)
@@ -428,15 +457,9 @@ namespace EventOrg
                 NavigationService.Navigate(new Uri("/Zusammenfassung.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        //Alle TextBoxen suchen und in die Liste "textBoxList" eintragen
         private void GetTextBoxes(ref Panorama uiElement,ref List<TextBox> textBoxList)
         {
-            /*TextBox textBox = uiElement as TextBox;
-            foreach (var ctrl in LayoutRoot.Children)
-                if (ctrl is TextBox)
-                    if (ctrl != null)
-                        // If the UIElement is a Textbox, add it to the list.
-                        textBoxList.Add((TextBox)ctrl);*/
-
             foreach (var ctrl in uiElement.Items)
             {
                 if (ctrl is PanoramaItem)

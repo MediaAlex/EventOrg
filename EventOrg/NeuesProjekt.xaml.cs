@@ -34,7 +34,7 @@ namespace EventOrg
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            nav = e.NavigationMode.ToString();
+            nav = e.NavigationMode.ToString(); //Speichert, wie/woher navigiert wurde
         }
 
         private void tBl_wahlEventart_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -73,6 +73,7 @@ namespace EventOrg
                 e.Cancel = true;
         }
 
+        //Instanzen von Unterklassen von der Klasse Event und deren Listen werden erzeugt
         private void _erzeugeUnterklassen(Event ev)
         {
             ev.gäste = new Gäste();
@@ -119,6 +120,7 @@ namespace EventOrg
             ev.catering.bar.bar_cocktAlk = new List<string>();
         }
 
+        //Prüft, ob alle Felder befüllt wurden
         private void check()
         {
             // Instantiate a list of TextBoxes
@@ -148,6 +150,7 @@ namespace EventOrg
                 erstelleProjekt();
         }
 
+        //sucht alle TextBoxen und speichert diese in Liste "textBoxList"
         private void GetTextBoxes(UIElement uiElement, List<TextBox> textBoxList)
         {
             TextBox textBox = uiElement as TextBox;
@@ -176,8 +179,10 @@ namespace EventOrg
             }
         }
 
+        //Button Erstellen geklickt
         private void erstelleProjekt()
         {
+            //Wenn vorher von MainWindow navigiert wurde
             if (nav == "New")
             {
                 Kunde kunde = new Kunde();
@@ -212,6 +217,7 @@ namespace EventOrg
                 App._aktEventPoint = App.oc_alleProjekte.Count - 1;
             }
 
+            //Wenn vorher von EventGuide zurück navigiert wurde
             if (nav == "Back")
             {
                 ind = App._aktEventPoint;

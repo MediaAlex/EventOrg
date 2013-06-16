@@ -27,11 +27,12 @@ namespace EventOrg
             lB_eventarten.ItemsSource = App._eventArten;
         }
 
+        //Beim Klick auf "+" Button
         private void but_eventHinzu_Click(object sender, RoutedEventArgs e)
         {
             if (tB_eventName.Text != "")
             {
-                App._eventArten.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = ListInfo.pnkteGrundlage() });//Füllen der Liste richtig?
+                App._eventArten.Add(new Eventart { nameEA = tB_eventName.Text, listInfo = ListInfo.pnkteGrundlage() });
                 neu = true;
 
                 NavigationService.Navigate(new Uri("/NeuesEvent.xaml?msg=" + tB_eventName.Text + "&neu=" + neu, UriKind.RelativeOrAbsolute));
@@ -40,6 +41,7 @@ namespace EventOrg
                 MessageBox.Show("Bitte geben sie der neuen Eventart einen Namen.");
         }
 
+        //löschen beim TapHold auf eine Eventart
         private void tBl_eventName_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
             MessageBoxResult myMsgResult = MessageBox.Show("Eventart löschen", "Wirklich löschen?", MessageBoxButton.OKCancel);
@@ -52,6 +54,7 @@ namespace EventOrg
             }
         }
 
+        //Wählen und Navigieren zu den Einstellungen einer Eventart
         private void tBl_eventName_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             string indNeuEA = lB_eventarten.SelectedIndex.ToString();

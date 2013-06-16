@@ -27,6 +27,7 @@ namespace EventOrg
         public static ObservableCollection<Eventart> aktEventArt = new ObservableCollection<Eventart>();
         public static List<ListeInfoPunkte> punkte = new List<ListeInfoPunkte>();
         public static Berechnung berechnung;
+        public static int maxGast;
 
         /// <summary>
         /// Ermöglicht den einfachen Zugriff auf den Hauptframe der Phone-Anwendung.
@@ -87,6 +88,11 @@ namespace EventOrg
 
             if (IsolatedStorageSettings.ApplicationSettings.Contains("Projekte.xml"))
                 oc_alleProjekte = Read<ObservableCollection<Event>>("Projekte.xml");
+
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("maxGast"))
+                IsolatedStorageSettings.ApplicationSettings.TryGetValue("maxGast", out maxGast);
+            else
+                maxGast = 300;
         }
 
         private T Read<T>(string datei)
@@ -122,6 +128,7 @@ namespace EventOrg
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             IsolatedStorageSettings.ApplicationSettings["_eventArten"] = _eventArten;
+            IsolatedStorageSettings.ApplicationSettings["maxGast"] = _eventArten;
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 

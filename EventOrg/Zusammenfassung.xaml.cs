@@ -24,6 +24,7 @@ namespace EventOrg
         {
             InitializeComponent();
         }
+        //Hilfslisten für verschiedene Bereiche/Objekte werden erstellt
         List<string> kunde = new List<string>();
         List<string> projekt = new List<string>();
         List<string> gäste = new List<string>();
@@ -47,6 +48,7 @@ namespace EventOrg
             _listenGenerieren();
         }
 
+        //Hilfslisten werden mit Einträgen von EventGuide und NeuesProjekt befüllt
         private void _listenFüllen()
         {
             kunde.Add(App.oc_alleProjekte[App._aktEventPoint].kunde._KundenID.ToString());
@@ -177,6 +179,7 @@ namespace EventOrg
                 einladungen.Add(item);
             einladungen.Add(App.oc_alleProjekte[App._aktEventPoint].einladungen.einlad_text);
 
+            //ListBoxen werden mit Items, die nicht leer oder größer als 0 sind, aus Listen befüllt
             lB_kunde.ItemsSource = (from a in kunde where a != null && a != "0" && a != "" select a).ToList();
             lB_projekt.ItemsSource = (from a in projekt where a != null && a != "0" && a != "" select a).ToList();
             lB_gäste.ItemsSource = (from a in gäste where a != null && a != "0" && a != "" select a).ToList();
@@ -195,6 +198,7 @@ namespace EventOrg
             lB_einl.ItemsSource = (from a in einladungen where a != null && a != "0" && a != "" select a).ToList();
         }
 
+        //Listen werden entweder sichtbar gemacht oder collapsed, wenn diese nichts enthalten
         private void _listenGenerieren()
         {
             foreach (var item in stPan_zusFas.Children)
@@ -220,15 +224,20 @@ namespace EventOrg
             }
         }
 
+        //Klick auf Haken (Fertigstellen/Beenden)
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
+            //Methode für speichern des Projekts aufrufen
             Write<Event>(App.oc_alleProjekte[App._aktEventPoint], "Projekte.xml");
+            //Alle Navigationsstränge werden gelöscht
             NavigationService.RemoveBackEntry();
             NavigationService.RemoveBackEntry();
             NavigationService.RemoveBackEntry();
+            //Navigation zu MainPage
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        //XML wird erstellt und in IsolatedStorage geschrieben/gespeichert
         private void Write<T>(T observableCollection, string datei)
         {
             XmlWriterSettings writerSettings = new XmlWriterSettings

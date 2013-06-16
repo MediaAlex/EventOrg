@@ -32,6 +32,7 @@ namespace EventOrg
             _filtern();
         }
 
+        //Listen für ListPicker werden erstellt
         List<string> catServ = new List<string> { "Eigener", "Willi's Catering", "Metzgerei Heinrich"};
         List<string> sektGetr = new List<string> { "Sekt XY", "Sekt XYZ", "Orangensaft", "Cola", "Aperitif" };
         List<string> sektSnacks = new List<string> { "Salzstangen", "Chips", "Flipps", "Erdnüsse" };
@@ -57,6 +58,7 @@ namespace EventOrg
         List<string> barCocktAlk = new List<string> { "Pina Colada", "Bahama Mama", "Tequila Sunrise", "Caipirinha", "Mojito" };
         List<string> barCocktAlkFrei = new List<string> { "Simply Red", "Paddling Pool", "Fruit Cup", "Florida Sun Virgin", "Coconut Kiss" };
 
+        //ListPicker werden befüllt
         private void _listPickerFüllen()
         {
             LP_CatVorschl.ItemsSource = catServ;
@@ -85,6 +87,7 @@ namespace EventOrg
             LP_barCocktAlkFrei.ItemsSource = barCocktAlkFrei;
         }
 
+        //Filtern von Elementen, anhand von Einstellung der Eventart
         private void _filtern()
         {
             string bezeichnung = "";
@@ -108,6 +111,7 @@ namespace EventOrg
             }
         }
 
+        //CheckBox ist checked
         private void cB_Checked(object sender, RoutedEventArgs e)
         {
             if ((sender as CheckBox).Name == "cB_seEmpf")
@@ -133,6 +137,7 @@ namespace EventOrg
                 App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_krabCockt = "Krabben Cocktail";
         }
 
+        //Checkbox ist unchecked
         private void cB_Unchecked(object sender, RoutedEventArgs e)
         {
             if ((sender as CheckBox).Name == "cB_seEmpf")
@@ -163,6 +168,7 @@ namespace EventOrg
                 App.oc_alleProjekte[App._aktEventPoint].catering.vorspeise.vs_krabCockt = "";
         }
 
+        //ListPicker mit Singleselection
         private void single_Selection(object sender, SelectionChangedEventArgs e)
         {
             if ((sender as ListPicker).SelectedItem != null)
@@ -172,6 +178,7 @@ namespace EventOrg
 	        }
         }
 
+        //ListPicker mit Multiselection
         private void multiple_selection(object sender, SelectionChangedEventArgs e)
         {
             if ((sender as ListPicker).SelectedItems != null)

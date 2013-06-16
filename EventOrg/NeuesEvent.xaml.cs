@@ -26,6 +26,7 @@ namespace EventOrg
         {
         }
 
+        //Nach Navigieren zu diesem Page mit Übergabeparametern
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -65,6 +66,7 @@ namespace EventOrg
             NavigationService.GoBack();
         }
 
+        //Beim Klick auf "-" Button
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult myMsgResult = MessageBox.Show("Eventart löschen", "Wirklich löschen?", MessageBoxButton.OKCancel);
